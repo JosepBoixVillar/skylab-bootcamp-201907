@@ -24,6 +24,10 @@ app.get('/register', (req, res) => {
     res.send(Html(Register()))
 })
 
+app.get('/login', (req, res) => {
+    res.send(Html(Login()))
+})
+
 app.get('/search', (req, res) => {
     const { query: { q }, session } = req
 debugger
