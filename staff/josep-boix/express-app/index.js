@@ -34,7 +34,7 @@ app.post('/register', parseBody, (request, response) => {
 
     try {
         logic.registerUser(name, surname, email, password, repassword)
-            .then(() => response.send(Html(Register('/'))))
+            .then(() => response.send(Html(Register('/login'))))
             .catch(error => { throw error })
     } catch (error) {
         throw error
@@ -43,6 +43,24 @@ app.post('/register', parseBody, (request, response) => {
 
 app.get('/login', (request, response) => {
     response.send(Html(Login('/login')))
+})
+
+app.post('/login'. parseBody, (request, response) => {
+    const {body, session} = request
+    const {email, password} = body
+
+    try{
+        logic.authenticateUser (email, password)
+            .then (({id, token}) => {
+                session.userId = id
+                session.token = token
+
+                response.redirect('/home')
+            })
+            .catch (error => {throw error})
+    } catch(error) {
+        throw error
+    }
 })
 
 app.get('/search', (request, response) => {

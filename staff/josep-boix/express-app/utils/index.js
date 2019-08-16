@@ -1,5 +1,7 @@
 module.exports = {
 
-    parseBody: require ('./parse-body')
+    parseBody: require ('./parse-body'),
+    call: require ('./call'),
+    validate: require ('./validate')
 
 }
