@@ -1,4 +1,5 @@
-function Html(content) {
+// function Html(content) {
+module.exports = function Html(content){
     return `<!DOCTYPE html>
         <html lang="en">
             <head>
@@ -12,5 +13,4 @@ function Html(content) {
             </body>
         </html>`
 }
-
-module.exports = Html
+// module.exports = Html

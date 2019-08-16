@@ -1,77 +1,74 @@
 const express = require('express')
 const http = require('http')
-const { Html, Header, Search, DuckResults, DuckDetail, Register, Login } = require('./components')
 const session = require('express-session')
+const logic = require('./logic')
+const parseBody = require('./utils/parse-body')
+
+const { Html, Header, Search, DuckResults, DuckDetail, Register, Login } = require('./components')
 // const FileStore = require('session-file-store')(session);
 
 const { argv: [, , port] } = process
 
 const app = express()
- 
+
 app.use(session({
     // store: new FileStore({}),
-    secret: 's3cr3t th1ng'
+    secret: 's3cr3t th1ng',
+    saveUninitialized: true,
+    resave: true
 }));
 
 
-app.get('/', (req, res) => {
-    res.send(Html(Search()))
-    // res.send(Html(Register()))
-    // res.send(Html(Login()))
+app.get('/', (request, response) => {
+    response.send(Html(Search()))
 })
 
-app.get('/register', (req, res) => {
-    res.send(Html(Register()))
+app.get('/register', (request, response) => {
+    response.send(Html(Register('/register')))
 })
 
-app.get('/login', (req, res) => {
-    res.send(Html(Login()))
+app.post('/register', parseBody, (request, response) => {
+    const { body } = request
+    debugger
+    const { name, surname, email, password, repassword } = body
+
+    try {
+        logic.registerUser(name, surname, email, password, repassword)
+            .then(() => response.send(Html(Register('/'))))
+            .catch(error => { throw error })
+    } catch (error) {
+        throw error
+    }
 })
 
-app.get('/search', (req, res) => {
-    const { query: { q }, session } = req
-debugger
+app.get('/login', (request, response) => {
+    response.send(Html(Login('/login')))
+})
+
+app.get('/search', (request, response) => {
+    const { query: { q }, session: { userId, token } } = request
+    // debugger
     session.query = q
 
-    const request = http.get(`http://duckling-api.herokuapp.com/api/search?q=${q}`, response => {
-        response.on('error', error => { throw error })
-
-        let content = ''
-
-        response.on('data', chunk => content += chunk)
-
-        response.on('end', () => {
-            const ducks = JSON.parse(content)
-
-            if (ducks.error) throw new Error(ducks.error)
-
-            res.send(Html(`${Search(session.query)}${DuckResults(ducks)}`))
-        })
-    })
-
-    request.on('error', error => { throw error })
+    try {
+        logic.searchDucks(userId, token, q)
+            .then(ducks => response.send(Html(`${Search(q)}${DuckResults(ducks)}`)))
+            .catch(error => { throw error })
+    } catch (error) {
+        throw error
+    }
 })
 
-app.get('/ducks/:id', (req, res) => {
-    const { params: { id }, session } = req
+app.get('/ducks/:id', (request, response) => {
+    const { params: { id: duckId }, session: { userId, token, query } } = request
 
-    const request = http.get(`http://duckling-api.herokuapp.com/api/ducks/${id}`, response => {
-        response.on('error', error => { throw error })
-
-        let content = ''
-
-        response.on('data', chunk => content += chunk)
-
-        response.on('end', () => {
-            const duck = JSON.parse(content)
-
-            if (duck.error) throw new Error(duck.error)
-
-            res.send(Html(`${Search(session.query)}${DuckDetail(duck)}`))
-        })
-    })
-
-    request.on('error', error => { throw error })
+    try {
+        logic.retrieveDuck(userId, token, duckId)
+            .then(duck => response.send(Html(`${Search(query)}${DuckDetail(duck)}`)))
+            .catch(error => { throw error })
+    } catch (error) {
+        throw error
+    }
 })
 
 app.listen(port)

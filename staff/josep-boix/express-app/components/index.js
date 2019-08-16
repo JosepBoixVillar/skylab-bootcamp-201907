@@ -1,10 +1,14 @@
+// const components = {
 module.exports = {
+
     Html: require('./html'),
     Header: require('./header'),
-    Search: require('./search'),
-    Register: require('./register'), 
-    Login: require('./login'), 
+    DuckDetail: require('./duck-detail'),
     DuckResults: require('./duck-results'),
-    DuckDetail: require('./duck-detail')
+    Login: require('./login'), 
+    Register: require('./register'), 
+    RegisterSucces: require ('./register-success'),
+    Search: require('./search')
 
 }
+// module.exports = components

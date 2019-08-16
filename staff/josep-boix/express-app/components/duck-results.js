@@ -1,4 +1,5 @@
-function DuckResults(ducks) {
+// function DuckResults(ducks) {
+module.exports = function (ducks){
     return `<ul>${ducks.map(({ id, title, imageUrl, price }) => `<li>
         <a href="/ducks/${id}">
             <h3>${title}</h3>
@@ -7,5 +8,4 @@ function DuckResults(ducks) {
         </a>
     </li>`).join('')}</ul>`
 }
-
-module.exports = DuckResults
+// module.exports = DuckResults

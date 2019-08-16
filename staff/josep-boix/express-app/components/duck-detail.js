@@ -1,4 +1,5 @@
-function DuckDetail({ title, imageUrl, price, description, link }) {
+// function DuckDetail({title, imageUrl, price, description, link}){
+module.exports = function({ title, imageUrl, price, description, link }) {
     return `<article>
         <h3>${title}</h3>
         <img src="${imageUrl}">
@@ -8,4 +9,4 @@ function DuckDetail({ title, imageUrl, price, description, link }) {
     </article>`
 }
 
-module.exports = DuckDetail
+// module.exports = DuckDetail
