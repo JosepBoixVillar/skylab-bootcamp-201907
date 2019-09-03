@@ -1,9 +1,8 @@
 const mongoose = require ('mongoose') 
 const { Schema } = mongoose
 const  cardSchema = require ('./card')
-const  productSchema = require ('./product')
 
-const user = new Schema ({
+const userSchema = new Schema ({
     id: {
         type: Number,
         required: true
@@ -22,8 +21,10 @@ const user = new Schema ({
         type: String,
         required: true
     },
-
-    favorite: [productSchema],  
+    favorite: {
+        type: Array
+    },
+    
     card: [cardSchema]
 })
-module.exports = user
+module.exports = userSchema

@@ -1,9 +1,11 @@
 const mongoose = require ('mongoose')
-const { Schema } = mongoose
-const productSchema = require ('./product')
+const { Schema, Schema: { Types: { ObjectId } } } = mongoose
 
-const item = new Schema ({
-    quantity: {type: String},
-    product: [productSchema]
+const itemSchema = new Schema ({
+    quantity: {
+        type: String
+    },
+    
+    product: [{ type: ObjectId, ref: 'Product' }]
 })
-module.exports = item
+module.exports = itemSchema

@@ -1,7 +1,7 @@
 const mongoose = require ('mongoose')
 const { Schema } = mongoose
 
-const card = new Schema ({
+const cardSchema = new Schema ({
     number: {
         type: Number,
         required: true
@@ -14,6 +14,6 @@ const card = new Schema ({
         type: Number,
         required: true
     }
+    
 })
-
-module.exports = card
+module.exports = cardSchema

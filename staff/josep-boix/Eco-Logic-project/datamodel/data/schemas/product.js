@@ -1,7 +1,7 @@
 const mongoose = require ('mongoose')
 const { Schema } = mongoose
 
-const product = new Schema ({
+const productSchema = new Schema ({
     id: {
         type: Number,
         required: true
@@ -22,5 +22,4 @@ const product = new Schema ({
         type: String
     }
 })
-
-module.exports = product
+module.exports = productSchema
