@@ -1,21 +1,21 @@
 const mongoose = require ('mongoose')
 
-let connection
+let _connection
 
-const _connection = {
+const connection = {
 
     connect(url) {
-        return connection ? 
-            connection 
+        return _connection ? 
+            _connection 
             : 
-            connection = mongoose.connect(url, { useNewUrlParser: true})
+            _connection = mongoose.connect(url, { useNewUrlParser: true})
 
     },
 
     disconnect() {
-        connection = undefined
+        _connection = undefined
 
         return mongoose.disconnect()
     }
 }
-module.exports = _connection
+module.exports = connection

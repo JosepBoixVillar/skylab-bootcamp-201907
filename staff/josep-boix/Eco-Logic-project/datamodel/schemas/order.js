@@ -1,7 +1,7 @@
 const mongoose = require ('mongoose')
 const { Schema, Schema: { Types: { ObjectId } } } = mongoose
 
-const order = new Schema ({
+const orderSchema = new Schema ({
     id: {
         type: Number
     },
@@ -15,4 +15,4 @@ const order = new Schema ({
         type: Array
     }
 })
-module.exports = order
+module.exports = orderSchema
