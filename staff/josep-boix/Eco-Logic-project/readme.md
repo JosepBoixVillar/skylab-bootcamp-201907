@@ -4,7 +4,7 @@
 
 ![interesting img](https://www.caerphillygardencentre.co.uk/files/images/news/how-to-plant-trees-and-shrubs-1542191365-1542191495_n.jpg)
 
-# [Eco-Logic Trello] (https://trello.com/b/bfwDrnGU/eco-logic)
+## [Eco-Logic Trello](https://trello.com/b/bfwDrnGU/eco-logic)
 
 ## Introduction
 This App pretends to simulate the operation of an e-commerce of responsible and sustainable product consumption.
@@ -22,24 +22,25 @@ Registered user can:
 * Contribute to the community
 
 ### Use cases
-![](Usecases.PNG)
+![ToDo](Usecases.PNG)
 
 ### Flowcharts
 #### User
-![](flowDiagram.jpg)
+![ToDo](flowDiagram.jpg)
 
-##Technical description
+## Technical description
 ![ToDo](flowDiagram.jpg)
 
 ### Block diagram
-![](BlockDiagram.PNG)
+![ToDo](BlockDiagram.PNG)
 
 ### React components
-![](Components.PNG)
+![ToDo](Components.PNG)
 
 ### Data model
-![](dataModel.PNG)
+![ToDo](dataModel.PNG)
 
 ### Code coverage
+
 
 ### Technologies
