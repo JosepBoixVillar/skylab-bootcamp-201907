@@ -9,33 +9,34 @@ const validations = {
         if (empty && !target.trim()) throw new Error (`${name} is empty or blank`)
     },
 
-    number (target, name, empty = true){
+    number (target, name){
+        if (typeof target === 'string' && !target.trim()) throw new Error (`${name} is empty or blank`)
         if (typeof target !== 'number') throw TypeError (`${name} with value ${target} is not a number`)
-        if (empty && !target.trim()) throw new Error (`${name} is empty or blank`)
     },
 
     boolean (target, name) {
+        if (typeof target === 'string' && !target.trim()) throw new Error (`${name} is empty or blank`)
         if (typeof target !== 'boolean') throw TypeError (`${name} with value ${target} is not a boolean`)
     },
 
-    email (target, name, empty = true) {
+    email (target, name) {
+        if (typeof target === 'string' && !target.trim()) throw new Error (`${name} is empty or blank`)
         if (!EMAIL_REGEX.test(target)) throw Error (`${name} with value ${target} is not a valid e-mail`)
-        if (empty && !target.trim()) throw new Error (`${name} is empty or blank`)
     }, 
 
-    function (target, name, empty = true) {
-        if (typeof target !== 'function') throw TypeError (`${name} with value ${target} is not a function`)
-        if (empty && !target.trim()) throw new Error (`${name} is empty or blank`)
+    funtion (target, name) {
+        if (typeof target === 'string' && !target.trim()) throw new Error (`${name} is empty or blank`)
+        if (typeof target !== 'function') throw TypeError (`${name} with value ${target} is not a valid function`)
     },
 
-    url (target, name, empty = true) {
+    url (target, name) {
+        if (typeof target === 'string' && !target.trim()) throw new Error (`${name} is empty or blank`)
         if (!URL_REGEX.test(target)) throw Error (`${name} with value ${target} is not a valid url`)
-        if (empty && !target.trim()) throw new Error (`${name} is empty or blank`)
     },
 
-    date (target, name, empty = true) {
+    date (target, name) {
+        if (typeof target === 'string' && !target.trim()) throw new Error (`${name} is empty or blank`)
         if (!DATE_REGEX.test(target)) throw Error (`${name} with value ${target} is not a valid date`)
-        if (empty && !target.trim()) throw new Error (`${name} is empty or blank`)
     }
 }
 module.exports = validations
