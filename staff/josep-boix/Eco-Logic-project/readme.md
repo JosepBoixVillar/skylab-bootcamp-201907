@@ -12,6 +12,9 @@ You will also have access to see, not participate, in the community
 
 A registered user will access their private and personalized area. You could do the same operations cited above. As a registered user you can select products as favorites, check orders and contribute to the community.
 
+**PLANNING**
+![](https://trello.com/b/bfwDrnGU/eco-logic)
+
 **USE CASES**
 
 ![](Usecases.PNG)
@@ -19,7 +22,6 @@ A registered user will access their private and personalized area. You could do 
 **FLOW DIAGRAM**
 
 ![](flowDiagram.jpg)
-
 
 **BLOCK DIAGRAM**
 
