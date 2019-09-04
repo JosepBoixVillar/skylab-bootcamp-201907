@@ -13,7 +13,7 @@ describe ('validate', () => {
             expect(false).to.be.false
         })
         it ('should throw Error on empty value', () => {
-            expect(() => { validate.string() }).to.throw(Error, 'string is empty or blank')
+            expect(() => { validate.string('', 'string') }).to.throw(Error, 'string is empty or blank')
         })
     })
     
@@ -26,18 +26,23 @@ describe ('validate', () => {
             expect(() => { validate.number('string', 'number') }).to.throw(Error, 'number with value string is not a number')
             expect(false).to.be.false
         })
-        it ('should throw Error on empty value', () => {
-            expect(() => { validate.number() }).to.throw(Error, 'number is empty or blank')
+        it ('should throw TypeError on not number', () => {
+            expect(() => { validate.number('', 'number') }).to.throw(Error, 'number is empty or blank')
+            expect(false).to.be.false
         })
     })
 
     describe ('boolean', () => {
         it ('should succeed on boolean', () => {
-            validate.boolean ("false", 'boolean')
+            validate.boolean (true, 'boolean')
             expect(true).to.be.true
         })
         it ('should succeed on boolean', () => {
-            expect(() => { validate.boolean('', 'boolean') }).to.throw(Error, 'boolean with value string is not a boolean')
+            expect(() => { validate.boolean(false, 'boolean') })
+            expect(false).to.be.false
+        })
+        it ('should throw TypeError on not boolean', () => {
+            expect(() => { validate.boolean('', 'boolean') }).to.throw(Error, 'boolean is empty or blank')
             expect(false).to.be.false
         })
     })
@@ -51,7 +56,7 @@ describe ('validate', () => {
             expect(() => { validate.email('not#mail.com', 'email') }).to.throw (Error, 'email with value not#mail.com is not a valid e-mail')
         })
         it ('should throw Error on empty value', () => {
-            expect(() => { validate.email() }).to.throw(Error, 'email is empty or blank')
+            expect(() => { validate.email('', 'email') }).to.throw(Error, 'email is empty or blank')
         })
     })
 
@@ -59,14 +64,14 @@ describe ('validate', () => {
         it ('should succeed on function', () => {
             const func = function func() {}
 
-            validate.function(func, 'function')
+            validate.funtion(func, 'function')
             expect(true).to.be.true
         })
         it ('should throw TypeError on not function', () => {
-            expect(() => { validate.function('not_a_function', 'function') }).to.throw (Error, 'function with value not_a_function is not a valid function')
+            expect(() => { validate.funtion('not_a_function', 'function') }).to.throw (Error, 'function with value not_a_function is not a valid function')
         })
         it ('should throw Error on empty value', () => {
-            expect(() => { validate.function() }).to.throw(Error, 'function is empty or blank')
+            expect(() => { validate.funtion('', 'function') }).to.throw(Error, 'function is empty or blank')
         })
     })
 
@@ -79,7 +84,7 @@ describe ('validate', () => {
             expect(() => { validate.url('w.not#url.com', 'url') }).to.throw (Error, 'url with value w.not#url.com is not a valid url')
         })
         it ('should throw Error on empty value', () => {
-            expect(() => { validate.url() }).to.throw(Error, 'url is empty or blank')
+            expect(() => { validate.url('','url') }).to.throw(Error, 'url is empty or blank')
         })
     })
 
@@ -89,10 +94,10 @@ describe ('validate', () => {
             expect(true).to.be.true
         })
         it ('should throw TypeError on not da', () => {
-            expect(() => { validate.date ('not_a_date', 'date') }).to.throw (Error, 'date  with value w.not#dat.com is not a valid dat')
+            expect(() => { validate.date ('not_a_date', 'date') }).to.throw (Error, 'date with value not_a_date is not a valid date')
         })
         it ('should throw Error on empty value', () => {
-            expect(() => { validate.date() }).to.throw(Error, 'date is empty or blank')
+            expect(() => { validate.date('','date') }).to.throw(Error, 'date is empty or blank')
         })
     })
 })
