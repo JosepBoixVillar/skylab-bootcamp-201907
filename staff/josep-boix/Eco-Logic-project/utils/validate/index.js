@@ -2,7 +2,7 @@ const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"
 const URL_REGEX = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ 
 const DATE_REGEX = /[0-1]{1}[0-9]{1}[\/][0-9]{2}/
 
-const validations = {
+module.exports = {
 
     string (target, name, empty = true) {
         if (typeof target !== 'string') throw TypeError (`${name} with value ${target} is not a string`)
@@ -30,7 +30,7 @@ const validations = {
     },
 
     url (target, name) {
-        if (typeof target === 'string' && !target.trim()) throw new Error (`${name} is empty or blank`)
+        if (typeof target === 'string' && !target.trim()) throw new Error (`${name} is empty or blank`)        
         if (!URL_REGEX.test(target)) throw Error (`${name} with value ${target} is not a valid url`)
     },
 
@@ -39,4 +39,3 @@ const validations = {
         if (!DATE_REGEX.test(target)) throw Error (`${name} with value ${target} is not a valid date`)
     }
 }
-module.exports = validations

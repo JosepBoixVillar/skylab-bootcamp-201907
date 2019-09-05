@@ -1,12 +1,10 @@
+//user schema
+
 const mongoose = require ('mongoose') 
 const { Schema } = mongoose
 const  cardSchema = require ('./card')
 
-const userSchema = new Schema ({
-    id: {
-        type: Number,
-        required: true
-    },
+module.exports = new Schema ({
     name: {
         type: String,
         required: true
@@ -27,4 +25,3 @@ const userSchema = new Schema ({
     
     card: [cardSchema]
 })
-module.exports = userSchema

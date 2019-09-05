@@ -1,4 +1,7 @@
-const logicApi = {
-    registerUser: require ('./register-user')
+// logic-api
+
+module.exports = {
+
+    register: require ('./user-register'),
+    authenticate: require ('./user-authenticate'),
 }
-module.exports = logicApi

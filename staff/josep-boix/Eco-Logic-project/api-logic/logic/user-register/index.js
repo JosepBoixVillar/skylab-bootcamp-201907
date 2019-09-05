@@ -1,5 +1,7 @@
-const validate = require ('utils')
-const { User } = require ('datamodel')
+// logic user-register
+
+const validate = require ('utils/validate')
+const { models: { User } } = require ('datamodel')
 
 /**
  * 
@@ -10,11 +12,10 @@ const { User } = require ('datamodel')
  * @returns {Promise}
  */
 
- function registerUser (name, email, password) {
+module.exports = function (name, email, password) {
 
     validate.string(name, 'name')
     validate.email(email, 'email')
-    validate.string(email, 'email')
     validate.string(password, 'password')
     
     return (async () => {
@@ -22,6 +23,4 @@ const { User } = require ('datamodel')
         if (user) throw new Error('User already exists.')
         await User.create({ name, email, password })
     })()
- }
-
-module.exports = registerUser
+}
