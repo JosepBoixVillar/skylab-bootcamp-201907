@@ -5,6 +5,7 @@ const { models: { User } } = require('datamodel')
 
 /**
  * 
+ * @param {id}
  * @param {string} email
  * @param {string} password
  * 
@@ -18,7 +19,7 @@ module.exports = function (id, email, password) {
     validate.string(password, 'password')
 
     return (async () => {
-        await User.deleteOne({ _id:id, email, password })
-        if (!user.deletedCount) throw new Error (`${email} not unregistered`)
+        const user = await User.deleteOne({ _id: id, email, password })
+        if (!user.deletedCount) throw new Error ('There was an error unregistering the user')
     })()
 }

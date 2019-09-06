@@ -30,12 +30,13 @@ describe ('logic - register user', () => {
 
         try {
             await logic.register(name, email, password)
-                // expect(result).to.exist
+                // expect(result).not.to.exist
         } catch(error) {
             expect(error).to.exist
             expect(error.message).to.equal('User already exists.')
         }
     })
+    
     /* Name */
     it ('should fail on empty name', () => {
         name = ''
