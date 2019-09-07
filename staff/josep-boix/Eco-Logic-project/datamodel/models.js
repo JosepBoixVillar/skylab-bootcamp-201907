@@ -1,12 +1,12 @@
-const mongoose = require ('mongoose')
-const { user, card, product, item, order } = require ('./schemas')
-
-const models = {
-    User: mongoose.model ('User', user),
-    Card: mongoose.model ('Card', card),
-    Product: mongoose.model ('Product', product),
-    Item: mongoose.model ('Item', item),
-    Order: mongoose.model ('Order', order)
-}
-module.exports = models
 //collections
+
+const mongoose = require ('mongoose')
+const { userSchema, cardSchema, productSchema, itemSchema, orderSchema } = require ('./schemas')
+
+module.exports = {
+    User: mongoose.model ('User', userSchema),
+    Card: mongoose.model ('Card', cardSchema),
+    Product: mongoose.model ('Product', productSchema),
+    Item: mongoose.model ('Item', itemSchema),
+    Order: mongoose.model ('Order', orderSchema)
+}

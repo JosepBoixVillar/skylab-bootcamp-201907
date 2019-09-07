@@ -1,8 +1,10 @@
+//connection to mongoose
+
 const mongoose = require ('mongoose')
 
 let connection
 
-const _connection = {
+module.exports = {
 
     connect(url) {
         return connection ? 
@@ -18,4 +20,3 @@ const _connection = {
         return mongoose.disconnect()
     }
 }
-module.exports = _connection
