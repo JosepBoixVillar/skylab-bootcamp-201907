@@ -1,12 +1,10 @@
+// user schema
+
 const mongoose = require ('mongoose') 
 const { Schema } = mongoose
 const  cardSchema = require ('./card')
 
-const userSchema = new Schema ({
-    id: {
-        type: Number,
-        required: true
-    },
+module.exports = new Schema ({
     name: {
         type: String,
         required: true
@@ -14,7 +12,6 @@ const userSchema = new Schema ({
     email: {
         type: String,
         required: true,
-        lowercase: true,
         match: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     },
     password: {
@@ -24,7 +21,9 @@ const userSchema = new Schema ({
     favorite: {
         type: Array
     },
+    isAdmin: {
+        type: Boolean
+    },
     
-    card: [cardSchema]
+    cards: [cardSchema]
 })
-module.exports = userSchema
