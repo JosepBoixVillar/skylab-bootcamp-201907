@@ -1,18 +1,16 @@
+// order schema
+
 const mongoose = require ('mongoose')
 const { Schema, Schema: { Types: { ObjectId } } } = mongoose
+const itemSchema = require ('./item')
 
-const orderSchema = new Schema ({
-    id: {
-        type: Number
-    },
+module.exports = new Schema ({
     date: {
         type: Date
     },
-
-    buyer: [{ type: ObjectId, ref: 'User' }],
-
-    items: {
-        type: Array
-    }
+    customer: { 
+        type: ObjectId, 
+        ref: 'User' 
+    },
+    items: [itemSchema]
 })
-module.exports = orderSchema

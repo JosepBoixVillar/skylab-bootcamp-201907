@@ -1,8 +1,10 @@
+// card schema
+
 const mongoose = require ('mongoose')
 const { Schema } = mongoose
 
-const cardSchema = new Schema ({
-    number: {
+module.exports = new Schema ({
+    identifier: {
         type: Number,
         required: true
     },
@@ -13,7 +15,12 @@ const cardSchema = new Schema ({
     ccv: {
         type: Number,
         required: true
+    },
+    currency: {
+        type: Text,
+        required: true,
+        uppercase: true,
+        enum: ['EUR', 'USD', 'LIB'],
+        default:'EUR'
     }
-    
 })
-module.exports = cardSchema
