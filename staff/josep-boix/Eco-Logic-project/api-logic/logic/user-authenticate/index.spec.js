@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const authenticate = require('.')
+const authenticateUser = require('.')
 const { database, models: { User } } = require('datamodel')
 
 describe ('logic - authenticate user', () => {
@@ -21,7 +21,7 @@ describe ('logic - authenticate user', () => {
     })
 
     it ('should succeed on correct data', async () => {
-        const retrieved_id = await authenticate(email, password) 
+        const retrieved_id = await authenticateUser(email, password) 
 
         expect(retrieved_id).to.exist
         expect(retrieved_id).to.be.a('string')
@@ -32,7 +32,7 @@ describe ('logic - authenticate user', () => {
         let password = 'incorrect_pass'
 
         try {
-            await authenticate(email, password)
+            await authenticateUser(email, password)
         } catch (error) {
             expect(error).to.exist
             expect(error.message).to.equal('wrong credentials')
@@ -42,34 +42,34 @@ describe ('logic - authenticate user', () => {
     /* e-mail */
     it ('should fail on empty e-mail input', () => {
         email = ''
-        expect(() => authenticate(email, password)
+        expect(() => authenticateUser(email, password)
         ).to.throw(Error, 'email is empty or blank')
     })
     it ('should fail on undefined email', () => {
         email = undefined
-        expect(() => authenticate(email, password)
+        expect(() => authenticateUser(email, password)
         ).to.throw(Error, 'email with value undefined is not a string')
     })
     it ('should fail on not valid e-mail', () => {
         email = 'false#mail.com'
-        expect(() => authenticate(email, password)
+        expect(() => authenticateUser(email, password)
         ).to.throw(Error, 'email with value false#mail.com is not a valid e-mail')
     })
 
     /* password */
     it ('should fail on empty password', () => {
         password = ''
-        expect(() => authenticate(email, password)
+        expect(() => authenticateUser(email, password)
         ).to.throw(Error, 'password is empty or blank')
     })
     it ('should fail on undefined password', () => {
         password = undefined
-        expect(() => authenticate(email, password)
+        expect(() => authenticateUser(email, password)
         ).to.throw(Error, 'password with value undefined is not a string')
     })
     it ('should fail on not valid data type for password', () => {
         password = false
-        expect(() => authenticate(email, password)
+        expect(() => authenticateUser(email, password)
         ).to.throw(Error, 'password with value false is not a string')
     })
 })

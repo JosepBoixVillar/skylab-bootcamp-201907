@@ -2,9 +2,11 @@
 
 module.exports = {
 
-    register: require ('./user-register'),
-    authenticate: require ('./user-authenticate'),
-    unregister: require ('./user-unregister'),
-    retrieve: require ('./user-retrieve'),
-    update: require ('./user-update')
+    registerUser: require ('./user-register'),
+    authenticateUser: require ('./user-authenticate'),
+    unregisterUser: require ('./user-unregister'),
+    retrieveUser: require ('./user-retrieve'),
+    updateUser: require ('./user-update'),
+
+    registerCard: require('./card-register'),
 }

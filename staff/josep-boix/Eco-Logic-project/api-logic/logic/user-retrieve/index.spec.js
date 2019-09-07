@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const logic = require('..')
+const retrieveUser = require('.')
 const { database, models: { User } } = require('datamodel')
 
 describe ('logic - retrieve user', () => {
@@ -18,7 +18,7 @@ describe ('logic - retrieve user', () => {
 
     /* id */
     it ('should succees on correct id', async () => {
-        const user = await logic.retrieve(id)
+        const user = await retrieveUser(id)
             expect(user).to.exist
             expect(user.id).to.exist
             expect(user.name).to.equal(name)
@@ -29,19 +29,19 @@ describe ('logic - retrieve user', () => {
     it ('should fail on empty id', () => { 
         id = ''
         expect(() => 
-            logic.retrieve(id)
+            retrieveUser(id)
         ).to.throw(Error, 'id is empty or blank')
     })
     it ('should fail on not valid type id', () => { 
         id = undefined
         expect(() => 
-            logic.retrieve(id)
+            retrieveUser(id)
         ).to.throw(Error, 'id with value undefined is not a string')
     })
     it ('should fail on uncorrect id', async () => {
         id = '41224d776a326fb40f000001'
         try {
-            await logic.retrieve(id)
+            await retrieveUser(id)
             // throw new Error('should not to throw, sth wrong in the logic')
         } catch (error) {
             expect(error).to.exist

@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const logic = require('..')
+const updateUser = require('.')
 const { database, models: { User } } = require('datamodel')
 
 describe ('logic update user', () => {
@@ -20,7 +20,7 @@ describe ('logic update user', () => {
 
     it ('should succees on correct data', async () => {
         debugger
-        const user = await logic.update(id, { 
+        const user = await updateUser(id, { 
             name: 'newName', 
             email: 'new-Email@domain.com',
             password: 'newPassword' })
@@ -36,7 +36,7 @@ describe ('logic update user', () => {
     /* id */
     it ('should fail on empty id', () => {
         id = ''
-        expect(() => logic.update(id, email, password)
+        expect(() => updateUser(id, email, password)
         ).to.throw(Error, 'id is empty or blank')
     })
     it ('should fail on not valid type id', () => {
@@ -52,7 +52,7 @@ describe ('logic update user', () => {
     it ('should fail on uncorrect id', async () => {
         id = '41224d776a326fb40f000001'
         try {
-            await logic.update(id, { 
+            await updateUser(id, { 
                 name: 'updateName', 
                 email: 'updateEmail@domain.com',
                 password: 'updatePassword' })
