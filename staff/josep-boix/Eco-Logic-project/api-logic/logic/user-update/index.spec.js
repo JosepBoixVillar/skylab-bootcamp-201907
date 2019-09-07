@@ -2,7 +2,7 @@ const { expect } = require('chai')
 const logic = require('..')
 const { database, models: { User } } = require('datamodel')
 
-describe.only ('logic update user', () => {
+describe ('logic update user', () => {
     before(() => database.connect('mongodb://localhost/api-test', { useNewUrlParse: true }))
 
     beforeEach(async () => {
@@ -21,16 +21,16 @@ describe.only ('logic update user', () => {
     it ('should succees on correct data', async () => {
         debugger
         const user = await logic.update(id, { 
-            name: 'updateName', 
-            email: 'updateEmail@domain.com',
-            password: 'updatePassword' })
+            name: 'newName', 
+            email: 'new-Email@domain.com',
+            password: 'newPassword' })
             expect(user).not.to.exist
         
         const updateUser = await User.findOne({ _id: id })
             expect(updateUser).to.exist
-            expect(updateUser.name).to.equal('updateName')
-            expect(updateUser.email).to.equal('updateEmail@domain.com')
-            expect(updateUser.password).to.equal('updatePassword')
+            expect(updateUser.name).to.equal('newName')
+            expect(updateUser.email).to.equal('new-email@domain.com')
+            expect(updateUser.password).to.equal('newPassword')
     })
 
     /* id */
