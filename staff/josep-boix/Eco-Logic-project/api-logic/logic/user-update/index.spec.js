@@ -19,18 +19,17 @@ describe ('logic update user', () => {
     let name, email, password, id
 
     it ('should succees on correct data', async () => {
-        debugger
         const user = await updateUser(id, { 
             name: 'newName', 
-            email: 'new-Email@domain.com',
+            email: 'new-email@domain.com',
             password: 'newPassword' })
             expect(user).not.to.exist
         
-        const updateUser = await User.findOne({ _id: id })
-            expect(updateUser).to.exist
-            expect(updateUser.name).to.equal('newName')
-            expect(updateUser.email).to.equal('new-email@domain.com')
-            expect(updateUser.password).to.equal('newPassword')
+        const updatedUser = await User.findOne({ _id: id })
+            expect(updatedUser).to.exist
+            expect(updatedUser.name).to.equal('newName')
+            expect(updatedUser.email).to.equal('new-email@domain.com')
+            expect(updatedUser.password).to.equal('newPassword')
     })
 
     /* id */
@@ -41,12 +40,12 @@ describe ('logic update user', () => {
     })
     it ('should fail on not valid type id', () => {
         id = undefined
-        expect(() => logic.unregister(id, email, password)
+        expect(() => updateUser(id, email, password)
         ).to.throw(Error, 'id with value undefined is not a string')
     })
     it ('should fail on not valid data type for id', () => {
         id = false
-        expect(() => logic.unregister(id, email, password)
+        expect(() => updateUser(id, email, password)
         ).to.throw(Error, 'id with value false is not a string')
     })
     it ('should fail on uncorrect id', async () => {

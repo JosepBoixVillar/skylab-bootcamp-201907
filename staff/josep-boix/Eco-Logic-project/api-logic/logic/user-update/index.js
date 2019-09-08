@@ -1,9 +1,8 @@
-// logic user-update
-
 const validate = require('utils/validate')
 const { models: { User } } = require('datamodel')
 
 /**
+ * Update an user by id and setting the new fields
  * 
  * @param {string} id
  * @param {object} updatedFields

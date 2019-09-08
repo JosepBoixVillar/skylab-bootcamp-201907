@@ -2,7 +2,7 @@ const { expect } = require ('chai')
 const registerUser = require ('.')
 const {database, models: { User } } = require ('datamodel')
 
-describe.only ('logic - register user', () => {
+describe ('logic - register user', () => {
 
     before(() => database.connect('mongodb://localhost/api-test', { useNewUrlParser:true }))
 

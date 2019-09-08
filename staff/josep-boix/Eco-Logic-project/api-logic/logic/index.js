@@ -9,4 +9,6 @@ module.exports = {
     updateUser: require ('./user-update'),
 
     registerCard: require('./card-register'),
+    unregisterCard: require('./card-unregister'),
+    // retrieveCard: require('./card-retrieve'),
 }

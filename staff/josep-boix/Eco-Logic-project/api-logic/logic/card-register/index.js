@@ -1,5 +1,5 @@
 const validate = require('utils/validate')
-const { models: { User } } = require('datamodel')
+const { models: { User, Card } } = require('datamodel')
 
 /**
  * It registers a card associated to an user
@@ -22,14 +22,16 @@ const { models: { User } } = require('datamodel')
 
      return(async () => {
         const user = await User.findById(id)
-        if(!user) throw Error(`User with id ${id} does not exist`)
+        if(!user) throw Error(`User with id ${id} does not exist.`)
 
         const card = user.cards.find(card => card.identifier === identifier)
         if(card) throw Error('Card already registered')
 
         const newCard = new Card({ identifier, expiry, ccv, currency})
-        user.card.push(newCard)
+
+        user.cards.push(newCard)
         await user.save()
-        return user.card[user.card.length -1].id
+        debugger
+        return user.cards[user.cards.length -1].id
      })()
  }
