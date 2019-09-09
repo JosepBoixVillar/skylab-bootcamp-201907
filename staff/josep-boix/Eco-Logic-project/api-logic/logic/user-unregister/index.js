@@ -4,6 +4,7 @@ const validate = require('utils/validate')
 const { models: { User } } = require('datamodel')
 
 /**
+ * Unregister an user by the user ID
  * 
  * @param {id} id
  * @param {string} email

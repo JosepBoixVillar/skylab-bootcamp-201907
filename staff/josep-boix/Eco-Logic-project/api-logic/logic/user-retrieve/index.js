@@ -4,6 +4,7 @@ const validate = require('utils/validate')
 const { models: { User } } = require('datamodel')
 
 /**
+ * Retrieve the user information by user ID
  * 
  * @param {string} id
  * @param {*} name
