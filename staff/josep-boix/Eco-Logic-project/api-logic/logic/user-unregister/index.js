@@ -5,7 +5,7 @@ const { models: { User } } = require('datamodel')
 
 /**
  * 
- * @param {id}
+ * @param {id} id
  * @param {string} email
  * @param {string} password
  * 

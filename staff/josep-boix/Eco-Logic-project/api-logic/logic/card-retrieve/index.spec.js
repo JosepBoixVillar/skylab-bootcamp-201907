@@ -2,7 +2,7 @@ const { expect } = require('chai')
 const retrieveCard = require('.')
 const { database, models: { User, Card } } = require('datamodel')
 
-describe.only ('logic - retrieve card', () => {
+describe ('logic - retrieve card', () => {
     before(() => database.connect('mongodb://localhost/api-test', { useNewUrlParser: true }))
 
     let userId
@@ -46,7 +46,6 @@ describe.only ('logic - retrieve card', () => {
         await User.deleteMany()
         try {
             await retrieveCard(userId, cardId)
-            // expect(user).not.to.exist
         } catch (error) {
             expect(error).to.exist
             expect(error.message).to.equal(`User with id ${userId} does not exist.`)
@@ -104,7 +103,6 @@ describe.only ('logic - retrieve card', () => {
         cardId = "123456789"
         try {
             await retrieveCard(userId, cardId)
-            // expect(cardId).not.to.exist
         } catch(error) { 
             expect(error).to.exist
             expect(error.message).to.equal('Card with id 123456789 does not exist.')

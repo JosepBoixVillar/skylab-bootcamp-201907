@@ -1,7 +1,6 @@
 // logic-api
 
 module.exports = {
-
     registerUser: require ('./user-register'),
     authenticateUser: require ('./user-authenticate'),
     unregisterUser: require ('./user-unregister'),
@@ -10,5 +9,6 @@ module.exports = {
 
     registerCard: require('./card-register'),
     unregisterCard: require('./card-unregister'),
-    // retrieveCard: require('./card-retrieve'),
+    retrieveCard: require('./card-retrieve'),
+    retrieveAllCards: require('./card-retrieveAll'),
 }
