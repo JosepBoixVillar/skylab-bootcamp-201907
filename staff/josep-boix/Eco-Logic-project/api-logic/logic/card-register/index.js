@@ -2,7 +2,7 @@ const validate = require('utils/validate')
 const { models: { User, Card } } = require('datamodel')
 
 /**
- * It registers a card associated to an user
+ * Registers a credit-card by an user id
  * 
  * @param {string} id
  * @param {Number} identifier
@@ -31,7 +31,5 @@ const { models: { User, Card } } = require('datamodel')
 
         user.cards.push(newCard)
         await user.save()
-        debugger
-        return user.cards[user.cards.length -1].id
      })()
  }
