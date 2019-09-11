@@ -53,7 +53,7 @@ describe ('logic - unregister card', () => {
             await unregisterCard(userId, cardId)
         } catch(error) {
             expect(error).to.exist
-            expect(error.message).to.equal('User with id 41224d776a326fb40f000001 does not exist.')
+            expect(error.message).to.equal('User with id 41224d776a326fb40f000001 not found.')
         }
     })
     it('should fail on empty user ID', () => {

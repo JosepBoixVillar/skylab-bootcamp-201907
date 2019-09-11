@@ -13,23 +13,23 @@ const { models: { User, Card } } = require('datamodel')
  * @returns {Promise}
  */
 
- module.exports = function(id, identifier, expiry, ccv, currency) {
-     validate.string(id, 'id')
-     validate.number(identifier, 'identifier')
-     validate.string(expiry, 'expiry date')
-     validate.string(ccv, 'ccv')
-     validate.string(currency, 'currency')
+module.exports = function(id, identifier, expiry, ccv, currency) {
+    validate.string(id, 'id')
+    validate.number(identifier, 'identifier')
+    validate.string(expiry, 'expiry date')
+    validate.string(ccv, 'ccv')
+    validate.string(currency, 'currency')
 
-     return(async () => {
-        const user = await User.findById(id)
-        if(!user) throw Error(`User with id ${id} does not exist.`)
+    return(async () => {
+    const user = await User.findById(id)
+    if(!user) throw Error(`User with id ${id} does not exist.`)
 
-        const card = user.cards.find(card => card.identifier === identifier)
-        if(card) throw Error('Card already registered')
+    const card = user.cards.find(card => card.identifier === identifier)
+    if(card) throw Error('Card already registered')
 
-        const newCard = new Card({ identifier, expiry, ccv, currency})
+    const newCard = new Card({ identifier, expiry, ccv, currency})
 
-        user.cards.push(newCard)
-        await user.save()
-     })()
- }
+    user.cards.push(newCard)
+    await user.save()
+    })()
+}

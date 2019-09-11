@@ -2,7 +2,7 @@ const { expect } = require('chai')
 const retrieveAll = require('.')
 const { database, models: { User, Card } } = require('datamodel')
 
-describe.only ('logic - retrieveAll cards', () => {
+describe ('logic - retrieveAll cards', () => {
     before(() => database.connect('mongodb://localhost/api-test', { useNewUrlParser: true }))
 
     let userId, cardId, cardId2,
@@ -93,17 +93,17 @@ describe.only ('logic - retrieveAll cards', () => {
     it('should fail on empty User ID', () => {
         userId = ''
         expect(() => retrieveAll(userId)
-        ).to.throw('id is empty or blank')
+        ).to.throw('User ID is empty or blank')
     })
     it('should fail on undefined User ID', () => {
         userId = undefined
         expect(() => retrieveAll(userId)
-        ).to.throw(`id with value undefined is not a string`)
+        ).to.throw('User ID with value undefined is not a string')
     })
     it('should fail on wrong data type for User ID', () => {
         userId = false
         expect(() => retrieveAll(userId)
-        ).to.throw(`id with value false is not a string`)
+        ).to.throw('User ID with value false is not a string')
     })
     
     after(() => database.disconnect())

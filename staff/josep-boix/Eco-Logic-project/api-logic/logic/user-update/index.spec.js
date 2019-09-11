@@ -57,7 +57,7 @@ describe ('logic update user', () => {
                 password: 'updatePassword' })
         } catch (error) {
             expect(error).to.exist
-            expect(error.message).to.equal('There was an error updating the user')
+            expect(error.message).to.equal('User id 41224d776a326fb40f000001 does not exist.')
         }
     })
 
