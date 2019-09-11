@@ -4,17 +4,18 @@ const { models: { User } } = require('datamodel')
 /**
  * Retrieve all cards of an user by user ID
  * 
- * @param {string} id
+ * @param {string} userId
  * 
  * @returns {Promise}
  */
 
-module.exports = function(id) {
-    validate.string(id, 'id')
-
+module.exports = function(userId) {
+    validate.string(userId, 'User ID')
+debugger
     return( async () => {
-        const user = await User.findById(id)
-        if(!user) throw Error(`User with id ${id} does not exist.`)
+        debugger
+        const user = await User.findById(userId)
+        if(!user) throw Error(`User with id ${userId} does not exist.`)
 
         user.cards.forEach(card => {
             card.id = card._id

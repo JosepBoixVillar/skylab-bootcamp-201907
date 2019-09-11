@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken')
 const { env: { JWT_SECRET } } = process
 
 module.exports = async function(req, res) {
-    debugger
     const { body: { email, password } } = req
     
     try {

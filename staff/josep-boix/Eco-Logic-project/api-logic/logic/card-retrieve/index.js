@@ -1,11 +1,11 @@
 const validate = require('utils/validate')
-const {models: { User } } = require('datamodel')
+const { models: { User } } = require('datamodel')
 
 /**
- * Retrieve the card by the cardId of an user ID
+ * Retrieve a card by the card ID of an user ID
  * 
  * @param {string} userId
- * @param {string} userId
+ * @param {string} cardId
  * 
  * @returns {Promise}
  */

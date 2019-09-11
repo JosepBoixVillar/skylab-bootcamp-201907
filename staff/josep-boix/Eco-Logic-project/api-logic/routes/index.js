@@ -13,8 +13,8 @@ const updateUser = require('./user-update')
 
 const registerCard = require('./card-register')
 const unregisterCard = require('./card-unregister') 
-// const retrieveCard = require('./card-retrieve')
-// const retrieveAllCards = require('./card-retrieveAll')
+const retrieveCard = require('./card-retrieve')
+const retrieveAllCards = require('./card-retrieveAll')
 
 
 /* user */
@@ -25,7 +25,9 @@ router.get('/user',[tokenMiddleware, jsonBodyParser], retrieveUser)
 router.patch('/user',[tokenMiddleware, jsonBodyParser], updateUser)
 
 /* card */
-router.post('/user/cards',[tokenMiddleware, jsonBodyParser], registerCard)
+router.post('/user/card',[tokenMiddleware, jsonBodyParser], registerCard)
 router.delete('/user/card/:cardId', [tokenMiddleware, jsonBodyParser], unregisterCard)
+router.get('/user/card/:cardId', [tokenMiddleware, jsonBodyParser], retrieveCard)
+router.get('/user/cards', [tokenMiddleware, jsonBodyParser], retrieveAllCards)
 
 module.exports = router
