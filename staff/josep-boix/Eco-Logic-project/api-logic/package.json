@@ -1,0 +1,25 @@
+{
+  "name": "api-logic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx mocha --timeout 20000 '**/*.spec.js'",
+    "test-debug": "npx mocha --inspect-brk --timeout 20000 '**/*.spec.js'",
+    "coverage": "nyc --reporter=html --reporter=text mocha '**/*.spec.js' --runInBand"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "datamodel": "file:../datamodel",
+    "mongodb": "^3.3.2",
+    "mongoose": "^5.6.12",
+    "utils": "file:../utils"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "nyc": "^14.1.1"
+  }
+}
