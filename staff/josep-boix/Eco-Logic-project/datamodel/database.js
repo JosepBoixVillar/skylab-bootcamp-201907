@@ -8,7 +8,7 @@ const _connection = {
         return connection ? 
             connection 
             : 
-            connection = mongoose.connect(url, { useNewUrlParser: true})
+            connection = mongoose.connect(url, { useNewUrlParser: true, { useUnifiedTopology: true } })
 
     },
 
