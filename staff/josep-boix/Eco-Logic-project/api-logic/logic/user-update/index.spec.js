@@ -1,8 +1,8 @@
 const { expect } = require('chai')
-const logic = require('..')
+const updateUser = require('.')
 const { database, models: { User } } = require('datamodel')
 
-describe.only ('logic update user', () => {
+describe ('logic update user', () => {
     before(() => database.connect('mongodb://localhost/api-test', { useNewUrlParse: true }))
 
     beforeEach(async () => {
@@ -19,46 +19,45 @@ describe.only ('logic update user', () => {
     let name, email, password, id
 
     it ('should succees on correct data', async () => {
-        debugger
-        const user = await logic.update(id, { 
-            name: 'updateName', 
-            email: 'updateEmail@domain.com',
-            password: 'updatePassword' })
+        const user = await updateUser(id, { 
+            name: 'newName', 
+            email: 'new-email@domain.com',
+            password: 'newPassword' })
             expect(user).not.to.exist
         
-        const updateUser = await User.findOne({ _id: id })
-            expect(updateUser).to.exist
-            expect(updateUser.name).to.equal('updateName')
-            expect(updateUser.email).to.equal('updateEmail@domain.com')
-            expect(updateUser.password).to.equal('updatePassword')
+        const updatedUser = await User.findOne({ _id: id })
+            expect(updatedUser).to.exist
+            expect(updatedUser.name).to.equal('newName')
+            expect(updatedUser.email).to.equal('new-email@domain.com')
+            expect(updatedUser.password).to.equal('newPassword')
     })
 
     /* id */
     it ('should fail on empty id', () => {
         id = ''
-        expect(() => logic.update(id, email, password)
+        expect(() => updateUser(id, email, password)
         ).to.throw(Error, 'id is empty or blank')
     })
     it ('should fail on not valid type id', () => {
         id = undefined
-        expect(() => logic.unregister(id, email, password)
+        expect(() => updateUser(id, email, password)
         ).to.throw(Error, 'id with value undefined is not a string')
     })
     it ('should fail on not valid data type for id', () => {
         id = false
-        expect(() => logic.unregister(id, email, password)
+        expect(() => updateUser(id, email, password)
         ).to.throw(Error, 'id with value false is not a string')
     })
     it ('should fail on uncorrect id', async () => {
         id = '41224d776a326fb40f000001'
         try {
-            await logic.update(id, { 
+            await updateUser(id, { 
                 name: 'updateName', 
                 email: 'updateEmail@domain.com',
                 password: 'updatePassword' })
         } catch (error) {
             expect(error).to.exist
-            expect(error.message).to.equal('There was an error updating the user')
+            expect(error.message).to.equal('User id 41224d776a326fb40f000001 does not exist.')
         }
     })
 

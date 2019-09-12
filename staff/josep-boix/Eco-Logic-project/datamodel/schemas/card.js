@@ -13,11 +13,11 @@ module.exports = new Schema ({
         required: true
     },
     ccv: {
-        type: Number,
+        type: String,
         required: true
     },
     currency: {
-        type: Text,
+        type: String,
         required: true,
         uppercase: true,
         enum: ['EUR', 'USD', 'LIB'],

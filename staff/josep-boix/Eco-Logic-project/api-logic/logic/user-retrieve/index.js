@@ -4,6 +4,7 @@ const validate = require('utils/validate')
 const { models: { User } } = require('datamodel')
 
 /**
+ * Retrieve the user information by user ID
  * 
  * @param {string} id
  * @param {*} name
@@ -15,7 +16,7 @@ const { models: { User } } = require('datamodel')
 
 module.exports = function (id) {
     validate.string(id, 'id')
-
+debugger
     return (async () => {
         const user = await User.findOne({ _id: id }, { _id: 0, password: 0}).lean()
         if(!user) throw new Error(`User with id ${id} does not exist.`)

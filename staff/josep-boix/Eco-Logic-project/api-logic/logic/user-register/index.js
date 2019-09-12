@@ -13,7 +13,6 @@ const { models: { User } } = require ('datamodel')
  */
 
 module.exports = function (name, email, password) {
-
     validate.string(name, 'name')
     validate.email(email, 'email')
     validate.string(password, 'password')
