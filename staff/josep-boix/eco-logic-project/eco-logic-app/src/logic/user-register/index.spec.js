@@ -1,15 +1,15 @@
 import registerUser from '.'
 
 const {database, models: { User } } = require ('datamodel')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 
 describe ('logic - register user', () => {
 
-    beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
-
     let name, email, password
+    
+    beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
     beforeEach ( async () => {
         name = `name-${Math.random()}`
@@ -19,7 +19,7 @@ describe ('logic - register user', () => {
         await User.deleteMany()
     })
 
-    it ('should succeed on correct data', async () => {
+    fit ('should succeed on correct data', async () => {
         const result = await registerUser(name, email, password)
         expect(result).toBeUndefined()
         
