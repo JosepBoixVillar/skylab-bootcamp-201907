@@ -16,6 +16,10 @@ const unregisterCard = require('./card-unregister')
 const retrieveCard = require('./card-retrieve')
 const retrieveAllCards = require('./card-retrieveAll')
 
+const registerProduct = require('./product-register')
+// const unregisterProduct = require('./product-unregister')
+// const retrieveProduct = require('./product-retrieve')
+
 
 /* user */
 router.post('/users',jsonBodyParser, registerUser)
@@ -29,5 +33,8 @@ router.post('/user/card',[tokenMiddleware, jsonBodyParser], registerCard)
 router.delete('/user/card/:cardId', [tokenMiddleware, jsonBodyParser], unregisterCard)
 router.get('/user/card/:cardId', [tokenMiddleware, jsonBodyParser], retrieveCard)
 router.get('/user/cards', [tokenMiddleware, jsonBodyParser], retrieveAllCards)
+
+/* product */
+router.post('/user/product',[tokenMiddleware, jsonBodyParser], registerProduct)
 
 module.exports = router

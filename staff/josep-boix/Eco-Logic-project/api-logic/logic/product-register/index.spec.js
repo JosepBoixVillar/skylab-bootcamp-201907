@@ -2,7 +2,7 @@ const { expect } = require('chai')
 const registerProduct = require('.')
 const { database, models: { Product } } = require('datamodel')
 
-xdescribe ('logic - register product', () => {
+describe.only ('logic - register product', () => {
     before(() => database.connect('mongodb://localhost/api-test', { useNewUrlParser:true }))
 
     let name, image, price, description
@@ -18,9 +18,9 @@ xdescribe ('logic - register product', () => {
 
     it('should succeed on correct data', async () => {
         debugger
-        const product = await registerProduct(name, image, price, description)
-        expect(product).to.exist
-        const result = await Product.findOne({ _id })
+        const productId = await registerProduct(name, image, price, description)
+        expect(productId).to.exist
+        const result = await Product.findOne({ _id:productId })
         expext(result).to.exist
         // expect(product.name).to.equal(name)
         // expect(product.image).to.equal(image)
