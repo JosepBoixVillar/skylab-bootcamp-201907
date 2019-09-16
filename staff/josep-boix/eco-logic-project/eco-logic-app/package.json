@@ -7,13 +7,15 @@
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
+    "router": "^1.3.3",
     "utils": "file:../utils"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:debug": "react-scripts --inspect-brk=9230 test --runInBand --no-cache"
   },
   "eslintConfig": {
     "extends": "react-app"

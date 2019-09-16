@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function({ onBack, onLogin }) {
+
     return <> 
         <h2>ACCÈS</h2>
 

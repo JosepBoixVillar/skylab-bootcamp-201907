@@ -2,91 +2,66 @@ import React, { useState, useEffect } from 'react'
 import { Route, withRouter } from 'react-router-dom'
 // import './index.sass'
 
+import Header from '../Header'
 import Register from '../Register'
 import Login from '../Login'
-// import Home from '../Home'
+import Home from '../Home'
 
 import logic from '../../logic'
 
-
 export default withRouter(function ({ history }) {
-  const [view, setView] = useState( 'home' )
+  const [setView] = useState(logic.isUserLogIn() ? 'home' : undefined )
 
   const handleBack = () => {
     setView(undefined)
-
     history.push('/')
   }
+  const handleGoToRegister = () => {
+    setView('register')
+    history.push('/register')
+  }
 
-  const handleRegister = async (name, surname, email, password) => {
+  const handleRegister = async (name, email, password) => {
     try {
-      await logic.registerUser(name, surname, email, password)
-      console.log('success register')
+      await logic.registerUser(name, email, password)
+      console.log("register success")
       history.push('/login')
-    } catch ({ message }) {
-      console.log('fail register', message)
+    } catch({ message }) {
+      console.log("error", message)
     }
+  }
+
+  const handleGoToLogin = () => {
+    setView('login')
+    history.push('/login')
   }
 
   const handleLogin = async (email, password) => {
     try {
       await logic.authenticateUser(email, password)
-
-      setView('home')
+      console.log("authenticate success")
       history.push('/home')
-    } catch ({ message }) {
-      console.log('fail login', message)
+    } catch({ message }) {
+      console.log("error", message)
     }
-  }
-
-  const handleGoToRegister = event => {
-    event.preventDefault()
-
-    setView('register')
-
-    history.push('/register')
-  }
-
-  const handleGoToLogin = event => {
-    event.preventDefault()
-
-    setView('login')
-
-    history.push('/login')
   }
 
   useEffect(() => {
     if (history.location.pathname === '/') setView(undefined)
-  }, [history.location])
+  },[history.location])
 
-  // const handleLogout = () => {
-  //   logic.logUserOut()
-
-  //   setView(undefined)
-  //   history.push('/')
-  // }
+  const handleLogout = () => {
+    logic.logUserOut()
+    setView(undefined)
+    history.push('/')
+  }
 
   return <div className="App">
-    {/* <header>
-        <nav>
-          <ul>
-            <li><Link to="/register">Register</Link></li>
-            <li><Link to="/login">Login</Link></li>
-          </ul>
-        </nav>
-      </header> */}
+    <Route path='/' render={() => <Header onRegister={handleGoToRegister} onLogin={handleGoToLogin}/> } />
 
-    <header>
-      {view !== 'home' && <nav>
-        <ul>
-          {view !== 'register' && <li><a href="" onClick={handleGoToRegister}>Register</a></li>}
-          {view !== 'login' && <li><a href="" onClick={handleGoToLogin}>Login</a></li>}
-        </ul>
-      </nav>}
-    </header>
+    <Route path="/register" render={() => <Register onBack={handleBack} onRegister={handleRegister} /> } />
+    <Route path="/login" render={() => <Login onBack={handleBack} onLogin={handleLogin}/>} />
+    {logic.isUserLogIn() && <Route path="/home" render={() => <Home onLogout={handleLogout}/>} />}
 
-    <Route path="/register" render={() => <Register onBack={handleBack} onRegister={handleRegister} />} />
-    <Route path="/login" render={() => <Login onBack={handleBack} onLogin={handleLogin} />} />
-    {/* {logic.isUserLoggedIn() && <Route path="/home" render={() => <Home onLogout={handleLogout}/>} />} */}
   </div>
 })
