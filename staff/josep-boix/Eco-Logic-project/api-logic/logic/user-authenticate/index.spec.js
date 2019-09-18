@@ -1,10 +1,14 @@
+require ('dotenv').config()
+
 const { expect } = require('chai')
 const authenticateUser = require('.')
 const { database, models: { User } } = require('datamodel')
 
+const { env: { DB_URL_TEST } } = process
+
 describe ('logic - authenticate user', () => {
 
-    before(() => database.connect('mongodb://localhost/api-test', { useNewUrlParser:true }))
+    before(() => database.connect(DB_URL_TEST))
 
     let name, email, password, id
         

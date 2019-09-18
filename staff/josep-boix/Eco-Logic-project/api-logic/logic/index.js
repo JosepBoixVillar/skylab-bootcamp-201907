@@ -10,7 +10,6 @@ module.exports = {
     registerCard: require('./card-register'),
     unregisterCard: require('./card-unregister'),
     retrieveCard: require('./card-retrieve'),
-    retrieveAllCards: require('./card-retrieveAll'),
+    retrieveAllCards: require('./card-retrieve-all'),
 
-    registerProduct: require('./product-register')
 }

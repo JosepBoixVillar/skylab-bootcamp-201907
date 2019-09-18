@@ -1,9 +1,13 @@
+require ('dotenv').config()
+
 const { expect } = require('chai')
 const retrieveAll = require('.')
 const { database, models: { User, Card } } = require('datamodel')
 
+const { env: { DB_URL_TEST } } = process
+
 describe ('logic - retrieveAll cards', () => {
-    before(() => database.connect('mongodb://localhost/api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST))
 
     let userId, cardId, cardId2,
         name, email, password,
@@ -11,7 +15,6 @@ describe ('logic - retrieveAll cards', () => {
         identifier2, expiry2, ccv2, currency2
         
     beforeEach(() => {
-        debugger
         name = `name-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
