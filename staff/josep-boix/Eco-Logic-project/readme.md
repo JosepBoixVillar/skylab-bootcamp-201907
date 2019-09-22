@@ -28,7 +28,7 @@ Registered user can:
 * Add products to favorites.
 
 ### Use cases
-![ToDo](images/Use-Cases-Diagram.drawio)
+![ToDo](images/Use-cases-diagram)
 
 ### Flowcharts
 #### User
