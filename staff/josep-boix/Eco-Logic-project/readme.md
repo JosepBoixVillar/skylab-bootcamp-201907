@@ -28,17 +28,18 @@ Registered user can:
 * Add products to favorites.
 
 ### Use cases
-![ToDo](images/Use-cases-diagram)
+![userCases](images/functional-description/User-cases-diagram.png)
 
 ### Flowcharts
 #### User
-![ToDo](flowDiagram.jpg)
+![flowchartUser](images/functional-description/Flowchart-user-diagram.png)
 
 ## Technical description
-![ToDo](flowDiagram.jpg)
-
 ### Block diagram
-![ToDo](BlockDiagram.PNG)
+![Blocks](images/technical-description/Block-diagram.png)
+
+### Components
+![Components](images/technical-description/Components-diagram.png`)
 
 ### React components
 ![ToDo](Components.PNG)
@@ -50,3 +51,10 @@ Registered user can:
 
 
 ### Technologies
+JavaScript, ReactJS, Node.js, Express, MongoDB, Mongoose, SASS.
+Testing: Jest & Mocha-Chai.
+Others: draw.io
+
+## ToDo
+* Create a comunity (forum)
+* Create an admin userCase
