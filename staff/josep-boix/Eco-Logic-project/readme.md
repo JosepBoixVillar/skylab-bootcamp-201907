@@ -9,20 +9,26 @@
 ## Introduction
 This App pretends to simulate the operation of an e-commerce of responsible and sustainable product consumption.
 
-Any user can search for products, both by category and by the general search engine. You can access the product listed by a click to see the detail of the product and finally you can add any product you wish to buy in the cart. 
-You will also have access to see, not participate, in the community
+Any user can search products, both by category and by the general search engine. 
+You can access to the product listed by a click to see the detail of the product and finally you could add any product you wish to buy into the cart. Into the cart you are able to see all the orders, check the data order and delete an order.
 
-A registered user will access their private and personalized area. You could do the same operations cited above. As a registered user you can select products as favorites, check orders and contribute to the community.
+A registered user can access into their private and personalized area. As a registered user you can do the same operations cited above & can select products as favorites.
 
 ## Functional description
-![ToDo]
+![ToDo] wireframes
+
+Any user can:
+* Search products by categories or by search toolbar.
+* Register to the comunity.
+* Login to their home page.
+* Add products & quantity of them to the cart.
+* Check & delete orders into the cart.
 
 Registered user can:
-* Add products to favorites
-* Contribute to the community
+* Add products to favorites.
 
 ### Use cases
-![ToDo](Usecases.PNG)
+![ToDo](images/Use-Cases-Diagram.drawio)
 
 ### Flowcharts
 #### User
