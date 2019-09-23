@@ -12,4 +12,14 @@ module.exports = {
     retrieveCard: require('./card-retrieve'),
     retrieveAllCards: require('./card-retrieve-all'),
 
+    // addToCart: require('./addToCart'),
+    listToCart: require('./cart-list'),
+    cartRemove: require('./cart-remove'),
+
+    // unregisterItem: require('./unregister'),
+
+    registerOrder: require('./order-register'),
+    retrieveOrder: require('./order-register'),
+    
+
 }

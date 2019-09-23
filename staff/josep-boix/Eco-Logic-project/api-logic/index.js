@@ -1,4 +1,4 @@
-require('dotenv').config()
+require ('dotenv').config()
 
 const { database } = require('datamodel')
 const express = require('express')
