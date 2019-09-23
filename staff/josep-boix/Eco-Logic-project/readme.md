@@ -39,13 +39,13 @@ Registered user can:
 ![Blocks](images/technical-description/Block-diagram.png)
 
 ### Components
-![Components](images/technical-description/Components-diagram.png`)
+![Components](images/technical-description/Components-diagram.png)
 
 ### React components
-![ToDo](Components.PNG)
+![ToDo]()
 
 ### Data model
-![ToDo](dataModel.PNG)
+![ToDo](images/technical-description/Data-model-diagram.png)
 
 ### Code coverage
 
