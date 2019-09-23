@@ -17,7 +17,7 @@ module.exports = new Schema ({
         required: true
     },
     currency: {
-        type: Text,
+        type: String,
         required: true,
         uppercase: true,
         enum: ['EUR', 'USD', 'LIB'],
