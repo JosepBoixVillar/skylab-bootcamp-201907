@@ -48,7 +48,7 @@ Registered user can:
 ![ToDo](images/technical-description/Data-model-diagram.png)
 
 ### Code coverage
-
+![ToDo]
 
 ### Technologies
 JavaScript, ReactJS, Node.js, Express, MongoDB, Mongoose, SASS.
