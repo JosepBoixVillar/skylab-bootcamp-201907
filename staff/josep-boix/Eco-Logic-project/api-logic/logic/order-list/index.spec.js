@@ -17,12 +17,11 @@ describe.only ('logic - list orders', () => {
     
 
     beforeEach(async() => {
-
         _quantity = Number((Math.random()*1000).toFixed())
         date= new Date()
         
-        await Order.deleteMany()
         await User.deleteMany()
+        await Order.deleteMany()
   
         name = `name-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
