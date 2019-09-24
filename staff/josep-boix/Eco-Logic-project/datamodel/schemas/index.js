@@ -5,5 +5,6 @@ module.exports = {
     cardSchema: require('./card'),
     productSchema: require('./product'),
     itemSchema: require('./item'),
-    orderSchema: require('./order')
+    orderSchema: require('./order'),
+    cartSchema: require('./cart')
 }
