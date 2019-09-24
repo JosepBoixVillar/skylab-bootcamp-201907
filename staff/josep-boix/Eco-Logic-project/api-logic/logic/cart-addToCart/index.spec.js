@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const { expect } = require('chai')
-const { database,models:{User, Product, Cart} } = require('skyshop-data')
+const { database,models:{User, Product, Cart} } = require('datamodel')
 const{ env: { DB_URL_TEST } } = process
 
 const addToCart = require('.')

@@ -2,7 +2,7 @@ const { models: { Product, User, Order, Item } } = require('datamodel')
 const { validate } = require('utils/validate')
 
 /**
- * Retrieve all orders from a user
+ * Retrieve all orders from an user
  * 
  * @param {*} userId 
  * 

@@ -1,7 +1,7 @@
+//routes logic api
 const express = require('express')
 const tokenMiddleware = require('../middleware')
 const bodyParser = require('body-parser')
-
 const jsonBodyParser = bodyParser.json()
 const router = express.Router()
 
@@ -34,5 +34,8 @@ router.get('/user/card/:cardId', [tokenMiddleware, jsonBodyParser], retrieveCard
 router.get('/user/cards', [tokenMiddleware, jsonBodyParser], retrieveAllCards)
 
 /* product */
+/* item */
+/* order */
+/* cart */
 
 module.exports = router
