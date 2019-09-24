@@ -35,7 +35,17 @@ router.get('/user/cards', [tokenMiddleware, jsonBodyParser], retrieveAllCards)
 
 /* product */
 /* item */
+router.post('/user/item',[tokenMiddleware, jsonBodyParser], registerItem)
+router.delete('/user/item/:productId', [tokenMiddleware, jsonBodyParser], unregisterItem)
+
 /* order */
+router.post('/user/orders',[tokenMiddleware, jsonBodyParser], registerOrder)
+router.get('/user/orders', [tokenMiddleware, jsonBodyParser], listOrders)
+router.get('/user/allorders/', [tokenMiddleware, jsonBodyParser], retrieveAllOrders)
+
 /* cart */
+router.post('/user/cart',[tokenMiddleware, jsonBodyParser], addToCart)
+router.patch('/user/cart/deleteItem',[tokenMiddleware, jsonBodyParser], removeProduct)
+router.get('/user/cart',[tokenMiddleware, jsonBodyParser], listCart)
 
 module.exports = router

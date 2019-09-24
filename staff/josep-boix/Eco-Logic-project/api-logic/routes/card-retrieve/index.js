@@ -4,7 +4,6 @@ module.exports = async function(req, res) {
     const { userId, params: { cardId } } = req
 
     try{
-        debugger
         const card = await logic.retrieveCard(userId, cardId)
         res.status(201).json({ message: 'Retrieve success', card })
     } catch ({ message }) {
