@@ -8,15 +8,19 @@ module.exports = new Schema ({
         type: String,
         required: true
     },
-    image: {
+    categorie: {
         type: String,
         required: true
+    },
+    image: {
+        type: String,
     },
     price: {
         type: Number,
         required: true
     },
     description: {
-        type: String
+        type: String,
+        required: true
     }
 })
