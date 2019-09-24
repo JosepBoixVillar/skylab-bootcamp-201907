@@ -3,6 +3,7 @@
 const mongoose = require ('mongoose') 
 const { Schema } = mongoose
 const  cardSchema = require ('./card')
+const  itemSchema = require ('./item')
 
 module.exports = new Schema ({
     name: {
@@ -24,6 +25,7 @@ module.exports = new Schema ({
     isAdmin: {
         type: Boolean
     },
-    
+
+    cart: [itemSchema],
     cards: [cardSchema]
 })
