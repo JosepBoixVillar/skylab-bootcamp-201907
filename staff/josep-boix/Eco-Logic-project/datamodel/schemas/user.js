@@ -5,7 +5,7 @@ const { Schema } = mongoose
 const  cardSchema = require ('./card')
 const  itemSchema = require ('./item')
 
-module.exports = new Schema ({
+const userSchema = new Schema ({
     name: {
         type: String,
         required: true
@@ -29,3 +29,4 @@ module.exports = new Schema ({
     cart: [itemSchema],
     cards: [cardSchema]
 })
+module.exports = userSchema

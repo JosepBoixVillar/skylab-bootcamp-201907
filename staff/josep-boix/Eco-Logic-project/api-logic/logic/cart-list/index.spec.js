@@ -1,78 +1,68 @@
 require('dotenv').config()
 
 const { expect } = require('chai')
-const { database,models:{User, Product, Cart, Item} } = require('datamodel')
-
-const{env: {DB_URL_TEST}}=process //nuevo
-
 const listToCart = require('.')
+const { database, models: { User, Product, Item } } = require('datamodel')
 
-describe('logic - list cart', () => {
+const{ env: { DB_URL_TEST } } = process
 
-    before(() => database.connect(DB_URL_TEST)) //nuevo
+describe ('logic - list cart', () => {
+    before(() => database.connect(DB_URL_TEST))
     
-    let name, surname, email, password, userId, user
-    let title,image,description,size,color,price, productId
-    let quantity1, itemId
+    let name, email, password, userId
+    let title, categorie, image, price, description, productId
+    let _quantity
     
     beforeEach(async() => {
-
-        quantity1 = Number((Math.random()*1000).toFixed())
-        date= new Date()
+        _quantity = Number((Math.random()*1000).toFixed())
+        date = new Date()
 
         await User.deleteMany()
-            name = `name-${Math.random()}`
-            surname = `surname-${Math.random()}`
-            email = `email-${Math.random()}@domain.com`
-            password = `password-${Math.random()}`
-            
-            title = `title-${Math.random()}`
-            image = `image-${Math.random()}`
-            description = `description-${Math.random()}`
-            size =  's' 
-            color = `color-${Math.random()}`
-            price = Math.random()
 
-            const product=await Product.create({ title,image,description,size,color,price })
-            productId = product.id 
-            
-            user=await User.create({ name, surname, email, password })
-            userId = user.id
+        name = `name-${Math.random()}`
+        email = `email-${Math.random()}@domain.com`
+        password = `password-${Math.random()}`
+        
+        title = `title-${Math.random()}`
+        categorie = `categorie-${Math.random()}`
+        image = `image-${Math.random()}`
+        price = Math.random()
+        description = `description-${Math.random()}`
+        
+        const user = await User.create({ name, email, password })
+        userId = user.id
 
-            let item = new Item({product:productId,quantity:quantity1})
-            
-            user.cart.push(item)
-            await user.save()
-                  
+        const product = await Product.create({ title, categorie, image, price, description })
+        productId = product.id 
+
+        let item = new Item({ quantity: _quantity, product: productId })          
+        user.cart.push(item)
+        await user.save()              
     })
 
     it('should succeed on correct data',async () =>{
-  
-
         await listToCart(userId)
-        const user=await User.findById(userId)
-        debugger
+        const user = await User.findById(userId)
         expect(user.cart[0]).to.exist
-        expect(user.cart[0].quantity).to.equal(quantity1)
+        expect(user.cart[0].quantity).to.equal(_quantity)
         expect(user.cart[0].product).to.exist
-
     })
-
- it('should fail on empty userId', () =>
- expect(() =>
-     listToCart('')
- ).to.throw('userId is empty or blank')
-)
-it('should fail on undefined userId', () =>
- expect(() =>
-    listToCart(undefined)
- ).to.throw(`userId with value undefined is not a string`)
-)
-it('should fail on wrong data type for userId', () =>
- expect(() =>
-    listToCart(123)
- ).to.throw(`userId with value 123 is not a string`)
-)
+    /* User ID */
+    it('should fail on empty userId', () => {
+        userId = ""
+        expect(() => listToCart(userId)
+        ).to.throw('User ID is empty or blank')
+    })
+    it('should fail on undefined userId', () => {
+        userId = undefined
+        expect(() => listToCart(userId)
+        ).to.throw(`User ID with value undefined is not a string`)
+    })
+    it('should fail on wrong data type for userId', () => {
+        userId = false
+        expect(() => listToCart(userId)
+        ).to.throw(`User ID with value false is not a string`)
+    })
 
     after(() => database.disconnect())
 })

@@ -17,11 +17,12 @@ describe ('logic - unregister item', () => {
         await Item.deleteMany()
             
         title = `title-${Math.random()}`
+        categorie = `categorie-${Math.random()}`
         image = `image-${Math.random()}`
         price = Math.random()
         description = `description-${Math.random()}`
 
-        const product = await Product.create({ title, image, price, description })
+        const product = await Product.create({ title,categorie, image, price, description })
         id = product._id.toString()   
     })
 

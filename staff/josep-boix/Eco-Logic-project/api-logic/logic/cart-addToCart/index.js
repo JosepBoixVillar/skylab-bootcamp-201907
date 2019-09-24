@@ -8,18 +8,16 @@ const validate = require('utils/validate')
  * @param {*} productId 
  * @param {*} quantity 
  * 
- * 
  * @returns {Promise}
  */
 
-function addToCart(userId, productId, quantity) {
+function addToCart(userId, quantity, productId) {
     validate.string(userId, 'User ID')
+    validate.number(quantity, 'Quantity')
     validate.string(productId, 'Product ID')
-    validate.number(quantity, 'quantity')
 
-    return (async () => {
+    return( async () => {
         const user = await User.findById(userId)
-
         if (!user) throw Error(`User with id ${userId} does not exist`)
 
         let item = user.cart.find(item => item.product.toString() === productId)
@@ -27,13 +25,14 @@ function addToCart(userId, productId, quantity) {
         if (item) item.quantity += quantity
 
         else {
-            item = new Item({product: productId, quantity})
+            item = new Item({ quantity, product: productId })
             user.cart.push(item)
         }
         await user.save()
+
         const _user = await User.findById(userId)
         let _item = _user.cart.find(item => item.product.toString() === productId)
-        if(_item.quantity<0) _item.quantity=0
+        if(_item.quantity < 0) _item.quantity = 0
 
         await _user.save()
     })()

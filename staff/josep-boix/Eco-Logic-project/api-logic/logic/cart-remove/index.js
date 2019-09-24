@@ -1,8 +1,8 @@
-const { models: { Product, User, Order, Item } } = require('datamodel')
+const { models: { User } } = require('datamodel')
 const validate = require('utils/validate')
 
 /**
- * Removes one product from the cart
+ * Removes a product from the cart
  * 
  * @param {*} userId 
  * @param {*} productId 
@@ -11,23 +11,19 @@ const validate = require('utils/validate')
  */
 
 function cartRemove(userId, productId) {
-    
-    validate.string(userId, 'userId')
-    validate.string(productId, 'productId')
-    return (async () => {
-        const user = await User.findById(userId)
-        
+    validate.string(userId, 'User ID')
+    validate.string(productId, 'Product ID')
 
-        if (!user) throw Error('User not found')
+    return( async () => {
+        const user = await User.findById(userId)
+        if (!user) throw Error(`User with id ${userId} does not exist`)
 
         let item = user.cart.findIndex(item => { 
-            debugger
-            return item.product.toString() === productId
-            
-         })
+            return item.product.toString() === productId            
+        })
 
-        if (item > -1) await user.cart.splice(item,1)
-        if (item <0) throw Error("Item not found")
+        if (item > -1) await user.cart.splice(item, 1)
+        if (item < 0) throw Error("Item not found")
         
         await user.save()
     })()

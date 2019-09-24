@@ -1,4 +1,4 @@
-const { models: { Product, User, Order, Item } } = require('datamodel')
+const { models: { User, Order } } = require('datamodel')
 const validate = require('utils/validate')
 
 /**
@@ -19,20 +19,20 @@ function retrieveOrder(userId, orderId) {
         if (!user) throw Error(`User with id ${userId} does not exist`)
         
         const order = await Order.find({ _id: orderId }, { __v: 0 }).lean()
-        if(!order) throw new Error(`Order with id ${orderId} not exist`)
+        if(!order) throw new Error(`Order with id ${orderId} does not exist`)
         
         order.forEach(items => {
             items.id = items._id.toString()
             delete items._id 
         })
         
-        owner = order[0].owner
+        customer = order[0].customer
 
-        if(owner.toString() === userId)  {
+        if(customer.toString() === userId)  {
             return order
         } else {
-            throw new Error(`Order owner do not corresponds with user id ${userId}`)
+            throw new Error(`Order customer ${orderId} does not match with user id ${userId}`)
         }
-    }) ()
+    })()
 }
 module.exports = retrieveOrder

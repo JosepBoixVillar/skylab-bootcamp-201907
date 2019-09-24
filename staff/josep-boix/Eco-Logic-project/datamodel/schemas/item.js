@@ -3,7 +3,7 @@
 const mongoose = require ('mongoose')
 const { Schema, Schema: { Types: { ObjectId } } } = mongoose
 
-module.exports = new Schema ({
+const itemSchema = new Schema ({
     quantity: {
         type: Number,
         required: true,
@@ -14,3 +14,4 @@ module.exports = new Schema ({
         ref: 'Product' 
     }
 })
+module.exports = itemSchema

@@ -2,7 +2,7 @@ const { models: { User, Item } } = require('datamodel')
 const validate = require('utils/validate')
 
 /**
- * Retrieves products of the cart to an user
+ * Retrieve cart added products by an user
  * 
  * @param {*} userId 
  * 
@@ -10,16 +10,15 @@ const validate = require('utils/validate')
  */
 
 function listToCart(userId) {
-    validate.string(userId, 'userId')
+    validate.string(userId, 'User ID')
 
-    return (async () => {
+    return( async () => {
         const user = await User.findById(userId)
         if (!user) throw Error(`User with id ${userId} does not exist`)
         
         const { cart } = await User.findById(userId, { __v: 0 }).populate('cart.product').lean()
 
         return cart
-
     })()
 }
 module.exports = listToCart
