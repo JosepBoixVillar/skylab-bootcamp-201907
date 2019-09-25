@@ -3,7 +3,7 @@
 const mongoose = require ('mongoose')
 const { Schema } = mongoose
 
-module.exports = new Schema ({
+const cardSchema = new Schema ({
     identifier: {
         type: Number,
         required: true
@@ -24,3 +24,4 @@ module.exports = new Schema ({
         default:'EUR'
     }
 })
+module.exports = cardSchema

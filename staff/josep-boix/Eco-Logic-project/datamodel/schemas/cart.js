@@ -1,4 +1,8 @@
-module.exports = new Schema({
+//cart schema
+const mongoose = require ('mongoose') 
+const { Schema } = mongoose
+
+const cartSchema = new Schema ({
     productId: {
         type: Number,
         required: true
@@ -8,3 +12,4 @@ module.exports = new Schema({
         required: true
     }
 })
+module.exports = cartSchema

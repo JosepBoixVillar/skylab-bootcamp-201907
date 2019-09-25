@@ -1,9 +1,13 @@
+require ('dotenv').config()
+
 const { expect } = require('chai')
 const updateUser = require('.')
 const { database, models: { User } } = require('datamodel')
 
+const { env: { DB_URL_TEST } } = process
+
 describe ('logic update user', () => {
-    before(() => database.connect('mongodb://localhost/api-test', { useNewUrlParse: true }))
+    before(() => database.connect(DB_URL_TEST))
 
     beforeEach(async () => {
         await User.deleteMany()

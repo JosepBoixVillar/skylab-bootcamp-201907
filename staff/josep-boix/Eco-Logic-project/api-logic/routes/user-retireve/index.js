@@ -5,7 +5,7 @@ module.exports = async function(req, res) {
 
     try {
         const user = await logic.retrieveUser(userId)
-        res.status(201).json({ message: 'Retrieve success', user })
+        res.json({ message: 'Retrieve success', user })
     } catch ({ message }) {
         res.status(404).json({ error: message })
     }

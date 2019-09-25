@@ -1,9 +1,13 @@
+require ('dotenv').config()
+
 const { expect } = require('chai')
 const unregisterCard = require('.')
 const { database, models: { User, Card } } = require('datamodel')
 
+const { env: { DB_URL_TEST } } = process
+
 describe ('logic - unregister card', () => {
-    before(() => database.connect('mongodb://localhost/api-test', { useNewUrlParser: true }))
+    before(() => database.connect(DB_URL_TEST))
 
     let userId, cardId
 

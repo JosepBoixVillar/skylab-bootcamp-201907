@@ -4,7 +4,7 @@ const mongoose = require ('mongoose')
 const { Schema, Schema: { Types: { ObjectId } } } = mongoose
 const itemSchema = require ('./item')
 
-module.exports = new Schema ({
+const orderSchema = new Schema ({
     date: {
         type: Date
     },
@@ -14,3 +14,4 @@ module.exports = new Schema ({
     },
     items: [itemSchema]
 })
+module.exports = orderSchema

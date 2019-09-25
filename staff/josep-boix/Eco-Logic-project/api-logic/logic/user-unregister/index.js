@@ -20,7 +20,6 @@ module.exports = function (id, email, password) {
     validate.string(password, 'password')
 
     return (async () => {
-        debugger
         const user = await User.deleteOne({ _id: id, email, password })
         if (!user.deletedCount) throw new Error ('There was an error unregistering the user')
     })()

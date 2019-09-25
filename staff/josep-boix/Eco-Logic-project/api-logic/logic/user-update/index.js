@@ -13,7 +13,7 @@ const { models: { User } } = require('datamodel')
 module.exports = function(id, updatedFields) {
     validate.string(id, 'id')
     // validate.object(updatedFields, 'updatedFields')
-debugger
+
     return (async () => {
         const user = await User.findByIdAndUpdate(id, { $set: updatedFields })
         if(!user) throw Error(`User id ${id} does not exist.`)
