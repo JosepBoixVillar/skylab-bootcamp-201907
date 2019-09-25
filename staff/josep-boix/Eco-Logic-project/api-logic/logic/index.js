@@ -1,5 +1,8 @@
 // logic-api
 module.exports = {
+
+module.exports = {
+
     //USER
     registerUser: require ('./user-register'),
     authenticateUser: require ('./user-authenticate'),

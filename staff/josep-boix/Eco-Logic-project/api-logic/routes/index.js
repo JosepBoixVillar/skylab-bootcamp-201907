@@ -2,6 +2,7 @@
 const express = require('express')
 const tokenMiddleware = require('../middleware')
 const bodyParser = require('body-parser')
+
 const jsonBodyParser = bodyParser.json()
 const router = express.Router()
 
