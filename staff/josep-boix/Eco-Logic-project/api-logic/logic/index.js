@@ -12,7 +12,7 @@ module.exports = {
     retrieveCard: require('./card-retrieve'),
     retrieveAllCards: require('./card-retrieve-all'),
     // ITEM
-    // registerItem: require('./item-register'),
+    registerItem: require('./item-register'),
     unregisterItem: require('./item-unregister'),
     //ORDER
     listOrder: require('./order-list'),
