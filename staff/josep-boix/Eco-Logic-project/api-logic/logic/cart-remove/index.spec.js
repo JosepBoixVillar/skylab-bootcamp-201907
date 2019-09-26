@@ -7,7 +7,7 @@ const { database, models: { User, Product, Cart, Item } } = require('datamodel')
 const{ env: { DB_URL_TEST} } = process
 
 
-describe.only ('logic - remove from cart', () => {
+describe ('logic - remove from cart', () => {
     before(() => database.connect(DB_URL_TEST))
     
     let name, email, password, userId

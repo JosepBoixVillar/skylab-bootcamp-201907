@@ -6,7 +6,7 @@ module.exports = async(req, res) => {
 
     try {
         await logic.item.unregister(productId)
-        res.json({ message: 'Item unregistered successfully'}))
+        res.json({ message: 'Item unregistered successfully'})
     } catch({ message }) {
         res.status(404).json({ error: message })
     }

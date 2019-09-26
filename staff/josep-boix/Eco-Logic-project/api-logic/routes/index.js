@@ -16,6 +16,8 @@ const unregisterCard = require('./card-unregister')
 const retrieveCard = require('./card-retrieve')
 const retrieveAllCards = require('./card-retrieve-all')
 
+const searchProduct = require('./search')
+
 // const unregisterProduct = require('./product-unregister')
 // const retrieveProduct = require('./product-retrieve')
 
@@ -41,6 +43,8 @@ router.get('/user/card/:cardId', [tokenMiddleware, jsonBodyParser], retrieveCard
 router.get('/user/cards', [tokenMiddleware, jsonBodyParser], retrieveAllCards)
 
 /* product */
+router.get('/user/search', [tokenMiddleware, jsonBodyParser], searchProduct)
+
 /* item */
 // router.post('/user/item',[tokenMiddleware, jsonBodyParser], registerItem)
 // router.delete('/user/item/:productId', [tokenMiddleware, jsonBodyParser], unregisterItem)
@@ -53,6 +57,6 @@ router.get('/user/allorders/', [tokenMiddleware, jsonBodyParser], retrieveAllOrd
 /* cart */
 router.post('/user/cart',[tokenMiddleware, jsonBodyParser], addToCart)
 router.patch('/user/cart/deleteItem',[tokenMiddleware, jsonBodyParser], cartRemove)
-router.get('/user/cart',[tokenMiddleware, jsonBodyParser], listToCart)
+router.get('/user/cart/list',[tokenMiddleware, jsonBodyParser], listToCart)
 
 module.exports = router
