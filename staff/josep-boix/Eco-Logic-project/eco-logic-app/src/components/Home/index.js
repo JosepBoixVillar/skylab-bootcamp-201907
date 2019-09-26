@@ -13,9 +13,11 @@ const home = withRouter(function({ history, onLogout }) {
         })()
     }, [history.location]) 
 
-    return <main className="home">
-        Benvingut, {user && user.name}!
-        <button onClick={onLogout}>Surt</button> 
-    </main>
+    return <div>
+        <main className="home">
+            Welcome, {user && user.name}!
+            <button onClick={onLogout}>See you!</button> 
+        </main>
+    </div>
 })
 export default home

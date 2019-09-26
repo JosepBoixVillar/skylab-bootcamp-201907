@@ -2,26 +2,29 @@ import React from 'react'
 
 export default function({ onBack, onLogin }) {
 
-    return <> 
-        <h2>ACCÈS</h2>
+    return <>
+        <main className="loginPanel">  
+            <h2 className="loginPanel__title">LOG IN</h2>
+            <div>
+                <form className="loginPanel__form" onSubmit={event => {
+                    event.preventDefault()
+                    
+                    const { target: { email: { value: email },
+                    password: { value: password } } } = event
+                    onLogin(email, password) 
+                }}>
+                    <label className="loginPanel__lbl">e-mail<input className="loginPanel__input" type="email" name="email" placeholder="Your email"/></label>
+                    <label className="loginPanel__lbl">password<input className="loginPanel__input" type="password" name="password" /></label>
 
-        <form onSubmit={event => {
-            event.preventDefault()
+                    <button className="btn loginPanel__btn">Accedeix</button>
+                </form>
 
-            const { target: { email: { value: email },
-                password: { value: password } } } = event
-            onLogin(email, password) 
-        }}>
-            <label>Correu<input type="email" name="email" placeholder="Your email"/></label>
-            <label>Contrasenya<input type="password" name="password" /></label>
-
-            <button>Accedeix</button>
-        </form>
-
-        <a href="/" onClick={event => {
-            event.preventDefault()
-
-            onBack()
-        }}>Tornar</a>
+                <a className="ancor" href="/" onClick={event => {
+                    event.preventDefault()
+                    
+                    onBack()
+                }}>Go back</a>
+            </div>
+        </main>
     </>
 }

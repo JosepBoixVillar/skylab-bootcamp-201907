@@ -3,26 +3,28 @@ import React from 'react'
 export default function({ onBack, onRegister }) {
     
     return <>
-        <h2 className="formPanel-title">REGISTRE</h2>
-        <div className="formPanel-form">
-            <form onSubmit={event => {
-                event.preventDefault()
-                const { target: {name: { value: name },
+        <main className="registerPanel">
+            <h2 className="registerPanel__title">REGISTER</h2>
+            <div >
+                <form className="registerPanel__form" onSubmit={event => {
+                    event.preventDefault()
+                    const { target: {name: { value: name },
                     email: {value: email },
-                password: { value: password } } } = event
-                onRegister(name, email, password)
-            }}>
-                <label>Nom<input type="text" name="name" placeholder="Your name"/></label>
-                <label>Correu<input type="email" name="email" placeholder="Your email"/></label>
-                <label>Contrasenya<input type="password" name="password" /></label>
+                    password: { value: password } } } = event
+                    onRegister(name, email, password)
+                }}>
+                    <label className="registerPanel__lbl">Name<input className="registerPanel__input" type="text" name="name" placeholder="Your name"/></label>
+                    <label className="registerPanel__lbl">e-mail<input className="registerPanel__input" type="email" name="email" placeholder="Your email"/></label>
+                    <label className="registerPanel__lbl">password<input className="registerPanel__input" type="password" name="password" /></label>
 
-                <button>Registra't</button>
-            </form>
+                    <button className="btn registerPanel__btn">Sign in</button>
+                </form>
 
-            <a href="/" onClick={event => {
-                event.preventDefault()
-                onBack()
-            }}>Tornar</a>
-        </div>
+                <a className="ancor"href="/" onClick={event => {
+                    event.preventDefault()
+                    onBack()
+                }}>Tornar</a>
+            </div>
+        </main>
     </>
 }
