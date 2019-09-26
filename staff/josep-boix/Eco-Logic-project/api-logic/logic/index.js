@@ -1,5 +1,4 @@
 // logic-api
-module.exports = {
 
 module.exports = {
 
