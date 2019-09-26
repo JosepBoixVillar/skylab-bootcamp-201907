@@ -7,7 +7,6 @@ const { database, models: { User } } = require('datamodel')
 const { env: { DB_URL_TEST } } = process
 
 describe ('logic - authenticate user', () => {
-
     before(() => database.connect(DB_URL_TEST))
 
     let name, email, password, id

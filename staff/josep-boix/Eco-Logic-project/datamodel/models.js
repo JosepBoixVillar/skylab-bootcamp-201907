@@ -4,7 +4,6 @@ const mongoose = require ('mongoose')
 const { userSchema, cardSchema, productSchema,
         itemSchema, orderSchema, cartSchema } = require ('./schemas')
 
-
 module.exports = {
     User: mongoose.model ('User', userSchema),
     Card: mongoose.model ('Card', cardSchema),
