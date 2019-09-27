@@ -44,7 +44,7 @@ router.get('/user/card/:cardId', [tokenMiddleware, jsonBodyParser], retrieveCard
 router.get('/user/cards', [tokenMiddleware, jsonBodyParser], retrieveAllCards)
 
 /* product */
-router.get('/user/search', [tokenMiddleware, jsonBodyParser], searchProduct)
+router.get('/user/search/:query', jsonBodyParser, searchProduct)
 
 /* item */
 // router.post('/user/item',[tokenMiddleware, jsonBodyParser], registerItem)

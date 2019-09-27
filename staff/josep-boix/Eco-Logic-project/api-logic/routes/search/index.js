@@ -1,7 +1,7 @@
 const logic = require('../../logic')
 
 module.exports = async (req, res) => {
-    const { query: { query } } = req
+    const { params: { query } } = req
 
     try {
         const product = await logic.searchProduct(query)

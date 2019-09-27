@@ -13,6 +13,8 @@ module.exports = {
     unregisterCard: require('./card-unregister'),
     retrieveCard: require('./card-retrieve'),
     retrieveAllCards: require('./card-retrieve-all'),
+    // PRODUCT
+    searchProduct: require('./search'),
     // ITEM
     registerItem: require('./item-register'),
     unregisterItem: require('./item-unregister'),

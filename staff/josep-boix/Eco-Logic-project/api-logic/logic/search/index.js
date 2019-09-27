@@ -5,7 +5,6 @@ const validate = require('utils/validate')
  * Search according to a query.
  *
  * @param {String} query 
- * @param {String} domain
  * 
  * @throws {TypeError} - if any of the parameters are not a string.
  * @throws {Error} - if domain or query are not found.
@@ -13,12 +12,12 @@ const validate = require('utils/validate')
  * @returns {Promise} array of advertisement.
 */
 
-module.exports = function(query) {
+function searchProduct(query) {
     validate.string(query, 'query')
 
     return (async () => {
-        const product = await Product.find({ query })
-        if(!product) throw Error(`product ${query} not found`)
+        // const product = await Product.find({ query })
+        // if(!product) throw Error(`product ${query} not found`)
         
         let productId = product._id
 
@@ -28,3 +27,4 @@ module.exports = function(query) {
         return products
     })()
 }
+module.exports = searchProduct
