@@ -16,12 +16,12 @@ function searchProduct(query) {
     validate.string(query, 'query')
 
     return (async () => {
-        // const product = await Product.find({ query })
-        // if(!product) throw Error(`product ${query} not found`)
+        const product = await Product.find({ query })
+        if(!product) throw Error(`product ${query} not found`)
         
         let productId = product._id
 
-        const products = await Product.find({ "title": { "$regex": `${query}`, "$options": "i" }, product: productId },{ __v: 0 }).sort({_id: 1}).lean()
+        const products = await Product.find({ "name": { "$regex": `${query}`, "$options": "i" }, product: productId },{ __v: 0 }).sort({_id: 1}).lean()
         if (!products) throw Error(`there are not products with query ${query}`)   
       
         return products
