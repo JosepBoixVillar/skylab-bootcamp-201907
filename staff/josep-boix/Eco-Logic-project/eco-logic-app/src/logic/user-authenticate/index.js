@@ -13,9 +13,15 @@ export default function(email, password) {
             headers: { 'content-type':'application/json'},
             body: JSON.stringify({ email, password })
         })
-        if(response.status !== 200) {
-            const { error } = await response.json()
-            throw Error(error)
+
+        if (response.status === 200) {
+            const { token } = await response.json()
+            this.__token__ = token
+
+            return
         }
+
+        const { error } = await response.json()
+        throw Error(error)
     })()
 }

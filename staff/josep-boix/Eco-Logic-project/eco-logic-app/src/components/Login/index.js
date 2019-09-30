@@ -1,6 +1,7 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
-export default function({ onBack, onLogin }) {
+export default function({ onLogin }) {
 
     return <>
         <main className="loginPanel">  
@@ -13,17 +14,21 @@ export default function({ onBack, onLogin }) {
                     password: { value: password } } } = event
                     onLogin(email, password) 
                 }}>
-                    <label className="loginPanel__lbl">e-mail<input className="loginPanel__input" type="email" name="email" placeholder="Your email"/></label>
-                    <label className="loginPanel__lbl">password<input className="loginPanel__input" type="password" name="password" /></label>
+                    <label className="loginPanel__form--lbl">e-mail</label>
+                    <input className="loginPanel__form--input" type="email" name="email" placeholder="Your email"/>
+                    <label className="loginPanel__form--lbl">password</label>
+                    <input className="loginPanel__form--input" type="password" name="password" />
 
                     <button className="btn loginPanel__btn">Accedeix</button>
                 </form>
 
-                <a className="ancor" href="/" onClick={event => {
+                <Link className="ancor" to='/'>Go Back</Link>
+
+                {/* <a className="ancor" href="/" onClick={event => {
                     event.preventDefault()
                     
                     onBack()
-                }}>Go back</a>
+                }}>Go back</a> */}
             </div>
         </main>
     </>

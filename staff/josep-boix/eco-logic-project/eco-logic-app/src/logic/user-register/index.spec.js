@@ -6,10 +6,9 @@ const bcrypt = require('bcrypt')
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 
 describe ('logic - register user', () => {
+    beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
     let name, email, password
-    
-    beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
     beforeEach ( async () => {
         name = `name-${Math.random()}`
@@ -31,7 +30,7 @@ describe ('logic - register user', () => {
         const match = await bcrypt.compare(password, user.password)
         expect(match).toBeTruthy()
     })
-    fit ('should fail if user already exists', async () => {
+    it ('should fail if user already exists', async () => {
         await User.create({ name, email, password })
 
         try {

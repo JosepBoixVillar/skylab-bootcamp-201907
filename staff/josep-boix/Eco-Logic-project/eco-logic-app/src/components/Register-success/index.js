@@ -5,7 +5,7 @@ function RegisterSuccess({ onLogin }) {
     return <div className="successPanel">
         <h2 className="successPanel__title">Congratulations!</h2>
         <p className="successPanel__text">
-            Now you are ready in. Please <a className="successPanel__ancorToLogin" href="" onClick={event => {
+            Now you are ready in. Please <a className="successPanel__ancorToLogin" href="/login" onClick={event => {
                 event.preventDefault()
 
                 onLogin()

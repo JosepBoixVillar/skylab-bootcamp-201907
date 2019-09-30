@@ -10,15 +10,15 @@ export default function ({ onRegister, onLogin,  onCart }) {
         <h1 className="header__top--title">ECO-LOGIC_APP</h1>
         {view !== 'home' && <nav>
           <ul>
-            {view !== 'register' && <button className="btn header__register" href="/register" onClick={event => {
+            {view !== 'register' && <button className="btn header__top--register" href="/register" onClick={event => {
               event.preventDefault()
               onRegister()
             }}>R</button>}
-            {view !== 'login' && <button className="btn header__login" href="/login" onClick={event => {
+            {view !== 'login' && <button className="btn header__top--login" href="/login" onClick={event => {
               event.preventDefault()
               onLogin()
             }}>L</button>}
-            <button className="btn header__Cart" href="/cart" onClick={event => {
+            <button className="btn header__top--cart" href="/cart" onClick={event => {
               event.preventDefault()
               onCart()
             }}>C</button>
