@@ -1,13 +1,15 @@
 import registerUser from './user-register'
 import authenticateUser from './user-authenticate'
 import retrieveUser from './user-retrieve'
-import isUserLogIn from './user-logged_in'
+import isUserLoggedIn from './user-logged_in'
 import logUserOut from './user-log_out'
 import searchProducts from './search'
+import productDetail from './product-detail'
+import retrieveProduct from './product-retrieve'
+import addToCart from './cart-addToCart'
 
 export default {
     set __token__(token) {
-        debugger
         sessionStorage.token = token
     },
 
@@ -17,8 +19,11 @@ export default {
 
     registerUser,
     authenticateUser,
-    isUserLogIn,
+    isUserLoggedIn,
     logUserOut,
     retrieveUser,
     searchProducts,
+    productDetail,
+    retrieveProduct,
+    addToCart,
 }

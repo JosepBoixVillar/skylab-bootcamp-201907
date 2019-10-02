@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
-function Search ({ history, query}) {
+function Search ({ history }) {
 
     return <>
         <form className="searchPanel" onSubmit={event => {

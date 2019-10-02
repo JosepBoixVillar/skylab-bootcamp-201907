@@ -21,10 +21,10 @@ function searchProducts(query)  {
             headers: { 'content-type': 'application/json' }
         })
     
-        // if (response.status !== 200) {
-        //     const { error } = await response.json()
-        //     throw Error(error)
-        // }
+        if (response.status !== 200) {
+            const { error } = await response.json()
+            throw Error(error)
+        }
 
         const products = await response.json()
     

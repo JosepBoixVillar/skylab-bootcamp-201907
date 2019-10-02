@@ -1,35 +1,22 @@
-.header
+.homeHeader
     margin: 0
     padding: 2px
-    padding-bottom: 10px
-    width: 100%
-    // position: fixed
-    background: #40E0D0
-    background: -webkit-linear-gradient(to right, #FF0080, #FF8C00, #40E0D0)
-    background: linear-gradient(to right, #FF0080, #FF8C00, #40E0D0)
+    background: #00b09b
+    background: -webkit-linear-gradient(to right, #96c93d, #00b09b)
+    background: linear-gradient(to right, #96c93d, #00b09b)
 
     &__top
         display: flex
         align-content: baseline
-        justify-content: space-between
         margin: 10px
         padding: 0 10px 0 10px
         display: flex
+        justify-content: space-between
 
         &--title
             align-self: center
             font-family: Impact, Charcoal, sans-serif
             font-size: 100%
-        
-        &--register
-            padding: 1px
-            margin: 5px
-            background-color: red
-
-        &--login
-            padding: 1px
-            margin: 5px
-            background-color: #5DADE2
 
         &--cart
             padding: 1px
@@ -37,6 +24,7 @@
             background-color: green
 
     &__bottom
+        margin: 10px 
         display: flex
         justify-content: space-around
 
@@ -49,6 +37,8 @@
             justify-content: center
             align-content: center
 
+    
+        
 .btn
-    padding: 0 4px 0 4px
+    padding: 0
     border-radius: 15px
