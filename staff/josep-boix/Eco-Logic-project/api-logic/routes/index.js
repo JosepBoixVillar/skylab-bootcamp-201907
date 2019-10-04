@@ -18,6 +18,7 @@ const retrieveCard = require('./card-retrieve')
 const retrieveAllCards = require('./card-retrieve-all')
 
 const searchProduct = require('./search')
+const retrieveProducts = require('./product-retrieve')
 
 // const unregisterProduct = require('./product-unregister')
 // const retrieveProduct = require('./product-retrieve')
@@ -45,19 +46,20 @@ router.get('/user/cards', [tokenMiddleware, jsonBodyParser], retrieveAllCards)
 
 /* product */
 router.get('/user/search/:query', jsonBodyParser, searchProduct)
+router.get('/user/detail/:productId', jsonBodyParser, retrieveProducts)
 
 /* item */
 // router.post('/user/item',[tokenMiddleware, jsonBodyParser], registerItem)
 // router.delete('/user/item/:productId', [tokenMiddleware, jsonBodyParser], unregisterItem)
 
 /* order */
-router.post('/user/orders',[tokenMiddleware, jsonBodyParser], registerOrder)
+router.post('/user/orders', [tokenMiddleware, jsonBodyParser], registerOrder)
 router.get('/user/orders', [tokenMiddleware, jsonBodyParser], listOrders)
 router.get('/user/allorders/', [tokenMiddleware, jsonBodyParser], retrieveAllOrders)
 
 /* cart */
-router.post('/user/cart',[tokenMiddleware, jsonBodyParser], addToCart)
-router.patch('/user/cart/deleteItem',[tokenMiddleware, jsonBodyParser], cartRemove)
-router.get('/user/cart/list',[tokenMiddleware, jsonBodyParser], listToCart)
+router.post('/user/cart', [tokenMiddleware, jsonBodyParser], addToCart)
+router.patch('/user/cart/deleteItem', [tokenMiddleware, jsonBodyParser], cartRemove)
+router.get('/user/cart/list', [tokenMiddleware, jsonBodyParser], listToCart)
 
 module.exports = router

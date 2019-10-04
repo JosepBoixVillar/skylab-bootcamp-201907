@@ -14,6 +14,8 @@ database.connect(DB_URL, { useNewUrlParser: true })
         
         app.use(cors())
 
+        app.use(express.static('public'))
+        
         app.use('/api', routes)
 
         app.listen(PORT, () => console.log(`${name} ${version} up an running on port ${PORT}`))

@@ -15,6 +15,7 @@ module.exports = {
     retrieveAllCards: require('./card-retrieve-all'),
     // PRODUCT
     searchProduct: require('./search'),
+    retrieveProduct: require('./product-retrieve'),
     // ITEM
     registerItem: require('./item-register'),
     unregisterItem: require('./item-unregister'),
