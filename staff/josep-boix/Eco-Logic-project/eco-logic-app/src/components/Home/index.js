@@ -85,7 +85,7 @@ function Home ({ history, setUser }) {
                 </a>
             </div>
         
-            <figure className="random"><img className="home__container--imag" src="https://source.unsplash.com/random/800x552" width="300" alt="foto random"></img></figure>
+            {/* <figure className="random"><img className="home__container--imag" src="https://source.unsplash.com/random/800x552" width="300" alt="foto random"></img></figure> */}
             {/* <Results/> */}
         </main>
     </div>

@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 
+import Feedback from '../Feedback'
 import logic from '../../logic'
 
 const REACT_APP_API_PUBLIC = process.env.REACT_APP_API_PUBLIC 
 
 export default withRouter(function ({ history }) {
+    const [error, setError] = useState()    
     const [, setView] = useState()
     const [product, setProduct] = useState()
-    const [success, setSuccess] = useState(false)
+    const [, setSuccess] = useState(false)
 
     const handleGoBack = () => {
         setView('home')
-        history.push('/home')
+        history.push('/#/home')
     }
 
     const handleGoToCart = () => {
@@ -20,18 +22,18 @@ export default withRouter(function ({ history }) {
         history.push('/cart')
     }
 
-    function handleAddToCart(event){
-        event.preventDefault()
-        const pid = product.id
-        handleAddCart(pid)
-    }
-    
-    async function handleAddCart(pid){
+    const handleAddToCart = async (quantity) => {
+        debugger
+        const pid = product._id
+        
         try{
-          await logic.addToCart(pid)
-          setSuccess(true)
-        }catch(error){
-          console.log(error.message)
+            await logic.addToCart(pid, quantity)
+            setSuccess(true)
+            history.push('/home')
+            setView('home')
+        }catch({ message }){
+            setError(message)
+            // console.log(error.message)
         }
     }
 
@@ -44,22 +46,32 @@ export default withRouter(function ({ history }) {
     }, [])
   
     return <>
-        {product &&
-        <> 
-        <figure className="detailProduct">
-            <img className="detailProduct__image" src={`${REACT_APP_API_PUBLIC}${product.image}`} />
-        </figure>
-        <section className="detailProduct__text">
-            <p className="detailProduct__text--name">{product.name}</p>
-            <p className="detailProduct__text--price">{product.price}</p>
-            <p className="detailProduct__text--description">{product.description}</p>
-        </section>
-        <form className="detailProduct__btn" onSubmit={handleAddToCart}>
-            <input className="detailProduct__input--addToCart" name="inputquantity" placeholder= "how many?" ></input>
-            <button className="detailProduct__btn--addToCart" >Add to cart</button>
-        </form>
-        <a href='/home' onClick={handleGoBack} >Go back</a>
-        </>
+        {product && <main className="detailProduct">
+            <figure className="detailProduct__figure">
+                <img className="detailProduct__figure--image" src={`${REACT_APP_API_PUBLIC}${product.image}`} />
+            </figure>
+            <section className="detailProduct__text">
+                <p className="detailProduct__text--name">{product.name}</p>
+                <p className="detailProduct__text--price">Just: {product.price} €</p>
+                <p className="detailProduct__text--description">{product.description}</p>
+            </section>
+            <form className="detailProduct__form" onSubmit= {event => {
+                event.preventDefault()
+                const { target: { quantity: { value: quantity } } } = event
+                handleAddToCart(quantity)
+            }}>
+                <input className="detailProduct__form--input" type={Number} name="quantity" defaultValue={1} ></input>
+                <button className="detailProduct__form--btn" >Add to cart</button>
+
+            </form>
+
+            {error && <Feedback message={error} />}
+            
+            <a href='/#/home' className="ancor" onClick={handleGoBack} >Go back</a>
+        </main>
         }
     </>
 })
+
+
+// pattern="[0-9]*"

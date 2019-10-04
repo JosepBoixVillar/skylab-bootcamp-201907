@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Route, withRouter } from 'react-router-dom'
-import queryString from 'query-string'
+// import queryString from 'query-string'
 import './index.sass'
 
 import Header from '../Header'
@@ -34,9 +34,10 @@ export default withRouter(function ({ history }) {
     <Route path="/register_success" render={ () => <RegisterSuccess /> } />
     <Route path="/login" render={ () => <Login /> } />
     <Route path="/search/:query" render={ props => <Results query={props.match.params.query}  />} />
-    <Route path="/cart" render={ () => <Cart /> } />
     <Route path="/home" render={ () => logic.isUserLoggedIn() ? <Home setView={setView} user={user} setUser={setUser} /> : <Landing/>} /> 
+    <Route path="/cart" render={ () => <Cart /> } />
     <Route path="/detail/:productId" render={ () => <Detail /> } /> 
+    <Route path="/order" render={ () => <Cart /> } /> 
 
     <Footer/>
   </>

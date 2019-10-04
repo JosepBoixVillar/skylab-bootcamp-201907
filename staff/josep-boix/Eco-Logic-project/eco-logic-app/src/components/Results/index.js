@@ -5,20 +5,20 @@ import logic from '../../logic'
 
 const REACT_APP_API_PUBLIC = process.env.REACT_APP_API_PUBLIC 
 
-export default withRouter(function ({query}) {
+export default withRouter(function ({ history, query }) {
     const [products, setProduct] = useState(undefined)
+
     useEffect(() => {
         async function busqueda () {
             const { product } = await logic.searchProducts(query)
-                setProduct(product)
+            setProduct(product)
         }
-
         busqueda()
-    }, [])
+    }, [history.location])
 
     return <>
-        <main>
-            <ul className="productList" >
+        <main className="productList">
+            <ul>
                 { products ? products.map(item => <li className="productList__product" key={item._id}>
                     <a className="productList__product--a" href={`/#/detail/${item._id}`}>
                         <img className="productList__product--img" src={`${REACT_APP_API_PUBLIC}${item.image}`}></img>
@@ -29,7 +29,7 @@ export default withRouter(function ({query}) {
                     </a>
                 </li>)
                 :
-                <p className="ad__none">No hay resultados</p>}
+                <p className="productList__product--none">No hay resultados</p>}
             </ul>
         </main>
     </>

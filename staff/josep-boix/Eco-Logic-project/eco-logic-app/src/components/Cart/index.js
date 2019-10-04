@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
-// import './index.sass'
+import Register from '../Register'
+// // import './index.sass'
 
 function Cart() {
-    const { setView, user } = useState()
-    debugger
+    const { setView, user, product } = useState()
+
     return <>
         <section className="cartPanel">
             {user && <div className="cartPanel__user">
                 <h2 className="cartPanel__user--title">Cart</h2> 
                 <div className="cartPanel__user--form">
+                    {!product ? 
                     <p>Your shopping cart is empty</p>
+                    :
+                    <Register />}
                     <a href="/#/" onClick={event => {
                     event.preventDefault()
                     setView(undefined)
