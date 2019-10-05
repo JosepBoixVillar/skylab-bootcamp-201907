@@ -17,11 +17,6 @@ export default withRouter(function ({ history }) {
         history.push('/#/home')
     }
 
-    const handleGoToCart = () => {
-        setView('cart')
-        history.push('/cart')
-    }
-
     const handleAddToCart = async (quantity) => {
         debugger
         const pid = product._id
@@ -29,8 +24,8 @@ export default withRouter(function ({ history }) {
         try{
             await logic.addToCart(pid, quantity)
             setSuccess(true)
-            history.push('/home')
-            setView('home')
+            history.push('/cart-success')
+            setView('cart-success')
         }catch({ message }){
             setError(message)
             // console.log(error.message)
@@ -60,7 +55,7 @@ export default withRouter(function ({ history }) {
                 const { target: { quantity: { value: quantity } } } = event
                 handleAddToCart(quantity)
             }}>
-                <input className="detailProduct__form--input" type={Number} name="quantity" defaultValue={1} ></input>
+                <input className="detailProduct__form--input" type="number" pattern="[0-9]*" name="quantity" defaultValue={1} ></input>
                 <button className="detailProduct__form--btn" >Add to cart</button>
 
             </form>
@@ -72,6 +67,3 @@ export default withRouter(function ({ history }) {
         }
     </>
 })
-
-
-// pattern="[0-9]*"

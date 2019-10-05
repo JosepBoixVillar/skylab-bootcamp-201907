@@ -12,6 +12,7 @@ import Results from '../Results'
 import Home from '../Home'
 import Detail from '../Detail'
 import Cart from '../Cart'
+import CartSuccess from '../CartSuccess'
 import Footer from '../Footer'
 
 import logic from '../../logic'
@@ -37,6 +38,8 @@ export default withRouter(function ({ history }) {
     <Route path="/home" render={ () => logic.isUserLoggedIn() ? <Home setView={setView} user={user} setUser={setUser} /> : <Landing/>} /> 
     <Route path="/cart" render={ () => <Cart /> } />
     <Route path="/detail/:productId" render={ () => <Detail /> } /> 
+    <Route path="/cart-success" render={ () => <CartSuccess /> } /> 
+
     <Route path="/order" render={ () => <Cart /> } /> 
 
     <Footer/>

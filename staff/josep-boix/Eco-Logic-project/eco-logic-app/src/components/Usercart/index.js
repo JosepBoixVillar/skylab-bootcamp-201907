@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import logic from '../../logic'
 // import './index.sass'
 
 function UserCart() {
+  const [cart, setCart] = useState
+  
   let total = 0
 
   useEffect(() => {
@@ -17,28 +19,28 @@ function UserCart() {
     })()
   }, [cart])
 
-  async function handleUpdateCart(productId) {
-    try {
-      await logic.updateCart(productId)
-    } catch (error) {
-      console.log("error", error.message)
-    }
-  }
+  // async function handleUpdateCart(productId) {
+  //   try {
+  //     await logic.updateCart(productId)
+  //   } catch (error) {
+  //     console.log("error", error.message)
+  //   }
+  // }
 
-  function handleCheckout(event) {
-    event.preventDefault()
-    handlePlaceOrder()
-  }
-  async function handlePlaceOrder() {
+  // function handleCheckout(event) {
+  //   event.preventDefault()
+  //   handlePlaceOrder()
+  // }
+  // async function handlePlaceOrder() {
 
-    try {
-      await logic.placeOrder()
-      setView("success")
-      setFromCart(true)
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
+  //   try {
+  //     await logic.placeOrder()
+  //     setView("success")
+  //     setFromCart(true)
+  //   } catch (error) {
+  //     console.log(error.message)
+  //   }
+  // }
 
 
   return <>
@@ -54,12 +56,12 @@ function UserCart() {
           {cart.map(item => {
             return <>
               <ul className='userCart'>
-                <li onClick={event => {
+                {/* <li onClick={event => {
                   event.preventDefault()
                   
                   let productId = item.product._id
                   handleUpdateCart(productId)
-                }}><a>X</a></li>
+                }}><a>X</a></li> */}
                 <li className="userCart-title">{item.product.title}</li>
                 <li className="userCart-description"><img src={item.product.image}/></li>
                 <li className="userCart-description">{'Price:' + item.product.price + " €"}</li>
@@ -70,10 +72,10 @@ function UserCart() {
           }
           )}
         </ul>
-        {cart != "" && cart!= undefined && <h3 className = "userCart-total">Total: {total + " €"}</h3>}
+        {cart != "" && cart != undefined && <h3 className = "userCart-total">Total: {total + " €"}</h3>}
         
 
-        {cart != "" && cart != undefined && <button className = "formPanel-submit-buy" onClick={handleCheckout} >Checkout</button>}
+        {/* {cart != "" && cart != undefined && <button className = "formPanel-submit-buy" onClick={handleCheckout} >Checkout</button>} */}
         <p><a href="/#/home">X</a></p>
 
       </div>
