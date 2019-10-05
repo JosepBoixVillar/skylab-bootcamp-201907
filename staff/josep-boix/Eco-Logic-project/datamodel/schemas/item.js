@@ -5,7 +5,7 @@ const { Schema, Schema: { Types: { ObjectId } } } = mongoose
 
 const itemSchema = new Schema ({
     quantity: {
-        type: Number,
+        type: String,
         required: true,
         default: 1
     },

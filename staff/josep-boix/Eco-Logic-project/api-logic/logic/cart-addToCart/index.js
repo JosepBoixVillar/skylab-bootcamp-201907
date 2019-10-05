@@ -13,7 +13,7 @@ const validate = require('utils/validate')
 
 function addToCart(userId, quantity, productId) {
     validate.string(userId, 'User ID')
-    validate.number(quantity, 'Quantity')
+    validate.string(quantity, 'Quantity')
     validate.string(productId, 'Product ID')
 
     return( async () => {
