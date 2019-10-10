@@ -13,7 +13,7 @@ function RegisterSuccess({ history }) {
         <p className="successPanel__text">
             Now you are ready in. Please 
             <a className="successPanel__ancorToLogin" href="/login" onClick={handleGoToLogin}>
-                log in</a> to your private area.
+                 log in </a>to your private area.
         </p>        
     </div>
 }

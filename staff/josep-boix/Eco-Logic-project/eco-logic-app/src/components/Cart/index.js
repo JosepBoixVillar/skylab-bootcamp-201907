@@ -1,38 +1,57 @@
-import React, { useState } from 'react'
-import UserCart from '../Usercart'
+import React, { useState, useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
+import Feedback from '../Feedback'
 // import './index.sass'
 
-function Cart({ history}) {
-    const { setView, user, product } = useState()
+import logic from '../../logic'
+import UserCart from '../Usercart'
+
+function Cart({ history }) {
+    const [,setView] = useState()
+    const [user, setUser] = useState()
+    const [cart, setCart] = useState()
+    const [error, setError] = useState()
+
+    let total = 0
 
     const handleGoBack = () => {
         setView('home')
-        history.push('/#/home')
+        history.push('/home')
     }
 
-    return <>
-        <section className="cartPanel">
-            {user && <div className="cartPanel__user">
-                <h2 className="cartPanel__user--title">Cart</h2> 
-                <div className="cartPanel__user--form">
-                    {!product ? 
-                    <p>Your shopping cart is empty</p>
-                    :
-                    <UserCart />}
-                    <a href='/#/home' className="ancor" onClick={handleGoBack} >Go back</a>
-                </div>
-            </div>     
+  
+    useEffect(() => {
+        if (logic.isUserLoggedIn())
+            (async () => {
+                try {
+                    const user = await logic.retrieveUser()
+                    setUser(user)
+
+                } catch (error) {
+                    setError(error.message)
             }
-            {!user && <div className="cartPanel__user">            
+            })()
+    }, [history.location])
+
+    return <>
+        {!logic.isUserLoggedIn() ?
+        <section className="cartPanel">
+            <div className="cartPanel__user">            
                 <h2 className="cartPanel">You need to be registered in order to adquire our products, please 
-                    <a href="/#/login" className="cartPanel-submit"> log in </a> or 
-                    <a href="/#/register" className="cartPanel-submit"> sign up </a> if you are not still a member of our comunity.
+                    <a href="/#/login" className="cartPanel__ancor ancor"> log in </a> or 
+                    <a href="/#/register" className="cartPanel__ancor ancor"> sign up </a> if you are not still a member of our comunity.
                 </h2>
                 <a href='/#/home' className="ancor" onClick={handleGoBack} >Go back</a>
             </div>
-            }
-        </section>     
+        </section>
+        :  
+        <UserCart/>
+        }
+
+        <p><a href="/#/home">Go home</a></p>
+
+        {error && <Feedback message={error} /> }
+    
     </>
 }
-
-export default Cart
+export default withRouter(Cart)

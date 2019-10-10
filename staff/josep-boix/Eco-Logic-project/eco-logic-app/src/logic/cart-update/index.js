@@ -7,7 +7,7 @@ export default function (productId) {
     const { id, token } = this.__credentials__
 
     return (async () => {
-        const response = await fetch(`${REACT_APP_API_URL}/users/${id}/cart/deleteItem`, {
+        const response = await fetch(`${REACT_APP_API_URL}/user/cart/deleteItem`, {
             method: 'PATCH',
             headers: { 'content-type': 'application/json','authorization': `bearer ${token}` },
             body: JSON.stringify({productId})
