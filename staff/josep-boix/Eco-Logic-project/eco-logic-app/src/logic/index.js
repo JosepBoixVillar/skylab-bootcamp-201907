@@ -8,6 +8,7 @@ import productDetail from './product-detail'
 import retrieveProduct from './product-retrieve'
 import addToCart from './cart-addToCart'
 import retrieveCart from './cart-retrieve'
+import updateCart from './cart-update'
 
 export default {
     set __token__(token) {
@@ -28,4 +29,5 @@ export default {
     retrieveProduct,
     addToCart,
     retrieveCart,
+    updateCart
 }

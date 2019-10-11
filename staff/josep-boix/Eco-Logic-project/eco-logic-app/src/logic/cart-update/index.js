@@ -1,15 +1,16 @@
-import validate from '../../utils/validate'
+import validate from 'utils/validate'
+
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function (productId) {
     validate.string(productId, 'product id')
     
-    const { id, token } = this.__credentials__
+    // const { id, token } = this.__credentials__
 
     return (async () => {
-        const response = await fetch(`${REACT_APP_API_URL}/user/cart/deleteItem`, {
+        const response = await fetch(`${REACT_APP_API_URL}/user/cart/delete`, {
             method: 'PATCH',
-            headers: { 'content-type': 'application/json','authorization': `bearer ${token}` },
+            headers: { 'content-type': 'application/json', 'authorization': `bearer ${this.__token__}` },
             body: JSON.stringify({productId})
         })
         

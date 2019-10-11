@@ -9,10 +9,7 @@ import UserCart from '../Usercart'
 function Cart({ history }) {
     const [,setView] = useState()
     const [user, setUser] = useState()
-    const [cart, setCart] = useState()
     const [error, setError] = useState()
-
-    let total = 0
 
     const handleGoBack = () => {
         setView('home')
@@ -47,8 +44,6 @@ function Cart({ history }) {
         :  
         <UserCart/>
         }
-
-        <p><a href="/#/home">Go home</a></p>
 
         {error && <Feedback message={error} /> }
     
