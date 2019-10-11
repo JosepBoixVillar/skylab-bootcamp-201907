@@ -59,7 +59,7 @@ router.get('/user/allorders/', [tokenMiddleware, jsonBodyParser], retrieveAllOrd
 
 /* cart */
 router.post('/user/cart', [tokenMiddleware, jsonBodyParser], addToCart)
-router.patch('/user/cart/deleteItem', [tokenMiddleware, jsonBodyParser], cartRemove)
 router.get('/user/cart/list', [tokenMiddleware, jsonBodyParser], listToCart)
+router.patch('/user/cart/delete', [tokenMiddleware, jsonBodyParser], cartRemove)
 
 module.exports = router

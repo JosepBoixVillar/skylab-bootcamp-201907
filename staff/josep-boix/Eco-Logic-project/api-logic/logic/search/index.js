@@ -1,5 +1,5 @@
-const { models: { Product } } = require('datamodel')
 const validate = require('utils/validate')
+const { models: { Product } } = require('datamodel')
 
 /**
  * Search according to a query.

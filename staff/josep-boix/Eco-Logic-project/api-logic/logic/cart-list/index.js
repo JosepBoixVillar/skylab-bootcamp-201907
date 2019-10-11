@@ -1,15 +1,16 @@
-const { models: { User, Item } } = require('datamodel')
 const validate = require('utils/validate')
+const { models: { User, Item } } = require('datamodel')
 
 /**
  * Retrieve cart added products by an user
  * 
- * @param {*} userId 
+ * @param {String} userId 
  * 
  * @returns {Promise}
  */
 
 function listToCart(userId) {
+    debugger
     validate.string(userId, 'User ID')
 
     return( async () => {

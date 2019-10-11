@@ -29,7 +29,7 @@ function addToCart(userId, quantity, productId) {
             user.cart.push(item)
         }
         await user.save()
-
+debugger
         const _user = await User.findById(userId)
         let _item = _user.cart.find(item => item.product.toString() === productId)
         if(_item.quantity < 0) _item.quantity = 0

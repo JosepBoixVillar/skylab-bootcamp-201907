@@ -20,7 +20,9 @@ module.exports = function (id) {
     return (async () => {
         const user = await User.findOne({ _id: id }, { _id: 0, password: 0}).lean()
         if(!user) throw new Error(`User with id ${id} does not exist.`)
+        
         user.id = id
+        
         return user
     })()
 }
