@@ -8,7 +8,7 @@ import UserCart from '../Usercart'
 
 function Cart({ history }) {
     const [,setView] = useState()
-    const [user, setUser] = useState()
+    const [,setUser] = useState()
     const [error, setError] = useState()
 
     const handleGoBack = () => {
@@ -32,15 +32,17 @@ function Cart({ history }) {
 
     return <>
         {!logic.isUserLoggedIn() ?
-        <section className="cartPanel">
-            <div className="cartPanel__user">            
-                <h2 className="cartPanel">You need to be registered in order to adquire our products, please 
-                    <a href="/#/login" className="cartPanel__ancor ancor"> log in </a> or 
-                    <a href="/#/register" className="cartPanel__ancor ancor"> sign up </a> if you are not still a member of our comunity.
-                </h2>
-                <a href='/#/home' className="ancor" onClick={handleGoBack} >Go back</a>
+        <div className="cartPanel">            
+            <h2 className="cartPanel__title">You need to be registered in order to adquire our products...</h2>
+            <div className="userPanel">
+                <p className="userPanel__text">Please 
+                    <a className="userPanel__ancorToLogin" href="/#/login"> log in </a>
+                    or <a className="cartPanel__ancorToLogin" href="/#/register"> sign up </a>
+                    if you are not still a member of our comunity.
+                </p>
             </div>
-        </section>
+            <a href='/#/home' className="ancor" onClick={handleGoBack} >Go back</a>
+        </div>
         :  
         <UserCart/>
         }

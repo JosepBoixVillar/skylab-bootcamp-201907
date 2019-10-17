@@ -75,8 +75,8 @@ export default withRouter(function ({ history, view, setView, onLogout }) {
         <header className="header">
         <section className="header__top">
           <h1 className="header__top--title">ECO-LOGIC_APP</h1>
-          <h4>Welcome, {user && user.name}!</h4>
-          <ul>
+          <h4 className="header__top--user">Welcome, {user && user.name}!</h4>
+          <ul className="header__top--nav">
             <button className="btn header__top--favs" href="/favs" onClick={handleGoToFavs}>Fav's</button> 
             <button className="btn header__top--cart" href="/cart" onClick={handleGoToCart}>C</button>
             <button className="btn header__top--logout" onClick={handleOnLogout}>Log out</button> 

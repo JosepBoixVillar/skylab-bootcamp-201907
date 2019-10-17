@@ -40,7 +40,7 @@ export default withRouter(function({ history, setView }) {
                     <button className="btn loginPanel__btn">Log in</button>
                 </form>
 
-                <Link to='/'><a href='landing' className="ancor">Go Back</a></Link>
+                <Link to='/' className="ancor">Go Back</Link>
 
                 {/* <a className="ancor" href="/" onClick={event => {
                     event.preventDefault()

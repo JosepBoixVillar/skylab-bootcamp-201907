@@ -7,10 +7,12 @@ import Feedback from '../Feedback'
 const REACT_APP_API_PUBLIC = process.env.REACT_APP_API_PUBLIC 
 
 function UserCart() {
+  // debugger
   const [cart, setCart] = useState()
   const [error, setError] = useState()
   
   let total = 0
+  // let itemTotal = 0
 
   useEffect(() => {
     (async () => {
@@ -33,7 +35,7 @@ function UserCart() {
   }
 
   return <>
-    {cart && cart.length == 0 &&
+    {cart && cart.length === 0 &&
     <div>
         <p className="formPanel">Cart is empty</p>
     </div>
@@ -43,23 +45,25 @@ function UserCart() {
       <ul>
         {cart.map(item => {
           return <>
-            <ul className='userCart'>
-              <li className="productList__product" onClick={event => {
+            <ul>
+              <li className="productList__product--title"> {item.product.name}
+              <li className="productList__product--delete" onClick={event => {
                 event.preventDefault()
                 
                 let productId = item.product._id
                 handleUpdateCart(productId)
-              }}><a href="" className="ancor" >wtf</a></li>
-              <li className="productList__product--title">{item.product.name}</li>
-              <li ><img className="productList__product--img" src={`${REACT_APP_API_PUBLIC}${item.product.image}`}/></li>
-              <li className="productList__product--title">{'Price:' + item.product.price + " €"}</li>
-              <li className="productList__product--title">{'Quantity: ' + item.quantity}</li>
-              <li className="productList__product--total">{'Total: '+(total += (item.product.price * item.quantity))+ " €"}</li>         
+              }}><a href="/">Delete</a></li>
+              </li>
+              <li className="productList__product--img"><img src={ `${REACT_APP_API_PUBLIC}${item.product.image}`} alt="product_image" width="300"/></li>
+              <li className="productList__product--title"> { 'Price: ' + item.product.price + " €" } </li>
+              <li className="productList__product--title"> { 'Quantity: ' + item.quantity + " unit/s" } </li>
+              <li className="productList__product--total"> { 'Total: '+ (item.product.price * item.quantity.toString()).toFixed(2)+ " €" } </li>         
+              <li className="productList__product--hidden"> { 'Total: '+ (total += (item.product.price * item.quantity.toString()))+ " €" } </li>         
             </ul>
           </>
         })}
       </ul>
-      {cart != "" && cart != undefined && <h3 className = "userCart-total">Total: {total + " €"} </h3> }
+      {cart !== "" && cart !== undefined && <h3 className = "userCart-total">Total: {total.toFixed(2) + " €"} </h3> }
       
       {error && <Feedback message={error} /> }
       

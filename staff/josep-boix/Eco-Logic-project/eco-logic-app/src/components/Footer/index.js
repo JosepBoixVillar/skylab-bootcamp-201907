@@ -7,7 +7,7 @@ function Footer (){
     return <>
         <footer className="footer">
             <div className= "footer__menu--title">
-                <p>You can get more information contacting at </p><a>josepboixvillar@gmail.com</a><br/>
+                <p>You can get more information contacting at <a href="/">josepboixvillar@gmail.com</a></p><br/>
                 <p>We are also in social media</p>
             </div>
             <ul className="footer__menu">

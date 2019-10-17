@@ -11,16 +11,28 @@
     &__top
         display: flex
         align-content: baseline
-        justify-content: space-between
+        justify-content: space-around
         margin: 10px
-        padding: 0 10px 0 10px
+        padding: 0 5px 0 5px
         display: flex
 
         &--title
             align-self: center
             font-family: Impact, Charcoal, sans-serif
             font-size: 100%
-        
+
+        &--nav
+            margin: 0
+            padding: 0
+            display: flexbox
+            // align-content: center
+            
+            justify-content: flex-end
+        &--user
+            font-size: 25px
+            color: #0026ffa8
+            color: -webkit-linear-gradient(to right, #ec2F4B, #009FFF)
+            color: linear-gradient(to right, #ec2F4B, #009FFF) 
         &--register
             padding: 1px
             margin: 5px

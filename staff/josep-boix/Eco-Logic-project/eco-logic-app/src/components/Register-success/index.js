@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 function RegisterSuccess({ history }) {
-    const [view, setView] = useState()
+    const [, setView] = useState()
 
     const handleGoToLogin = () => {
         setView('login')

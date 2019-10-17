@@ -21,7 +21,7 @@ export default withRouter(function ({ history, query }) {
             <ul>
                 { products ? products.map(item => <li className="productList__product" key={item._id}>
                     <a className="productList__product--a" href={`/#/detail/${item._id}`}>
-                        <img className="productList__product--img" src={`${REACT_APP_API_PUBLIC}${item.image}`}></img>
+                        <img className="productList__product--img" src={`${REACT_APP_API_PUBLIC}${item.image}`} alt="product_image"></img>
                         <div >
                             <p className="productList__product--title">Name: {item.name}</p> 
                             <p className="productList__product--title">Categorie: {item.categoria}</p> 

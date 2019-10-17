@@ -46,7 +46,7 @@ export default withRouter(function({ history }) {
                     <button className="btn registerPanel__btn">Sign up</button>
                 </form>
 
-                <Link to='/'><a href='landing' className="ancor">Go back</a></Link>
+                <Link to='/' className="ancor">Go back</Link>
 
                 {/* <a className="ancor"href="/" onClick={handleBack}>Tornar</a> */}
             </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Route, withRouter } from 'react-router-dom'
 // import queryString from 'query-string'
 import './index.sass'
@@ -16,7 +16,7 @@ import Cart from '../Cart'
 import Footer from '../Footer'
 
 import logic from '../../logic'
-import UserCart from '../Usercart'
+// import UserCart from '../Usercart'
 
 export default withRouter(function () {
   const [user, setUser] = useState()

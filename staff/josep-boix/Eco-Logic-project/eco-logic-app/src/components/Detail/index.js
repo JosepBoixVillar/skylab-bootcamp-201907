@@ -18,7 +18,6 @@ export default withRouter(function ({ history }) {
     }
 
     const handleAddToCart = async (quantity) => {
-        debugger
         const pid = product._id
         
         try{
@@ -28,7 +27,6 @@ export default withRouter(function ({ history }) {
             setView('cart-success')
         }catch({ message }){
             setError(message)
-            // console.log(error.message)
         }
     }
 
@@ -38,12 +36,12 @@ export default withRouter(function ({ history }) {
             const product = await logic.retrieveProduct(pid)
             setProduct(product)
         })()
-    }, [])
+    }, )
   
     return <>
         {product && <main className="detailProduct">
             <figure className="detailProduct__figure">
-                <img className="detailProduct__figure--image" src={`${REACT_APP_API_PUBLIC}${product.image}`} />
+                <img className="detailProduct__figure--image" src={`${REACT_APP_API_PUBLIC}${product.image}`} alt="product_image" />
             </figure>
             <section className="detailProduct__text">
                 <p className="detailProduct__text--name">{product.name}</p>
@@ -55,7 +53,7 @@ export default withRouter(function ({ history }) {
                 const { target: { quantity: { value: quantity } } } = event
                 handleAddToCart(quantity)
             }}>
-                <input className="detailProduct__form--input" type="number" pattern="[0-9]*" name="quantity" defaultValue={1} ></input>
+                <input className="detailProduct__form--input" type="number" pattern="[0-9]*" name="quantity" defaultValue={1}></input>
                 <button className="detailProduct__form--btn" >Add to cart</button>
 
             </form>
