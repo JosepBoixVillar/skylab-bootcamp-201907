@@ -22,11 +22,12 @@ module.exports = function(userId, productId) {
         if(!user) throw Error('User not found')
 
         let item = user.cart.findIndex(item => { 
+            debugger
             return item.product.toString() === productId
         })
 
         if(item > -1) await user.cart.splice(item, 1)
-        if(item <0) throw Error("Item not found")
+        if(item <0) throw Error(`Item with productId ${productId} not found.`)
         
         await user.save()
     })()

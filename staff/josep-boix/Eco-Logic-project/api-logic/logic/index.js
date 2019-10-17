@@ -17,8 +17,8 @@ module.exports = {
     searchProduct: require('./search'),
     retrieveProduct: require('./product-retrieve'),
     // ITEM
-    registerItem: require('./item-register'),
-    unregisterItem: require('./item-unregister'),
+    // registerItem: require('./item-register'),
+    // unregisterItem: require('./item-unregister'),
     //ORDER
     listOrder: require('./order-list'),
     registerOrder: require('./order-register'),
