@@ -1,56 +1,63 @@
-import retrieveUser from require('.')
+import logic from '..'
+import jwt from 'jsonwebtoken'
 
-const { database, models: { User } } = require('datamodel')
+const  { database, models: { User } } = require('datamodel')
 
-const { env: { REACT_APP_DB_URL_TEST } } = process
+const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
+const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
 
-describe.only ('logic - retrieve user', () => {
+describe('logic - retrieve user', () => {
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
-    let name, email, password, id
+    let name, email, password, id, token
 
-    beforeEach(async () => {
+    beforeEach(async() => {
         name = `name-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
 
         await User.deleteMany()
-        const user = await User.create({ name, email, password })
+
+        const user = new User({ name, email, password })
         id = user.id
+        
+        const token = jwt.sign({ sub: id }, REACT_APP_JWT_SECRET_TEST)
+        logic.__token__ = token
+
+        await user.save()
     })
 
-    /* id */
-    it ('should succees on correct id', async () => {
-        const user = await retrieveUser(id)
-            expect(user).to.exist
-            expect(user.id).to.exist
-            expect(user.name).to.equal(name)
-            expect(user.email).to.equal(email)
-            expect(user._id).not.to.exist
-            expect(user.password).not.to.exist
+    it('should succeed on correct data', async() =>{
+        const user = await logic.retrieveUser()
+        
+        expect(user).toBedefined
+        expect(user.id).toBe(id)
+        expect(user.name).toBe(name)
+        expect(user.email).toBe(email)
+        expect(user.password).toBeUndefined()
     })
-    it ('should fail on empty id', () => { 
-        id = ''
-        expect(() => 
-            retrieveUser(id)
-        ).toBe('id is empty or blank')
-    })
-    it ('should fail on not valid type id', () => { 
-        id = undefined
-        expect(() => 
-            retrieveUser(id)
-        ).to.throw(Error, 'id with value undefined is not a string')
-    })
-    it ('should fail on uncorrect id', async () => {
-        id = '41224d776a326fb40f000001'
-        try {
-            await retrieveUser(id)
-            // throw new Error('should not to throw, sth wrong in the logic')
-        } catch (error) {
-            expect(error).to.exist
-            expect(error.message).to.equal('User with id 41224d776a326fb40f000001 does not exist.')
-        }                    
-    })
+
+    // it('should fail with a wrong token', async () =>{
+    //     try {
+    //         await logic.retrieveUser()
+    //     } catch(error) {
+    //         expect(error).toBeDefined()
+    //     }
+    // })
+
+// it('should fail on empty token', () =>{
+//     token = ""
+//     logic.__token__ = token
+//     expect(() => logic.retrieveUser(id)).toBe('id is empty or blank')
+// })
+
+//     it('should fail on undefined token', () =>{
+//         logic.__credentials__ = { id:undefined, token }
+//         expect(() =>
+//         logic.retrieveUser( )
+//         ).toThrow(`id with value undefined is not a string`)
+//     })
 
     afterAll(() => database.disconnect())
+
 })

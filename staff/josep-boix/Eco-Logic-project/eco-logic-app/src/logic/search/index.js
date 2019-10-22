@@ -23,7 +23,7 @@ function searchProducts(query)  {
     
         if (response.status !== 200) {
             const { error } = await response.json()
-            throw Error(error)
+            throw Error(error.message)
         }
 
         const products = await response.json()

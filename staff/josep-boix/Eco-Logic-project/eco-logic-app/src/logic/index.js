@@ -11,6 +11,16 @@ import retrieveCart from './cart-retrieve'
 import updateCart from './cart-update'
 
 export default {
+    // set __credentials__ ({ id, token }) {
+    //     sessionStorage.id = id
+    //     sessionStorage.token = token
+    // },
+   
+    // get __credentials__ () {
+    //     const { id, token } = sessionStorage
+    //     return { id, token }
+    // },
+    
     set __token__(token) {
         sessionStorage.token = token
     },

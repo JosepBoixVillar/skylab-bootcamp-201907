@@ -1,11 +1,13 @@
+require('dotenv').config()
+import logic from '..'
 import authenticateUser from '.'
 
 const { database, models: { User } } = require('datamodel')
+const bcrypt = require('bcrypt')
 
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 
 describe ('logic - authenticate user', () => {
-
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
     let name, email, password, id
@@ -17,62 +19,60 @@ describe ('logic - authenticate user', () => {
 
         return (async () => {
             await User.deleteMany()
-            const user = await User.create({ name, email, password })
-            id = user.id
+            const hash = await bcrypt.hash(password, 10)
+            await User.create({ name, email, password: hash })
         })()
     })
 
     it ('should succeed on correct data', async () => {
-        const retrieved_id = await authenticateUser(email, password) 
+        const retrieved_token = await authenticateUser(email, password) 
 
-        expect(retrieved_id).to.exist
-        expect(retrieved_id).to.be.a('string')
-        expect(retrieved_id).to.equal(id)
-    })
-
-    it ('should fail on not valid data', async () => {
-        let password = 'incorrect_pass'
-
-        try {
-            await authenticateUser(email, password)
-        } catch (error) {
-            expect(error).to.exist
-            expect(error.message).to.equal('wrong credentials')
-        }
+        expect(retrieved_token).toBeUndefined()
+        expect(logic.__token__).toBeDefined()
     })
 
     /* e-mail */
     it ('should fail on empty e-mail input', () => {
         email = ''
         expect(() => authenticateUser(email, password)
-        ).to.throw(Error, 'email is empty or blank')
+        ).toThrow('email is empty or blank')
     })
     it ('should fail on undefined email', () => {
         email = undefined
         expect(() => authenticateUser(email, password)
-        ).to.throw(Error, 'email with value undefined is not a string')
+        ).toThrow('email with value undefined is not a string')
     })
     it ('should fail on not valid e-mail', () => {
         email = 'false#mail.com'
         expect(() => authenticateUser(email, password)
-        ).to.throw(Error, 'email with value false#mail.com is not a valid e-mail')
+        ).toThrow('email with value false#mail.com is not a valid e-mail')
     })
 
     /* password */
+    it ('should fail on not valid data', async () => {
+        let password = 'incorrect_pass'
+
+        try {
+            await authenticateUser(email, password)
+        } catch (error) {
+            expect(error).toBeDefined()
+            expect(error.message).toBe('wrong credentials')
+        }
+    })
     it ('should fail on empty password', () => {
         password = ''
         expect(() => authenticateUser(email, password)
-        ).to.throw(Error, 'password is empty or blank')
+        ).toThrow('password is empty or blank')
     })
     it ('should fail on undefined password', () => {
         password = undefined
         expect(() => authenticateUser(email, password)
-        ).to.throw(Error, 'password with value undefined is not a string')
+        ).toThrow('password with value undefined is not a string')
     })
     it ('should fail on not valid data type for password', () => {
         password = false
         expect(() => authenticateUser(email, password)
-        ).to.throw(Error, 'password with value false is not a string')
+        ).toThrow('password with value false is not a string')
     })
 
     afterAll(() => database.disconnect())
