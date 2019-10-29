@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
+import Feedback from '../Feedback'
 // import queryString from 'query-string'
 import logic from '../../logic'
 
@@ -7,7 +8,8 @@ const REACT_APP_API_PUBLIC = process.env.REACT_APP_API_PUBLIC
 
 export default withRouter(function ({ history, query }) {
     const [products, setProduct] = useState(undefined)
-
+    const [error] = useState()
+    
     useEffect(() => {
         async function busqueda () {
             const { product } = await logic.searchProducts(query)
@@ -23,13 +25,15 @@ export default withRouter(function ({ history, query }) {
                     <a className="productList__product--a" href={`/#/detail/${item._id}`}>
                         <img className="productList__product--img" src={`${REACT_APP_API_PUBLIC}${item.image}`} alt="product_image"></img>
                         <div >
-                            <p className="productList__product--title">Name: {item.name}</p> 
+                            <p className="productList__product--title">Name: {item.title}</p> 
                             <p className="productList__product--title">Categorie: {item.categoria}</p> 
                         </div>
                     </a>
                 </li>)
                 :
-                <p className="productList__product--none">No hay resultados</p>}
+                error && <Feedback message={error}/>}
+                {/* products && <p className="productList__product--none">No hay resultados</p>} */}
+            
             </ul>
         </main>
     </>

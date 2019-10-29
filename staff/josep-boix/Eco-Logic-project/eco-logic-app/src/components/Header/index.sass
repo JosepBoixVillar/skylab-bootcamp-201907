@@ -10,29 +10,30 @@
 
     &__top
         display: flex
-        align-content: baseline
-        justify-content: space-around
+        // align-content: baseline
+        justify-content: space-between
         margin: 10px
         padding: 0 5px 0 5px
-        display: flex
 
         &--title
-            align-self: center
+            justify-content: center
             font-family: Impact, Charcoal, sans-serif
             font-size: 100%
-
-        &--nav
-            margin: 0
-            padding: 0
-            display: flexbox
-            // align-content: center
             
-            justify-content: flex-end
         &--user
+            // justify-content: center
+            font-variant: small-caps
             font-size: 25px
             color: #0026ffa8
             color: -webkit-linear-gradient(to right, #ec2F4B, #009FFF)
             color: linear-gradient(to right, #ec2F4B, #009FFF) 
+
+        &--nav
+            margin: 0
+            padding: 0
+            display: flex
+            justify-content: center
+
         &--register
             padding: 1px
             margin: 5px
@@ -48,13 +49,37 @@
             margin: 5px
             background-color: green
 
+        &--favs
+            padding: 1px
+            margin: 5px
+            color: white
+            background-color: red
+
+        &--logout
+            padding: 1px
+            margin: 5px
+            color: white
+            background-color: black
+
     &__bottom
         display: flex
         justify-content: space-around
 
         &--categories
+            background: #11998e
+            background: -webkit-linear-gradient(to right, #38ef7d, #11998e)
+            background: linear-gradient(to right, #38ef7d, #11998e)
             display: flex
             justify-content: flex-end
+            border-color: black
+
+        &--community
+            background: #ad5389
+            background: -webkit-linear-gradient(to right, #3c1053, #ad5389)
+            background: linear-gradient(to right, #3c1053, #ad5389)
+            display: flex
+            justify-content: flex-end
+            border-color: black
 
         &--search
             display: flex

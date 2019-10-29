@@ -13,7 +13,10 @@ import Home from '../Home'
 import Detail from '../Detail'
 import CartSuccess from '../CartSuccess'
 import Cart from '../Cart'
+import Categories from '../Categories'
+import Favs from '../Favs'
 import Footer from '../Footer'
+import EndFlow from '../EndFlow'
 
 import logic from '../../logic'
 // import UserCart from '../Usercart'
@@ -40,6 +43,9 @@ export default withRouter(function () {
     <Route path="/detail/:productId" render={ () => <Detail /> } /> 
     <Route path="/cart-success" render={ () => <CartSuccess /> } /> 
     <Route path="/cart" render={ () => <Cart setView={setView} user={user} setUser={setUser} /> } />
+    <Route path="/categories" render={ () => <Categories/> } />
+    <Route path="/favs" render={ () => <Favs/> } />
+    <Route path="/thanks" render={ () => <EndFlow/> } />
     {/* <Route path="/cart" render={ () => <Cart /> } />  */}
 
     <Footer/>

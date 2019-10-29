@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
 // import './index.sass'
 
 import logic from '../../logic'
@@ -6,10 +7,11 @@ import Feedback from '../Feedback'
 
 const REACT_APP_API_PUBLIC = process.env.REACT_APP_API_PUBLIC 
 
-function UserCart() {
+function UserCart({ history }) {
   // debugger
   const [cart, setCart] = useState()
   const [error, setError] = useState()
+  const [setView] = useState()
   
   let total = 0
   // let itemTotal = 0
@@ -34,10 +36,15 @@ function UserCart() {
     }
   }
 
+  const handleEndFlow = () => {
+    // setView('endFlow')
+    history.push('/thanks')
+  }
+
   return <>
     {cart && cart.length === 0 &&
-    <div>
-        <p className="formPanel">Cart is empty</p>
+    <div className="productList__empty">
+        <p className="productList__message">Cart is empty</p>
     </div>
     }
     {cart && cart.length > 0 &&
@@ -46,7 +53,7 @@ function UserCart() {
         {cart.map(item => {
           return <>
             <ul>
-              <li className="productList__product--title"> {item.product.name}
+              <li className="productList__product--title"> {item.product.title}
               <li className="productList__product--delete" onClick={event => {
                 event.preventDefault()
                 
@@ -63,7 +70,12 @@ function UserCart() {
           </>
         })}
       </ul>
-      {cart !== "" && cart !== undefined && <h3 className = "userCart-total">Total: {total.toFixed(2) + " €"} </h3> }
+      {cart !== "" && cart !== undefined && 
+      <>
+        <h3 className = "userCart-total">Total: {total.toFixed(2) + " €"} </h3> 
+        <button className="buyBtn" onClick={handleEndFlow}>Do you BUY IT??</button>  
+      </>
+      }
       
       {error && <Feedback message={error} /> }
       
@@ -77,7 +89,7 @@ function UserCart() {
   </>
 }
 
-export default UserCart
+export default withRouter(UserCart)
 
 
   // function handleCheckout(event) {

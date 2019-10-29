@@ -23,8 +23,8 @@ export default withRouter(function ({ history }) {
         try{
             await logic.addToCart(pid, quantity)
             setSuccess(true)
-            history.push('/cart-success')
             setView('cart-success')
+            history.push('/cart-success')
         }catch({ message }){
             setError(message)
         }

@@ -15,7 +15,6 @@ function Cart({ history }) {
         setView('home')
         history.push('/home')
     }
-
   
     useEffect(() => {
         if (logic.isUserLoggedIn())

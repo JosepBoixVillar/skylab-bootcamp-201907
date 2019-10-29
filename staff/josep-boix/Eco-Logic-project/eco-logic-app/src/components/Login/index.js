@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 
 import Feedback from '../Feedback'
 import logic from '../../logic'
 
 export default withRouter(function({ history, setView }) {
     const [error, setError] = useState()
+
+    const handleBack = () => {
+        history.push('/#/')
+    }
 
     const handleLogin = async (email, password) => {
         try {
@@ -40,13 +44,9 @@ export default withRouter(function({ history, setView }) {
                     <button className="btn loginPanel__btn">Log in</button>
                 </form>
 
-                <Link to='/' className="ancor">Go Back</Link>
+                {/* <Link to='/' className="ancor">Go Back</Link> */}
 
-                {/* <a className="ancor" href="/" onClick={event => {
-                    event.preventDefault()
-                    
-                    onBack()
-                }}>Go back</a> */}
+                <a className="ancor" href="/" onClick={handleBack}>Go back</a>
             </div>
         </main>
     </>
