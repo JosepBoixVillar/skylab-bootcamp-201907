@@ -23,12 +23,12 @@ describe ('logic - register user', () => {
         const result = await registerUser(name, email, password)
         expect(result).toBeUndefined()
         
-        const user = await User.findOne({ email })
-        expect(user).toBeDefined()
-        // expect(user.message).toBe('Register succees')
-        expect(user.email).toBe(email)
+        const _user = await User.findOne({ email })
+        expect(_user).toBeDefined()
+        // expect(_user.message).toBe('Register succees')
+        expect(_user.email).toBe(email)
 
-        const match = await bcrypt.compare(password, user.password)
+        const match = await bcrypt.compare(password, _user.password)
         expect(match).toBeTruthy()
     })
     
