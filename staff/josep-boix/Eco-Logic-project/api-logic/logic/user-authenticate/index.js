@@ -11,7 +11,7 @@ const { models: { User } } = require ('datamodel')
  * @returns {Promise}
  */
 
- module.exports = function (email, password) {
+ module.exports = function (email, password) { debugger
     validate.string(email, 'email')
     validate.email(email, 'email')
     validate.string(password, 'password')
