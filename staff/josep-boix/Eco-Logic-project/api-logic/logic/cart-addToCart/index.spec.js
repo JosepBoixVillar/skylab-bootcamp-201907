@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const addToCart = require('.')
-const { database, models: { User, Product, Item, Cart } } = require('datamodel')
+const { database, models: { User, Product } } = require('datamodel')
 
 const{ env: { DB_URL_TEST } } = process
 
@@ -10,11 +10,11 @@ describe ('logic - add to cart', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let name, email, password, userId
-    let title, categorie, image, price, description, productId, product
-    let _quantity, itemId
+    let title, categorie, image, price, description, productId
+    let _quantity
     
     beforeEach(async() => {
-        _quantity = Number((Math.random()*1000).toFixed())
+        _quantity = (Number((Math.random()*1000).toFixed())).toString()
         date = new Date()
 
         await User.deleteMany()
@@ -42,7 +42,7 @@ describe ('logic - add to cart', () => {
         const user = await User.findById(userId)
         expect(user).to.exist
         expect(user.cart).to.exist
-        expect(user.cart[0].quantity).to.equal(_quantity)
+        expect((user.cart[0].quantity).toString()).to.equal(_quantity)
         expect(user.cart[0].product._id.toString()).to.equal(productId)
     })
 
@@ -96,13 +96,13 @@ describe ('logic - add to cart', () => {
     it('should fail on undefined quantity', () => {
         _quantity = undefined
         expect(() => addToCart(userId, _quantity, productId)
-        ).to.throw(`Quantity with value undefined is not a number`)
+        ).to.throw(`Quantity with value undefined is not a string`)
     })
     it('should fail on wrong data type for quantity', () => {
         _quantity = false
         expect(() =>
         addToCart(userId, _quantity, productId)
-        ).to.throw(`Quantity with value false is not a number`)
+        ).to.throw(`Quantity with value false is not a string`)
     })
     /* Product ID */
     it('should fail on empty productId', () => {

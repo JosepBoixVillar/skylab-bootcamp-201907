@@ -1,8 +1,8 @@
 require ('dotenv').config()
 
 const { expect } = require ('chai')
-const registerUser = require ('.')
 const {database, models: { User } } = require ('datamodel')
+const registerUser = require ('.')
 
 const { env: { DB_URL_TEST } } = process
 
@@ -21,12 +21,13 @@ describe ('logic - register user', () => {
 
     it ('should succeed on correct data', async () => {
         const result = await registerUser(name, email, password)
-            expect(result).not.to.exist
-        const user = await User.findOne({ email, password })
-            expect(user).to.exist
-            expect(user.name).to.equal(name)
-            expect(user.email).to.equal(email)
-            expect(user.password).to.equal(password)
+        expect(result).not.to.exist
+
+        const user = await User.findOne({ email })
+        expect(user).to.exist
+        expect(user.name).to.equal(name)
+        expect(user.email).to.equal(email)
+        expect(user.password).to.exist
     })
     it ('should fail if user already exists', async () => {
         await User.create({ name, email, password })

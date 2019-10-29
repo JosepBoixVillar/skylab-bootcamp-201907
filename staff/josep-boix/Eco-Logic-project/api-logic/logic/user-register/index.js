@@ -1,6 +1,7 @@
 // logic user-register
 
 const validate = require ('utils/validate')
+const bcrypt = require ('bcryptjs')
 const { models: { User } } = require ('datamodel')
 
 /**
@@ -15,11 +16,17 @@ const { models: { User } } = require ('datamodel')
 module.exports = function (name, email, password) {
     validate.string(name, 'name')
     validate.email(email, 'email')
+    validate.string(email, 'email')
     validate.string(password, 'password')
     
     return (async () => {
         const user = await User.findOne({ email })
         if (user) throw new Error('User already exists.')
-        await User.create({ name, email, password })
+
+        const hash = await bcrypt.hash(password, 10)
+
+        await User.create({ name, email, password: hash })
+
+        return user
     })()
 }

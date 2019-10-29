@@ -1,5 +1,4 @@
 // logic-api
-module.exports = {
 
 module.exports = {
 
@@ -14,9 +13,12 @@ module.exports = {
     unregisterCard: require('./card-unregister'),
     retrieveCard: require('./card-retrieve'),
     retrieveAllCards: require('./card-retrieve-all'),
+    // PRODUCT
+    searchProduct: require('./search'),
+    retrieveProduct: require('./product-retrieve'),
     // ITEM
-    registerItem: require('./item-register'),
-    unregisterItem: require('./item-unregister'),
+    // registerItem: require('./item-register'),
+    // unregisterItem: require('./item-unregister'),
     //ORDER
     listOrder: require('./order-list'),
     registerOrder: require('./order-register'),

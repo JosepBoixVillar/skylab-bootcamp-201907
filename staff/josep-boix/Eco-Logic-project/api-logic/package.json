@@ -6,12 +6,13 @@
   "scripts": {
     "test": "npx mocha --timeout 20000 '**/*.spec.js'",
     "test-debug": "npx mocha --inspect-brk --timeout 20000 '**/*.spec.js'",
-    "coverage": "nyc --reporter=html --reporter=text mocha '**/*.spec.js' --runInBand"
+    "coverage": "nyc --reporter=html --reporter=text mocha --timeout 20000 '**/*.spec.js' --runInBand"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "datamodel": "file:../datamodel",
