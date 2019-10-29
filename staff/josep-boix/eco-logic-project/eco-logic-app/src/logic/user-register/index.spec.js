@@ -18,18 +18,20 @@ describe ('logic - register user', () => {
         await User.deleteMany()
     })
 
-    it ('should succeed on correct data', async () => {
+    it ('should succeed on correct data', async () => { 
+        debugger
         const result = await registerUser(name, email, password)
         expect(result).toBeUndefined()
         
         const user = await User.findOne({ email })
         expect(user).toBeDefined()
-        expect(user.name).toBe(name)
+        // expect(user.message).toBe('Register succees')
         expect(user.email).toBe(email)
 
         const match = await bcrypt.compare(password, user.password)
         expect(match).toBeTruthy()
     })
+    
     it ('should fail if user already exists', async () => {
         await User.create({ name, email, password })
 
@@ -42,7 +44,7 @@ describe ('logic - register user', () => {
     })
     
     /* Name */
-    fit ('should fail on empty name', () => {
+    it ('should fail on empty name', () => {
         name = ''
         expect(() => registerUser(name, email, password)
             ).toThrowError('name is empty or blank')

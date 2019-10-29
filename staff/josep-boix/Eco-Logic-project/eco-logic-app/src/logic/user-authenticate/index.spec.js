@@ -24,7 +24,7 @@ describe ('logic - authenticate user', () => {
         })()
     })
 
-    it ('should succeed on correct data', async () => {
+    it ('should succeed on correct data', async () => { debugger
         const retrieved_token = await authenticateUser(email, password) 
 
         expect(retrieved_token).toBeUndefined()

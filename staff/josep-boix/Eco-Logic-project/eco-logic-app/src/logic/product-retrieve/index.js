@@ -1,9 +1,9 @@
-import validate from "utils/validate"
+// import validate from "utils/validate"
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-export default function ([id]) {
-    validate.string (id, 'id')
+export default function([id]) {
+    // validate.string (id, 'id')
     
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/user/detail/${id}`, {
