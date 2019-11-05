@@ -12,26 +12,24 @@ const validate = require('utils/validate')
  */
 
 function addToCart(userId, quantity, productId) {
-    debugger
     validate.string(userId, 'User ID')
     validate.string(quantity, 'Quantity')
     validate.string(productId, 'Product ID')
 
-    return( async () => {debugger
+    return( async () => { debugger
         const user = await User.findById(userId)
         if (!user) throw Error(`User with id ${userId} does not exist`)
+
         quantity = parseInt(quantity)
-        let item = user.cart.find(item => item.product.toString() === productId)
         
+        let item = user.cart.find(item => item.product.toString() === productId)
         if (item) {
             item.quantity += quantity
-        
-        }
-
-        else {
+        } else {
             item = new Item({ quantity, product: productId })
             user.cart.push(item)
         }
+
         await user.save()
 
         const _user = await User.findById(userId)

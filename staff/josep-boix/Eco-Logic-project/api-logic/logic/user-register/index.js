@@ -23,9 +23,9 @@ module.exports = function (name, email, password) {
         const user = await User.findOne({ email })
         if (user) throw new Error('User already exists.')
 
-        const hash = await bcrypt.hash(password, 10)
-
-        await User.create({ name, email, password: hash })
+        // const hash = await bcrypt.hash(password, 10)
+        // await User.create({ name, email, password: hash }) Crea un password més segur, però sobreescriu el password introduit per l'user
+        await User.create({ name, email, password })
 
         return user
     })()

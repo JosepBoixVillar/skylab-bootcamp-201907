@@ -1,7 +1,6 @@
 const logic = require('../../logic')
 
 module.exports = async(req, res)=> {
-    debugger
     const { userId, body: { productId } } = req
 
     try { 
