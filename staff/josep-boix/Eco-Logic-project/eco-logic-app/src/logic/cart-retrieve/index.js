@@ -1,8 +1,19 @@
-import { validate } from "utils"
+import validate  from "utils/validate"
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-export default function () {
+/**
+ * Retrieve all Cart products by userId
+ * 
+ * @param {String} userId
+ * 
+ * @throws {Error} if any doesn't go right
+ * 
+ * @returns {Promise}
+ */
+
+function cartRetrieve(userId) {
+    validate.string(userId, 'User Id')
 
     // const { id, token } = this.__credentials__
 
@@ -24,3 +35,4 @@ export default function () {
         
     })()
 }
+export default cartRetrieve

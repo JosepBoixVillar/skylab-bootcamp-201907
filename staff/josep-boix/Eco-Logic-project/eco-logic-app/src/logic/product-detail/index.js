@@ -2,7 +2,17 @@ import validate from "utils/validate"
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-export default function(productId) {
+/**
+ * Retrieve the Product detail by ProductId
+ * 
+ * @param {String} productId 
+ * 
+ * @throws {Error} if any doesn't go right
+ * 
+ * @returns {Promise}
+ */
+
+function productDetail(productId) {
     validate.string(productId, 'Product ID')
 
     return(async () => {
@@ -19,3 +29,4 @@ export default function(productId) {
         return product
     })()
 }
+export default productDetail

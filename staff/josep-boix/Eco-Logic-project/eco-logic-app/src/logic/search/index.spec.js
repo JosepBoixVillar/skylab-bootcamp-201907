@@ -31,16 +31,24 @@ describe ('logic - search', () => {
         const product = await Product.create({ title, categorie, image, price, description })
         productId = product.id
     })
-    it('should succeed on correct data', async () => {
+    it('should succeed on correct data', async () => { debugger
         query = title
 
         const product = await searchProducts(query)
             expect(product).toBeDefined()
-            // expect(product[0].title).toBe(title)
-            // expect(product.categorie).toBe(categorie)
-            // expect(product.image).toBe(image)
-            // expect(product.description).toBe(description)
-            // expect(product.price).toBe(price)
+            expect(product['message']).toBe('Product found and available')
+            expect(product['product'][0].title).toBe(title)
+            expect(product['product'][0].categorie).toBe(categorie)
+            expect(product['product'][0].image).toBe(image)
+            expect(product['product'][0].description).toBe(description)
+            expect(product['product'][0].price).toBe(price)
+    })
+    it('should fail if query does not exist', async () => { debugger
+        query = 'not_existing'
+
+        const product = await searchProducts(query)
+            expect(product).toBeDefined()
+            expect(product['message']).toBe('Product found and available')
     })
 
     afterAll(() => database.disconnect())

@@ -8,9 +8,32 @@ import productDetail from './product-detail'
 import retrieveProduct from './product-retrieve'
 import addToCart from './cart-addToCart'
 import retrieveCart from './cart-retrieve'
-import updateCart from './cart-update'
+// import updateCart from './cart-update'
+import removeCart from './cart-update'
 
 export default {
+    set __token__(token) {
+        sessionStorage.token = token
+    },
+
+    get __token__() {
+        return sessionStorage.token
+    },
+
+    isUserLoggedIn,
+    logUserOut,
+    registerUser,
+    authenticateUser,
+    retrieveUser,
+    searchProducts,
+    productDetail,
+    retrieveProduct,
+    addToCart,
+    retrieveCart,
+    // updateCart,
+    removeCart
+}
+
     // set __credentials__ ({ id, token }) {
     //     sessionStorage.id = id
     //     sessionStorage.token = token
@@ -20,24 +43,3 @@ export default {
     //     const { id, token } = sessionStorage
     //     return { id, token }
     // },
-    
-    set __token__(token) {
-        sessionStorage.token = token
-    },
-
-    get __token__() {
-        return sessionStorage.token
-    },
-
-    registerUser,
-    authenticateUser,
-    isUserLoggedIn,
-    logUserOut,
-    retrieveUser,
-    searchProducts,
-    productDetail,
-    retrieveProduct,
-    addToCart,
-    retrieveCart,
-    updateCart
-}

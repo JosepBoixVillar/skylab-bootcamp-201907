@@ -1,16 +1,17 @@
-require('dotenv').config()
+// require('dotenv').config()
+
 import logic from '..'
 import authenticateUser from '.'
+import { database, models } from 'datamodel'
 
-const { database, models: { User } } = require('datamodel')
-const bcrypt = require('bcrypt')
+const { User } = models
 
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 
 describe ('logic - authenticate user', () => {
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
-
-    let name, email, password, id
+    debugger
+    let name, email, password
         
     beforeEach(() => {
         name = `name-${Math.random()}`
@@ -19,13 +20,13 @@ describe ('logic - authenticate user', () => {
 
         return (async () => {
             await User.deleteMany()
-            const hash = await bcrypt.hash(password, 10)
-            await User.create({ name, email, password: hash })
+            // const hash = await bcrypt.hash(password, 10)
+            await User.create({ name, email, password })    //password: hash
         })()
     })
 
     it ('should succeed on correct data', async () => { debugger
-        const retrieved_token = await authenticateUser(email, password) 
+        const retrieved_token = await logic.authenticateUser(email, password) 
 
         expect(retrieved_token).toBeUndefined()
         expect(logic.__token__).toBeDefined()

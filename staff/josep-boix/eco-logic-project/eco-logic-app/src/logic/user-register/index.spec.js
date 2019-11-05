@@ -10,7 +10,7 @@ describe ('logic - register user', () => {
 
     let name, email, password
 
-    beforeEach ( async () => {
+    beforeEach ( async () => { debugger
         name = `name-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
@@ -25,7 +25,7 @@ describe ('logic - register user', () => {
         
         const _user = await User.findOne({ email })
         expect(_user).toBeDefined()
-        // expect(_user.message).toBe('Register succees')
+        expect(_user.name).toBe(name)
         expect(_user.email).toBe(email)
 
         const match = await bcrypt.compare(password, _user.password)

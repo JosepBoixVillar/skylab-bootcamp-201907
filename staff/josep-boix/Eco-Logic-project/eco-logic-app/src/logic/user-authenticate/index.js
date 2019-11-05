@@ -2,12 +2,23 @@ import validate from "utils/validate"
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-export default function(email, password) {
+/**
+ * Authenticate an User by params
+ * 
+ * @param {String} email 
+ * @param {String} password 
+ * 
+ * @throws {Error} if any doesn't go right
+ * 
+ * @returns {Promise}
+ */
+
+function authenticateUser(email, password) {
     validate.string(email, 'email')
     validate.email(email, 'email')
     validate.string(password, 'password')
 
-    return(async () => {
+    return(async () => { debugger
         const response = await fetch(`${REACT_APP_API_URL}/users/auth`,{
             method: 'POST',
             headers: { 'content-type':'application/json'},
@@ -25,3 +36,4 @@ export default function(email, password) {
         throw Error(error)
     })()
 }
+export default authenticateUser

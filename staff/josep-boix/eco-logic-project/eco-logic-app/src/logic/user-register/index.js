@@ -2,6 +2,18 @@ import validate from "utils/validate"
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Register an User by params
+ * 
+ * @param {String} name 
+ * @param {String} email 
+ * @param {String} password 
+ * 
+ * @throws {Error} if any doesn't go right
+ * 
+ * @returns {Promise}
+ */
+
 function registerUser(name, email, password) {
     validate.string(name, 'name')
     validate.email(email, 'email')

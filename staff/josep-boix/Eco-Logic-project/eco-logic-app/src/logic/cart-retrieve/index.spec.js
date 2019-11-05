@@ -1,14 +1,17 @@
-import retrieveUser from '.'
+import logic from '..'
+import jwt from 'jsonwebtoken'
 
-const { database, models: { User, Product } } = require('datamodel')
+const { database, models: { User, Product, Item } } = require('datamodel')
 const { env: { REACT_APP_DB_URL_TEST } } = process
+const { env: { REACT_APP_JWT_SECRET_TEST } } = process
 
 describe.only ('logic - retrieve cart', () => {
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
-    let name, email, password, id
+    let name, email, password, userId
     let title, categorie, image, price, description, productId
-
+    let _quantity
+debugger
     beforeEach(async () => {
         name = `name-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
@@ -16,7 +19,7 @@ describe.only ('logic - retrieve cart', () => {
 
         await User.deleteMany()
         const user = await User.create({ name, email, password })
-        id = user.id
+        userId = user.id
 
         title = `title-${Math.random()}`
         categorie = `Categorie-${Math.random()}`
@@ -28,19 +31,28 @@ describe.only ('logic - retrieve cart', () => {
         const product = await Product.create({ title, categorie, image, price, description })
         productId = product.id
 
+        let item = new Item({ quantity:_quantity, product:productId })
+        // itemId = item.id
+        user.cart.push(item)
+
+        await user.save()   
+
+        const token = jwt.sign({ sub: userId }, REACT_APP_JWT_SECRET_TEST)
+        logic.__token__ = token
+
     })
 
     /* id */
     it ('should succeed on correct id', async () => {
-        const user = await retrieveUser(id)
-            expect(user).toBeDefined()
-            expect(user.id).toBeDefined()
-            expect(user.name).toBe(name)
-            expect(user.email).toBe(email)
-            // expect(user._id).not.to.exist
-            // expect(user.password).not.to.exist
+        const cart = await logic.retrieveCart(userId)
+        expect(cart).toBeDefined()
+        // expect(cart.id).toBeDefined()
+        // expect(cart.name).toBe(name)
+        // expect(cart.email).toBe(email)
+        // expect(cart._id).not.to.exist
+        // expect(cart.password).not.to.exist
     })
-    // it ('should fail on empty id', () => { 
+    // it ('should fail on empty user id', () => { 
     //     id = ''
     //     expect(() => retrieveUser(id)
     //     ).toBe('id is empty or blank')
