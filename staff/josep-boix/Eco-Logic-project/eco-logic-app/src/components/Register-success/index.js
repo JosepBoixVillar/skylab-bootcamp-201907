@@ -5,7 +5,7 @@ function RegisterSuccess({ history }) {
 
     const handleGoToLogin = () => {
         setView('login')
-        history.push('/#/login')
+        history.push('/login')
     }
 
     return <div className="successPanel">

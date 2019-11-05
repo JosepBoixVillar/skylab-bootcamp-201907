@@ -18,7 +18,7 @@ function authenticateUser(email, password) {
     validate.email(email, 'email')
     validate.string(password, 'password')
 
-    return(async () => { debugger
+    return(async () => {
         const response = await fetch(`${REACT_APP_API_URL}/users/auth`,{
             method: 'POST',
             headers: { 'content-type':'application/json'},

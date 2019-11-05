@@ -7,6 +7,7 @@ import logic from '../../logic'
 const REACT_APP_API_PUBLIC = process.env.REACT_APP_API_PUBLIC 
 
 export default withRouter(function ({ history }) {
+    debugger
     const [error, setError] = useState()    
     const [, setView] = useState()
     const [product, setProduct] = useState()
@@ -18,7 +19,7 @@ export default withRouter(function ({ history }) {
     }
 
     const handleAddToCart = async (quantity) => {
-        const pid = product._id
+        const pid = product.id
         
         try{
             await logic.addToCart(pid, quantity)
@@ -32,7 +33,8 @@ export default withRouter(function ({ history }) {
 
     useEffect(() => {
         (async () => {
-            const pid = history.location.pathname.split('/').slice(-1)
+            const pid = history.location.pathname.split('/').slice(-1).toString()
+
             const product = await logic.retrieveProduct(pid)
             setProduct(product)
         })()

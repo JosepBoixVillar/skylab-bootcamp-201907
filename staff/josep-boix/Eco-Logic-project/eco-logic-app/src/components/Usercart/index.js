@@ -11,7 +11,7 @@ function UserCart({ history }) {
   // debugger
   const [cart, setCart] = useState()
   const [error, setError] = useState()
-  const [setView] = useState()
+  // const [setView] = useState()
   
   let total = 0
   // let itemTotal = 0
