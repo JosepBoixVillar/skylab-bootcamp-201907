@@ -12,7 +12,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  * @returns {Promise}
  */
 
-function cartRetrieve(userId) {
+function cartRetrieve(userId) {debugger
     validate.string(userId, 'User Id')
 
     // const { id, token } = this.__credentials__

@@ -11,7 +11,7 @@ describe.only ('logic - retrieve cart', () => {
     let name, email, password, userId
     let title, categorie, image, price, description, productId
     let _quantity
-debugger
+
     beforeEach(async () => {
         name = `name-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
@@ -43,34 +43,37 @@ debugger
     })
 
     /* id */
-    it ('should succeed on correct id', async () => {
+    it ('should succeed on correct id', async () => { debugger
         const cart = await logic.retrieveCart(userId)
         expect(cart).toBeDefined()
-        // expect(cart.id).toBeDefined()
-        // expect(cart.name).toBe(name)
-        // expect(cart.email).toBe(email)
-        // expect(cart._id).not.to.exist
-        // expect(cart.password).not.to.exist
+        expect(cart[0]._id).toBeDefined()
+        expect(cart[0].product._id).toBe(productId)
+        expect(cart[0].product.title).toBe(title)
+        expect(cart[0].product.categorie).toBe(categorie)
+        expect(cart[0].product.image).toBe(image)
+        expect(cart[0].product.price).toBe(price)
+        expect(cart[0].product.description).toBe(description)
+        expect(cart[0].quantity).toBe(1)
     })
-    // it ('should fail on empty user id', () => { 
-    //     id = ''
-    //     expect(() => retrieveUser(id)
-    //     ).toBe('id is empty or blank')
-    // })
-    // it ('should fail on not valid type id', () => { 
-    //     id = undefined
-    //     expect(() => retrieveUser(id)).toBe('id with value undefined is not a string')
-    // })
-    // it ('should fail on wrong id', async () => {
-    //     id = '41224d776a326fb40f000001'
-    //     try {
-    //         await retrieveUser(id)
-    //         // throw new Error('should not to throw, sth wrong in the logic')
-    //     } catch (error) {
-    //         expect(error).toBeDefined()
-    //         expect(error.message).toBe('User with id 41224d776a326fb40f000001 does not exist.')
-    //     }                    
-    // })
+    it ('should fail on empty user id', () => { 
+        userId = ''
+        expect(() => logic.retrieveCart(userId)
+        ).toThrow('User Id is empty or blank')
+    })
+    it ('should fail on not valid type id', () => { 
+        userId = undefined
+        expect(() => logic.retrieveCart(userId)).toThrow('User Id with value undefined is not a string')
+    })
+    it ('should fail on wrong id', async () => {
+        userId = '41224d776a326fb40f000001'
+        try {
+            await logic.retrieveCart(userId)
+            // throw new Error('should not to throw, sth wrong in the logic')
+        } catch (error) {
+            expect(error).toBeDefined()
+            // expect(error.message).toBe('User with id 41224d776a326fb40f000001 does not exist.')
+        }                    
+    })
 
     afterAll(() => database.disconnect())
 })
