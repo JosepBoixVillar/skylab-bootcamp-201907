@@ -1,5 +1,3 @@
-import validate  from "utils/validate"
-
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 /**
@@ -12,9 +10,8 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  * @returns {Promise}
  */
 
-function cartRetrieve(userId) {debugger
-    validate.string(userId, 'User Id')
-
+function cartRetrieve() {
+    // no validations required
     // const { id, token } = this.__credentials__
 
     return (async () => {

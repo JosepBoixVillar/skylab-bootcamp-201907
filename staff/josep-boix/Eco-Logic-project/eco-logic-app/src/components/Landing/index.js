@@ -8,7 +8,7 @@ function Landing () {
         <main className="main">
             <section className="main__welcome">
                 <figure >
-                    <p className="main__welcome--texto">Welcome to Eco-Logic, be free to xplore around our app </p>
+                    <p className="main__welcome--texto">Welcome to Eco-Logic, be free to xplore our app </p>
                     <img className="main__welcome--img" src={require('../../img/ecommerce-welcome.png')} width="300" alt="foto random"></img></figure>
                     <p className="main__welcome--text">We are proud to see you here! Let us present you how we could improve our enviroment...</p>
             </section>

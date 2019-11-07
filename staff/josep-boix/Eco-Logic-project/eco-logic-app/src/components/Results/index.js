@@ -7,9 +7,15 @@ import logic from '../../logic'
 const REACT_APP_API_PUBLIC = process.env.REACT_APP_API_PUBLIC 
 
 export default withRouter(function ({ history, query }) {
-    const [products, setProduct] = useState(undefined)
     const [error] = useState()
+    const [, setView] = useState()
+    const [products, setProduct] = useState(undefined)
     
+    const handleGoBack = () => {
+        setView('home')
+        history.push('/#/home')
+    }
+
     useEffect(() => {
         async function busqueda () {
             const { product } = await logic.searchProducts(query)
@@ -35,6 +41,9 @@ export default withRouter(function ({ history, query }) {
                 {/* products && <p className="productList__product--none">No hay resultados</p>} */}
             
             </ul>
+
+            <a href='/#/home' className="ancor" onClick={handleGoBack} >Go back</a>
+
         </main>
     </>
 })

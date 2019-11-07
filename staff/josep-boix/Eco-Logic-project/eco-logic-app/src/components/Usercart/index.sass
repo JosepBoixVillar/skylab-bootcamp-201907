@@ -1,5 +1,7 @@
 .productList
     padding: 28px
+    display: flex
+    flex-direction: column
 
     &__empty
         background: #FFEFBA
@@ -42,10 +44,20 @@
             border-radius: 15px
 
         &--total
+            display: flex
+            justify-content: flex-end
             padding-bottom: 20px
-
 
         &--hidden
             display: none
 
+.userCart-total
+    padding: 6px
+    background: #93B076
+    display: flex
+    justify-content: center
+    flex-direction: column
 
+    &__total
+        display: flex
+        justify-content: center

@@ -10,8 +10,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  * @returns {Promise}
  */
 
-export default function (userId, productId) {
-    validate.string(userId, 'user id')
+export default function (productId) {
     validate.string(productId, 'product id')
     
     // const { id, token } = this.__credentials__
@@ -20,7 +19,7 @@ export default function (userId, productId) {
         const response = await fetch(`${REACT_APP_API_URL}/user/cart/delete`, {
             method: 'PATCH',
             headers: { 'content-type': 'application/json', 'authorization': `bearer ${this.__token__}` },
-            body: JSON.stringify({userId, productId})
+            body: JSON.stringify({ productId })
         })
         
         if (response.status !== 201) {

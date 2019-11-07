@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 function RegisterSuccess({ history }) {
-    const [, setView] = useState()
+    // const [, setView] = useState()
 
     const handleGoToLogin = () => {
-        setView('login')
         history.push('/login')
+        // setView('login')
     }
 
     return <div className="successPanel">

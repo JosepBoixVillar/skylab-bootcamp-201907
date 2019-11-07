@@ -44,6 +44,7 @@ function Cart({ history }) {
         </div>
         :  
         <UserCart/>
+
         }
 
         {error && <Feedback message={error} /> }

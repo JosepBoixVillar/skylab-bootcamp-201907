@@ -12,8 +12,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  * @returns {Promise}
  */
 
-export default function(userId, quantity, productId) {
-    validate.string(userId, 'userId')
+export default function( quantity, productId) {
     validate.string(quantity, 'quantity')
     validate.string(productId, 'productId')
 
@@ -23,7 +22,7 @@ export default function(userId, quantity, productId) {
         const response = await fetch(`${REACT_APP_API_URL}/user/cart`, {
             method: 'POST',
             headers: { 'content-type': 'application/json','authorization': `bearer ${this.__token__}` },
-            body: JSON.stringify({ userId, productId, quantity })
+            body: JSON.stringify({ quantity, productId })
         })
         
         if (response.status !== 201) {
