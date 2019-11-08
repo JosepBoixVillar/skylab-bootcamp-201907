@@ -1,7 +1,7 @@
 // logic user-register
 
 const validate = require ('utils/validate')
-const bcrypt = require ('bcryptjs')
+// const bcrypt = require ('bcryptjs')
 const { models: { User } } = require ('datamodel')
 
 /**
