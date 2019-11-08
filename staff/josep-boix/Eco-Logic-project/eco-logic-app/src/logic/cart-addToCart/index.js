@@ -12,8 +12,8 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  * @returns {Promise}
  */
 
-export default function( quantity, productId) {
-    validate.string(quantity, 'quantity')
+export default function(quantity, productId) {
+    validate.number(quantity, 'quantity')
     validate.string(productId, 'productId')
 
     // const { id, token } = this.__credentials__

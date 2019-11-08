@@ -14,14 +14,14 @@ describe('logic - add to cart', () => {
     let name, email, password, userId
     let title, categorie, image, price, description, productId
     let _quantity
-    debugger
+
     beforeEach(async() => {
         
         name = `name-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
         
-        _quantity = Number((Math.random()*1000).toFixed()).toString()
+        _quantity = Number((Math.random()*1000).toFixed()) //.toString()
         // date = new Date()
         
         title = `title-${Math.random()}`
@@ -43,71 +43,71 @@ describe('logic - add to cart', () => {
         logic.__token__ = token
     })
 
-    it('should succeed on correct data',async () =>{ debugger
-        await logic.addToCart(userId, _quantity, productId)
+    it('should succeed on correct data',async () =>{
+        await logic.addToCart(_quantity, productId)
               
         const user = await User.findById(userId)
         expect(user).toBeDefined()
         expect(user.cart).toBeDefined()
-        // expect(user.cart[0].quantity).toBe(_quantity)
+        expect(user.cart[0].quantity).toBe(_quantity)
     })
 
-    /* User ID */
-    it ('should fail on unexisting User ID', async () => {
-        userId = '41224d776a326fb40f000001'
+    // /* User ID */
+    // it ('should fail on unexisting User ID', async () => {
+    //     userId = '41224d776a326fb40f000001'
 
-        try {
-            await addToCart(userId, _quantity, productId)
-        } catch(error) {
-            expect(error).toBeDefined()
-            // expect(error.message).toBe(`User with id ${userId} does not exist`)
-        }
-    })
-    it('should fail on empty userId', () => {
-        userId = ""
-        expect(() => addToCart(userId, _quantity, productId)
-        ).toThrow('userId is empty or blank')
-    })
-    it('should fail on undefined userId', () => {
-        userId = undefined
-        expect(() => addToCart(userId, _quantity, productId)
-        ).toThrow(`userId with value undefined is not a string`)
-    })
-    it('should fail on wrong data type for userId', () => {
-        userId = false
-        expect(() => addToCart(userId, _quantity, productId)
-        ).toThrow(`userId with value false is not a string`)
-    })
-     /* Quantity */
-     it('should fail on empty quantity', () => {
+    //     try {
+    //         await addToCart(userId, _quantity, productId)
+    //     } catch(error) {
+    //         expect(error).toBeDefined()
+    //         // expect(error.message).toBe(`User with id ${userId} does not exist`)
+    //     }
+    // })
+    // it('should fail on empty userId', () => {
+    //     userId = ""
+    //     expect(() => addToCart(userId, _quantity, productId)
+    //     ).toThrow('userId is empty or blank')
+    // })
+    // it('should fail on undefined userId', () => {
+    //     userId = undefined
+    //     expect(() => addToCart(userId, _quantity, productId)
+    //     ).toThrow(`userId with value undefined is not a string`)
+    // })
+    // it('should fail on wrong data type for userId', () => {
+    //     userId = false
+    //     expect(() => addToCart(userId, _quantity, productId)
+    //     ).toThrow(`userId with value false is not a string`)
+    // })
+    /* Quantity */
+    it('should fail on empty quantity', () => {
         _quantity = ""
-        expect(() => addToCart(userId, _quantity, productId)
+        expect(() => addToCart(_quantity, productId)
         ).toThrow('quantity is empty or blank')
     })
     it('should fail on undefined quantity', () => {
         _quantity = undefined
-        expect(() => addToCart(userId, _quantity, productId)
-        ).toThrow(`quantity with value undefined is not a string`)
+        expect(() => addToCart(_quantity, productId)
+        ).toThrow(`quantity with value undefined is not a number`)
     })
     it('should fail on wrong data type for quantity', () => {
         _quantity = false
-        expect(() => addToCart(userId, _quantity, productId)
-        ).toThrow(`quantity with value false is not a string`)
+        expect(() => addToCart(_quantity, productId)
+        ).toThrow(`quantity with value false is not a number`)
     })
     /* Product ID */
     it('should fail on empty productId', () => {
         productId = ""
-        expect(() => addToCart(userId, _quantity, productId)
+        expect(() => addToCart(_quantity, productId)
         ).toThrow('productId is empty or blank')
     })
     it('should fail on undefined productId', () => {
         productId = undefined
-        expect(() => addToCart(userId, _quantity, productId)
+        expect(() => addToCart(_quantity, productId)
         ).toThrow(`productId with value undefined is not a string`)
     })
     it('should fail on wrong data type for productId', () => {
         productId = false
-        expect(() => addToCart(userId, _quantity, productId)
+        expect(() => addToCart(_quantity, productId)
         ).toThrow(`productId with value false is not a string`)
     })
 
