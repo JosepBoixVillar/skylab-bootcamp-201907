@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 
 import logic from '../../logic'
 import Feedback from '../Feedback'
+import userRetrieve from '../../logic/user-retrieve'
 
 const REACT_APP_API_PUBLIC = process.env.REACT_APP_API_PUBLIC 
 
@@ -46,10 +47,10 @@ function UserCart({ history }) {
     }
     {cart && cart.length > 0 &&
     <div >
-      <ul className="productList">
+      <ul >
         {cart.map(item => {
           return <>
-            <ul>
+            <ul className="productList">
               <li className="productList__product--title"> {item.product.title}
               <li className="productList__product--delete" onClick={event => {
                 event.preventDefault()
@@ -61,21 +62,21 @@ function UserCart({ history }) {
               <li className="productList__product--img"><img src={ `${REACT_APP_API_PUBLIC}${item.product.image}`} alt="product_image" width="300"/></li>
               <li className="productList__product--title"> { 'Price: ' + item.product.price + " €" } </li>
               <li className="productList__product--title"> { 'Quantity: ' + item.quantity + " unit/s" } </li>
-              <li className="productList__product--total"> { 'Product Total: '+ (item.product.price * item.quantity.toString()).toFixed(2)+ " €" } </li>         
+              <li className="productList__product--total"> { 'Total Product: '+ (item.product.price * item.quantity.toString()).toFixed(2)+ " €" } </li>         
               <li className="productList__product--hidden"> { 'Total: '+ (total += (item.product.price * item.quantity.toString()))+ " €" } </li>         
             </ul>
           </>
         })}
       </ul>
-      <div className="productList">
-        <a className="ancor" href="/#/home">Go home</a>
-      </div>
       {cart !== "" && cart !== undefined && 
       <div className="userCart-total">
         <h3 className = "userCart-total__total">Total: {total.toFixed(2) + " €"} </h3> 
         <button className="registerPanel__btn" onClick={handleEndFlow}>Do you BUY IT??</button>  
       </div>
       }
+      <div className="productList">
+        <a className="ancor" href="/#/home">Go home</a>
+      </div>
       
       {error && <Feedback message={error} /> }
       
