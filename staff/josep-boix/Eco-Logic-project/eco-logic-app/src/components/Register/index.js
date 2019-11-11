@@ -25,7 +25,7 @@ export default withRouter(function({ history }) {
 
     return <>
         <main className="registerPanel">
-            <h2 className="registerPanel__title">REGISTER</h2>
+            <h2 className="registerPanel__title">SIGN UP</h2>
             <div >
                 <form className="registerPanel__form" onSubmit={event => {
                     event.preventDefault()

@@ -34,13 +34,10 @@ function Cart({ history }) {
         <div className="cartPanel">            
             <h2 className="cartPanel__title">You need to be registered in order to adquire our products...</h2>
             <div className="userPanel">
-                <p className="userPanel__text">Please 
-                    <a className="userPanel__ancorToLogin" href="/#/login"> log in </a>
-                    or <a className="cartPanel__ancorToLogin" href="/#/register"> sign up </a>
-                    if you are not still a member of our comunity.
+                <p className="userPanel__text">Please, <a className="userPanel__ancorToLogin" href="/#/login">log in</a> or <a className="userPanel__ancorToLogin" href="/#/register">sign up</a> first if you are not still a member of our comunity.
                 </p>
             </div>
-            <a href='/#/home' className="ancor" onClick={handleGoBack} >Go back</a>
+            <a href='/#/home' className="ancor" onClick={handleGoBack}>Go back</a>
         </div>
         :  
         <UserCart/>

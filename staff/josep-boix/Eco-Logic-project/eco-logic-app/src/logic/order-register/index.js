@@ -1,4 +1,4 @@
-import validate from "utils/validate"
+// import validate from "utils/validate"
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
@@ -12,16 +12,15 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  * @returns {Promise}
  */
 
-export default function ( userId, productId, quantity) {
-    validate.string(userId, 'user Id')
-    validate.string(productId, 'product Id')
-    validate.number(quantity, 'quantity')
+export default function () {
+    // validate.string(productId, 'product Id')
+    // validate.number(quantity, 'quantity')
     
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/user/orders`, { 
                 method: 'POST', 
                 headers: { 'content-type': 'application/json', 'authorization':`${this.__token__}` },
-                body: JSON.stringify({ productId, quantity })
+                // body: JSON.stringify({ productId, quantity })
             })
         
         if (response.status !== 201) {

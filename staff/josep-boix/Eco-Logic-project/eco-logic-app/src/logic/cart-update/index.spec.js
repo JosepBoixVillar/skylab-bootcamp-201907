@@ -48,51 +48,26 @@ describe ('logic - remove from cart', () => {
     })
 
     it('should succeed on correct data',async () =>{
-        await logic.removeCart(userId, productId)
+        await logic.removeCart(productId)
 
         const user = await User.findById(userId)
         expect(user.cart[0]).toBeUndefined()
     })
-    /* User ID */
-    it ('should fail on unexisting User ID', async () => {
-        userId = '41224d776a326fb40f000001'
-
-        try {
-            await logic.removeCart(userId, productId)
-        } catch(error) {
-            expect(error).toBeDefined()
-            expect(error.message).toBe(`User with id ${userId} does not exist`)
-        }
-    })
-    it('should fail on empty userId', () => {
-        userId = ""
-        expect(() => logic.removeCart(userId, productId)
-        ).toThrow('user id is empty or blank')
-    })
-    it('should fail on undefined userId', () => {
-        userId = undefined
-        expect(() => logic.removeCart(userId, productId)
-        ).toThrow(`user id with value undefined is not a string`)
-    })
-    it('should fail on wrong data type for userId', () => {
-        userId = false
-        expect(() => logic.removeCart(userId, productId)
-        ).toThrow(`user id with value false is not a string`)
-    })
+    
     /* Product ID */
     it('should fail on empty productId', () => {
         productId = ""
-        expect(() => logic.removeCart(userId, productId)
+        expect(() => logic.removeCart(productId)
         ).toThrow('product id is empty or blank')
     })
     it('should fail on undefined productId', () => {
         productId = undefined
-        expect(() => logic.removeCart(userId, productId)
+        expect(() => logic.removeCart(productId)
         ).toThrow(`product id with value undefined is not a string`)
     })
     it('should fail on wrong data type for productId', () => {
         productId = false
-        expect(() => logic.removeCart(userId, productId)
+        expect(() => logic.removeCart(productId)
         ).toThrow(`product id with value false is not a string`)
     })
 

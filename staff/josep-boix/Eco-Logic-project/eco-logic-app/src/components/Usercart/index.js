@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 
 import logic from '../../logic'
 import Feedback from '../Feedback'
-import userRetrieve from '../../logic/user-retrieve'
 
 const REACT_APP_API_PUBLIC = process.env.REACT_APP_API_PUBLIC 
 
@@ -34,12 +33,18 @@ function UserCart({ history }) {
     }
   }
 
-  const handleEndFlow = () => {
-    history.push('/thanks')
+  async function handleEndFlow() {
+    try {
+      await logic.placeOrder()
+      history.push('/thanks')
+    }
+    catch(error) {
+      setError(error.message)
+    }
   }
 
   return <>
-    {cart && cart.length === 0 &&
+    {!cart || cart.length === 0 &&
     <div className="productList__empty">
         <p className="productList__message">Cart is empty</p>
         <a className="ancor" href="/#/home">Go home</a>
@@ -57,13 +62,15 @@ function UserCart({ history }) {
                 
                 let productId = item.product._id
                 handleUpdateCart(productId)
-              }}><a href="/">Delete</a></li>
+              }}><a href="/"> X </a></li>
               </li>
-              <li className="productList__product--img"><img src={ `${REACT_APP_API_PUBLIC}${item.product.image}`} alt="product_image" width="300"/></li>
-              <li className="productList__product--title"> { 'Price: ' + item.product.price + " €" } </li>
-              <li className="productList__product--title"> { 'Quantity: ' + item.quantity + " unit/s" } </li>
-              <li className="productList__product--total"> { 'Total Product: '+ (item.product.price * item.quantity.toString()).toFixed(2)+ " €" } </li>         
-              <li className="productList__product--hidden"> { 'Total: '+ (total += (item.product.price * item.quantity.toString()))+ " €" } </li>         
+              <a className="productList__product--a" href={`/#/detail/${item.product._id}`}>
+                <li className="productList__product--img"><img src={ `${REACT_APP_API_PUBLIC}${item.product.image}`} alt="product_image" width="300"/></li>
+                <li className="productList__product--title"> { 'Price: ' + item.product.price + " €" } </li>
+                <li className="productList__product--title"> { 'Quantity: ' + item.quantity + " unit/s" } </li>
+                <li className="productList__product--total"> { 'Total Product: '+ (item.product.price * item.quantity.toString()).toFixed(2)+ " €" } </li>         
+                <li className="productList__product--hidden"> { 'Total: '+ (total += (item.product.price * item.quantity.toString()))+ " €" } </li>         
+              </a>
             </ul>
           </>
         })}
@@ -71,7 +78,7 @@ function UserCart({ history }) {
       {cart !== "" && cart !== undefined && 
       <div className="userCart-total">
         <h3 className = "userCart-total__total">Total: {total.toFixed(2) + " €"} </h3> 
-        <button className="registerPanel__btn" onClick={handleEndFlow}>Do you BUY IT??</button>  
+        <button className="registerPanel__btn" onClick={handleEndFlow}>BUY IT</button>  
       </div>
       }
       <div className="productList">
