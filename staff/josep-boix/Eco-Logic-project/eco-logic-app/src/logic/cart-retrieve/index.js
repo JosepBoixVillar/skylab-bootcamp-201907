@@ -12,13 +12,12 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 function cartRetrieve() {
     // no validations required
-    // const { id, token } = this.__credentials__
 
     return (async () => {
         // validate.string(id, 'id')
         const response = await fetch(`${REACT_APP_API_URL}/user/cart/list`, {
             method: 'GET',
-            headers: {'authorization': `bearer ${this.__token__}` },
+            headers: {'authorization': `bearer ${this.__token__}` }
         })
         
         if (response.status !== 201) {

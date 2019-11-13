@@ -80,6 +80,10 @@ export default withRouter(function ({ history, view, setView, onLogout }) {
               {/* <button className="btn header__top--favs" href="/favs" onClick={handleGoToFavs}>Fav's</button>  */}
               <button className="btn header__top--cart" href="/cart" onClick={handleGoToCart}>Cart</button>
               <button className="btn header__top--logout" onClick={handleOnLogout}>Log out</button> 
+              <li>
+                <a className="header__top--orders" href='/#/view-orders'> View orders</a>
+              </li>
+              {/* {orders && <button className="btn header__top--cart" href="/orders" onClick={handleGoToOrders}>View Orders</button>} */}
             </ul>
           </div>
         </section>

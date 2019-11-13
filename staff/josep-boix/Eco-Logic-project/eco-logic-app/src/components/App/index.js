@@ -13,8 +13,9 @@ import Home from '../Home'
 import Detail from '../Detail'
 import CartSuccess from '../CartSuccess'
 import Cart from '../Cart'
-import Categories from '../Categories'
-import Favs from '../Favs'
+// import Categories from '../Categories'
+// import Favs from '../Favs'
+import ShowAllOrders from '../ShowAllOrders'
 import Footer from '../Footer'
 import EndFlow from '../EndFlow'
 
@@ -23,6 +24,7 @@ import logic from '../../logic'
 
 export default withRouter(function () {
   const [user, setUser] = useState()
+  const [orders, setOrders] = useState()
   const [view, setView] = useState()
   // const [query, setQuery] = useState('')
 
@@ -45,9 +47,10 @@ export default withRouter(function () {
     <Route path="/cart" render={ () => <Cart setView={setView} user={user} setUser={setUser} /> } />
     {/* <Route path="/categories" render={ () => <Categories/> } /> */}
     {/* <Route path="/favs" render={ () => <Favs/> } /> */}
+
+    <Route path="/view-orders" render={() => <ShowAllOrders orders={orders} setOrders={setOrders}/> } />
     <Route path="/thanks" render={ () => <EndFlow/> } />
     {/* <Route path="/cart" render={ () => <Cart /> } />  */}
-
     <Footer/>
   </>
 })  

@@ -11,6 +11,7 @@ import retrieveCart from './cart-retrieve'
 // import updateCart from './cart-update'
 import removeCart from './cart-update'
 import placeOrder from './order-register'
+import showAllOrders from './order-retrieve'
 
 export default {
     set __token__(token) {
@@ -31,9 +32,9 @@ export default {
     retrieveProduct,
     addToCart,
     retrieveCart,
-    // updateCart,
     removeCart,
-    placeOrder
+    placeOrder,
+    showAllOrders
 }
 
     // set __credentials__ ({ id, token }) {
