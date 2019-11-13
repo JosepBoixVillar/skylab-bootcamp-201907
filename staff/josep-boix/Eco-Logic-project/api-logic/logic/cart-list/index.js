@@ -10,7 +10,6 @@ const { models: { User, Item } } = require('datamodel')
  */
 
 function listToCart(userId) {
-    
     validate.string(userId, 'User ID')
 
     return( async () => {

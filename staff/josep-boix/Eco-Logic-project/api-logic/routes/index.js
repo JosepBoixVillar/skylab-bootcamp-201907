@@ -23,8 +23,9 @@ const retrieveProducts = require('./product-retrieve')
 // const unregisterProduct = require('./product-unregister')
 // const retrieveProduct = require('./product-retrieve')
 
-// const registerOrder = require('./order-register')
-// const listOrders = require('./order-list')
+const registerOrder = require('./order-register')
+const listOrders = require('./order-list')
+
 // const retrieveAllOrders = require('./order-retrieveAll')
 
 const addToCart = require('./cart-addToCart')
@@ -53,8 +54,9 @@ router.get('/user/detail/:productId', jsonBodyParser, retrieveProducts)
 // router.delete('/user/item/:productId', [tokenMiddleware, jsonBodyParser], unregisterItem)
 
 /* order */
-// router.post('/user/orders', [tokenMiddleware, jsonBodyParser], registerOrder)
-// router.get('/user/orders', [tokenMiddleware, jsonBodyParser], listOrders)
+router.post('/user/orders', [tokenMiddleware, jsonBodyParser], registerOrder)
+router.get('/user/orders/list', [tokenMiddleware, jsonBodyParser], listOrders)
+
 // router.get('/user/allorders/', [tokenMiddleware, jsonBodyParser], retrieveAllOrders)
 
 /* cart */

@@ -14,7 +14,7 @@ describe ('logic - add to cart', () => {
     let _quantity
     
     beforeEach(async() => {
-        _quantity = (Number((Math.random()*1000).toFixed())).toString()
+        _quantity = (Number((Math.random()*1000).toFixed())) //.toString()
         date = new Date()
 
         await User.deleteMany()
@@ -42,7 +42,7 @@ describe ('logic - add to cart', () => {
         const user = await User.findById(userId)
         expect(user).to.exist
         expect(user.cart).to.exist
-        expect((user.cart[0].quantity).toString()).to.equal(_quantity)
+        expect((user.cart[0].quantity).toString()).to.equal(_quantity.toString())
         expect(user.cart[0].product._id.toString()).to.equal(productId)
     })
 
@@ -89,26 +89,23 @@ describe ('logic - add to cart', () => {
      /* Quantity */
      it('should fail on empty quantity', () => {
         _quantity = ""
-        expect(() =>
-        addToCart(userId, _quantity, productId)
+        expect(() => addToCart(userId, _quantity, productId)
         ).to.throw('Quantity is empty or blank')
     })
     it('should fail on undefined quantity', () => {
         _quantity = undefined
         expect(() => addToCart(userId, _quantity, productId)
-        ).to.throw(`Quantity with value undefined is not a string`)
+        ).to.throw(`Quantity with value undefined is not a number`)
     })
     it('should fail on wrong data type for quantity', () => {
         _quantity = false
-        expect(() =>
-        addToCart(userId, _quantity, productId)
-        ).to.throw(`Quantity with value false is not a string`)
+        expect(() => addToCart(userId, _quantity, productId)
+        ).to.throw(`Quantity with value false is not a number`)
     })
     /* Product ID */
     it('should fail on empty productId', () => {
         productId = ""
-        expect(() =>
-        addToCart(userId, _quantity, productId)
+        expect(() => addToCart(userId, _quantity, productId)
         ).to.throw('Product ID is empty or blank')
     })
     it('should fail on undefined productId', () => {
@@ -118,8 +115,7 @@ describe ('logic - add to cart', () => {
     })
     it('should fail on wrong data type for productId', () => {
         productId = false
-        expect(() =>
-        addToCart(userId, _quantity, productId)
+        expect(() => addToCart(userId, _quantity, productId)
         ).to.throw(`Product ID with value false is not a string`)
     })
    
