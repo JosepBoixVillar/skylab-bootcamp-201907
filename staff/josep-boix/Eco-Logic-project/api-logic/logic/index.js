@@ -22,7 +22,7 @@ module.exports = {
     //ORDER
     listOrder: require('./order-list'),
     registerOrder: require('./order-register'),
-    retrieveOrder: require('./order-retrieve'),
+    listOrders: require('./order-list'),
     retrieveAllOrders: require('./order-retrieve-all'),
     // CART
     addToCart: require('./cart-addToCart'),

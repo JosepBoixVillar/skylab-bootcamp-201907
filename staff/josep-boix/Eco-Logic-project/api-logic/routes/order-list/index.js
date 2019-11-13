@@ -1,13 +1,13 @@
-// const logic = require('../../logic')
+const logic = require('../../logic')
 
-// module.exports = async(req, res)=> {
+module.exports = async(req, res)=> {
 
-//     const { params: { id } } = req
+    const { userId } = req
 
-//     try {
-//         const orderId = await logic.listOrders(id)
-//         res.status(201).json({ message: 'Orders listed successfully', orderId})
-//     } catch({ message }) {
-//         res.status(400).json({ error: message })
-//     }
-// }
+    try {
+        const orderId = await logic.listOrders(userId)
+        res.status(201).json({ message: 'Orders listed successfully', orderId})
+    } catch({ message }) {
+        res.status(400).json({ error: message })
+    }
+}

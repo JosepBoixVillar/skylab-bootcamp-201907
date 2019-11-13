@@ -1,33 +1,33 @@
-// const { models: { User, Order } } = require('datamodel')
-// const validate = require('utils/validate')
+const validate = require('utils/validate')
+const { models: { User, Order } } = require('datamodel')
 
-// /**
-//  * Place the order
-//  * 
-//  * @param {*} userId 
-//  * 
-//  * @returns {Promise}
-//  */
+/**
+ * Place the order by user id
+ * 
+ * @param {*} userId 
+ * 
+ * @returns {Promise}
+ */
 
-// function registerOrder(userId) {
-//     validate.string(userId, 'userId')
+function registerOrder(userId) {
+    validate.string(userId, 'userId')
 
-//     return(async () => {
-//         const user = await User.findById(userId)
-//         if(!user) throw Error(`User with id ${userId} does not exist`)
+    return(async () => {
+        const user = await User.findById(userId)
+        if(!user) throw Error(`User with id ${userId} does not exist`)
 
-//         const cart = user.cart
-//         if(cart.length === 0) throw new Error('Cart is empty')
+        const cart = user.cart
+        if(cart.length === 0) throw new Error('Cart is empty')
 
-//         const date = new Date()
+        const date = new Date()
 
-//         const order = await Order.create({ date, customer: userId, items: user.cart })
+        const order = await Order.create({ date, customer: userId, items: user.cart })
         
-//         user.cart = undefined
+        user.cart = []
 
-//         user.save()
+        user.save()
 
-//         return order
-//     }) ()
-// }
-// module.exports = registerOrder
+        return order
+    }) ()
+}
+module.exports = registerOrder
