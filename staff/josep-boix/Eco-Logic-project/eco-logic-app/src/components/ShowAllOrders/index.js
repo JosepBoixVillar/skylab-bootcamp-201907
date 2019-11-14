@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { withRouter } from 'react-router-dom'
+// import { withRouter } from 'react-router-dom'
 // import './index.sass'
 
 import logic from '../../logic'
 import Feedback from '../Feedback'
 
-function ShowAllOrdersUser() {
+function ShowAllOrders() {
     // const [user] = useState()
-    const [orders, setOrders] = useState()
-    const [error, setError] = useState()
+    const [orders, setOrders] = useState(undefined)
+    const [error, setError] = useState(undefined)
 
     let total = 0
   
@@ -17,13 +17,6 @@ function ShowAllOrdersUser() {
             try {
                 const orders = await logic.showAllOrders()
                 setOrders(orders)
-
-                // if(!orderId) {
-                // setOrders(undefined)      
-                // }
-                // setOrders(orderId)      
-                // setError(undefined)                 
-                // console.log('is order? '+ orderId)
             } catch(error) {
                 setError(error.message)
             }
@@ -39,17 +32,28 @@ function ShowAllOrdersUser() {
     // }
 
     return <>
-        <div>
         <h4>YOUR ORDERS:</h4>
+
+        {!orders &&
+            <p>Add our <a href="/home">products</a> to your <a href="/cart">cart</a></p>}
 
         {orders &&
             <ul>
                 {orders.map(item=> {
                     return<>
-                        <ul className='orders'>
-                            <a className="ancor">X</a>
-                            <label className="orders-label">Order day:
-                            <li className="">{ item.date.slice(0,10)+ ' / Hour ' + item.date.slice(11,20) }</li></label>
+                        <ul className='ordersPanel'>
+                            {/* <div className='yourOrdersPanel__order'> */}
+                                <li className="ordersPanel__order--title">Order day:
+                                <li className="ordersPanel__order--delete" onClick={event => {
+                                    event.preventDefault()
+                                    
+                                    // let orderId = item.items._id
+                                    // handleUpdateOrders(orderId)
+                                }}><a href="/"> X </a></li>
+                                </li>
+                                <li className="yourOrdersPanel__order--time">{ item.date.slice(0,10)+ ' / Hour ' + item.date.slice(11,20) }</li>
+                                {/* </li> */}
+                            {/* </div> */}
                             <label className="orders-label">ITEMS:</label>
                             <ul className='orders'>
                                 { item.items.map(prod => {
@@ -65,16 +69,16 @@ function ShowAllOrdersUser() {
                                 })}
                             </ul>
 
-                            <li className="userCart-hidden">{ item.items.map(prod => 'Total: ' + (total += (prod.product.price * prod.quantity)) + " €") }</li>  
-                            <p>{ "Total: " + total + " €" }</p>
-                            <p className="userCart-hidden">{ total = 0 }</p>
                         </ul>
+                        
+                        <li className="userCart-hidden">{ item.items.map(prod => 'Total: ' + (total += (prod.product.price * prod.quantity)) + " €") }</li>  
+                            <p>{ "Total: " + total + " €" }</p>
+                        <p className="userCart-hidden">{ total = 0 }</p>
                     </>
                 })} 
 
             </ul> 
         }     
-        </div>
 
         <div className="productList">
             <a className="ancor" href="/#/home">Go home</a>
@@ -85,4 +89,4 @@ function ShowAllOrdersUser() {
     </>
 }
 
-export default withRouter(ShowAllOrdersUser)
+export default ShowAllOrders

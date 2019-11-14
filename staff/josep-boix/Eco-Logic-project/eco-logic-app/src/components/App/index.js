@@ -24,7 +24,6 @@ import logic from '../../logic'
 
 export default withRouter(function () {
   const [user, setUser] = useState()
-  const [orders, setOrders] = useState()
   const [view, setView] = useState()
   // const [query, setQuery] = useState('')
 
@@ -48,7 +47,7 @@ export default withRouter(function () {
     {/* <Route path="/categories" render={ () => <Categories/> } /> */}
     {/* <Route path="/favs" render={ () => <Favs/> } /> */}
 
-    <Route path="/view-orders" render={() => <ShowAllOrders orders={orders} setOrders={setOrders}/> } />
+    <Route path="/view-orders" render={() => <ShowAllOrders /> } />
     <Route path="/thanks" render={ () => <EndFlow/> } />
     {/* <Route path="/cart" render={ () => <Cart /> } />  */}
     <Footer/>

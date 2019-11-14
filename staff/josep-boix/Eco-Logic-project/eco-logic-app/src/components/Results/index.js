@@ -39,9 +39,10 @@ export default withRouter(function ({ history, query }) {
                     </div>
                 </li>)
                 :
-                <div>
-                    <p className="cartPanel__title">There's no results for your search, try again</p>
+                <div className="ordersPanel">
+                    <p className="ordersPanel__emptyCart">There's no results for your search, try again</p>
                 </div>}
+
                 {error && <Feedback message={error}/>}
                 {/* products && <p className="productList__product--none">No hay resultados</p>} */}
             
