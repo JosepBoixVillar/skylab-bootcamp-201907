@@ -27,17 +27,22 @@ export default withRouter(function ({ history, query }) {
     return <>
         <main className="productList">
             <ul>
-                { products ? products.map(item => <li className="productList__product" key={item._id}>
-                    <a className="productList__product--a" href={`/#/detail/${item._id}`}>
-                        <img className="productList__product--img" src={`${REACT_APP_API_PUBLIC}${item.image}`} alt="product_image"></img>
+                {products && products.length > 0 ? products.map(item => <li className="productList__product" key={item._id}>
+                    <div>
+                        <a className="productList__product--a" href={`/#/detail/${item._id}`}>
+                            <img className="productList__product--img" src={`${REACT_APP_API_PUBLIC}${item.image}`} alt="product_image"></img>
+                        </a>
                         <div >
                             <p className="productList__product--title">Name: {item.title}</p> 
                             <p className="productList__product--title">Categorie: {item.categoria}</p> 
                         </div>
-                    </a>
+                    </div>
                 </li>)
                 :
-                error && <Feedback message={error}/>}
+                <div>
+                    <p className="cartPanel__title">There's no results for your search, try again</p>
+                </div>}
+                {error && <Feedback message={error}/>}
                 {/* products && <p className="productList__product--none">No hay resultados</p>} */}
             
             </ul>

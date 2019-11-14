@@ -47,7 +47,9 @@ function ShowAllOrdersUser() {
                 {orders.map(item=> {
                     return<>
                         <ul className='orders'>
-                            <label className="orders-label">Order day:<li className="">{ item.date.slice(0,10)+ ' / Hour ' + item.date.slice(11,20) }</li></label>
+                            <a className="ancor">X</a>
+                            <label className="orders-label">Order day:
+                            <li className="">{ item.date.slice(0,10)+ ' / Hour ' + item.date.slice(11,20) }</li></label>
                             <label className="orders-label">ITEMS:</label>
                             <ul className='orders'>
                                 { item.items.map(prod => {
@@ -56,17 +58,16 @@ function ShowAllOrdersUser() {
                                     <li>{ "Quantity: " + prod.quantity }</li>
                                     <li>{ "Price: " + prod.product.price }</li>
                                     <hr></hr>
-                                    {/* <hr></hr> */}
-                                    <li className="">{ "Total Order: " + (total += (prod.quantity * prod.product.price)) + " €" }</li>
+                                    <li className="">{ "Total Order: " + (prod.quantity * prod.product.price) + " €" }</li>
+                                    <hr></hr>
                                     <hr></hr>
                                     </>
                                 })}
                             </ul>
-                        {/* <li className="userCart-hidden">{item.items.map(prod=> 'Total: ' + (total += (prod.product.price * prod.quantity)) + " €") }</li>  
-                        <p>{ "Total: "+total+ " €" }</p>
-                        <p className="userCart-hidden">{ total = 0 }</p> */}
 
-
+                            <li className="userCart-hidden">{ item.items.map(prod => 'Total: ' + (total += (prod.product.price * prod.quantity)) + " €") }</li>  
+                            <p>{ "Total: " + total + " €" }</p>
+                            <p className="userCart-hidden">{ total = 0 }</p>
                         </ul>
                     </>
                 })} 
