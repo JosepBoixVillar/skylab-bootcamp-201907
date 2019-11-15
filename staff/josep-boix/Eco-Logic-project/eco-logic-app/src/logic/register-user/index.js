@@ -15,6 +15,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  */
 
 function registerUser(name, email, password) {
+
     validate.string(name, 'name')
     validate.email(email, 'email')
     validate.string(email, 'email')
@@ -31,5 +32,7 @@ function registerUser(name, email, password) {
             throw Error(error)
         }
     })()
+
 }
+
 export default registerUser

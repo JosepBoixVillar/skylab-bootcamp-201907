@@ -1,5 +1,4 @@
-import registerUser from '.'
-
+const registerUser = require ('.')
 const {database, models: { User } } = require ('datamodel')
 const bcrypt = require('bcrypt')
 
@@ -10,16 +9,16 @@ describe ('logic - register user', () => {
 
     let name, email, password
 
-    beforeEach ( async () => { debugger
+    beforeEach(async () => {
+        await User.deleteMany()
+
         name = `name-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
-        
-        await User.deleteMany()
     })
 
+    //happy-path
     it ('should succeed on correct data', async () => { 
-        debugger
         const result = await registerUser(name, email, password)
         expect(result).toBeUndefined()
         
@@ -32,6 +31,7 @@ describe ('logic - register user', () => {
         expect(match).toBeTruthy()
     })
     
+    //error-path
     it ('should fail if user already exists', async () => {
         await User.create({ name, email, password })
 
@@ -42,24 +42,22 @@ describe ('logic - register user', () => {
             expect(error.message).toBe('User already exists.')
         }
     })
-    
     /* Name */
     it ('should fail on empty name', () => {
         name = ''
         expect(() => registerUser(name, email, password)
-            ).toThrowError('name is empty or blank')
+        ).toThrowError('name is empty or blank')
     })
     it ('should fail on undefined name', () => {
         name = undefined
         expect(() => registerUser(name, email, password)
-            ).toThrowError('name with value undefined is not a string')
+        ).toThrowError('name with value undefined is not a string')
     })
     it ('should fail on not valid data type for name', () => {
         name = false
         expect(() => registerUser(name, email, password)
         ).toThrowError('name with value false is not a string')
     })
-
     /* e-mail */
     it ('should fail on empty email', () => {
         email = ''
@@ -81,7 +79,6 @@ describe ('logic - register user', () => {
         expect(() => registerUser(name, email, password)
         ).toThrowError('email with value false#mail.com is not a valid e-mail')
     })
-    
     /* Password */
     it ('should fail on empty password', () => {
         password = ''
