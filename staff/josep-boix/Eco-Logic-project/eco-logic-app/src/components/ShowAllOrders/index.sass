@@ -1,14 +1,33 @@
 .ordersPanel
+    padding: 5px
     padding-top: 28px
     display: flex
     flex-direction: column
+    
+    &__titleOrders
+        margin-top: 20px
+        padding-top: 7%
+        padding-bottom: 3%
+        display: flex
+        justify-content: center
+        font-size: 40px
+        font-variant: small-caps
+        color: #CC6600
+
 
     &__order
+        padding: 25px
         display: flex
+        align-items: center
 
         &--title
+            padding-bottom: 15px
             display: flex
             justify-content: space-between
+            color: #009FFF
+            color: -webkit-linear-gradient(to right, #ec2F4B, #009FFF)
+            color: linear-gradient(to right, #ec2F4B, #009FFF)
+            font-size: 50px
 
         &--delete
             display: flex
@@ -17,13 +36,26 @@
         &--time
             display: flex
             justify-content: space-between
-            font-size: 50%  
-            color: green
+            font-size: 15px  
+            color: #CC6600
+        
+        &--product
+            font-weight: bold 
+
+        &--img
+            display: flex
+            justify-content: center
+
+        &--ftotal
+            padding: 5px
+            font-size: 20px
+
 
         &--total
             display: flex
             justify-content: flex-end
-            padding-bottom: 20px
+            padding: 15px 5px 20px 0
+            font-size: 20px
 
         &--hidden
             display: none

@@ -66,11 +66,11 @@ function UserCart({ history }) {
               </li>
               <a className="productList__product--a" href={`/#/detail/${item.product._id}`}>
                 <li className="productList__product--img"><img src={ `${REACT_APP_API_PUBLIC}${item.product.image}`} alt="product_image" width="300"/></li>
+              </a>
                 <li className="productList__product--title"> { 'Price: ' + item.product.price + " €" } </li>
                 <li className="productList__product--title"> { 'Quantity: ' + item.quantity + " unit/s" } </li>
                 <li className="productList__product--total"> { 'Total Product: '+ (item.product.price * item.quantity.toString()).toFixed(2)+ " €" } </li>         
                 <li className="productList__product--hidden"> { 'Total: '+ (total += (item.product.price * item.quantity.toString()))+ " €" } </li>         
-              </a>
             </ul>
           </>
         })}
