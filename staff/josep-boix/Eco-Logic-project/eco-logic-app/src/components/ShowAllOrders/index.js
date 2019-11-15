@@ -5,12 +5,15 @@ import React, { useEffect, useState } from 'react'
 import logic from '../../logic'
 import Feedback from '../Feedback'
 
+const REACT_APP_API_PUBLIC = process.env.REACT_APP_API_PUBLIC 
+
 function ShowAllOrders() {
     // const [user] = useState()
     const [orders, setOrders] = useState(undefined)
     const [error, setError] = useState(undefined)
 
     let total = 0
+    let counter = 0
   
     useEffect(() => {
         ( async ()=> {
@@ -32,7 +35,7 @@ function ShowAllOrders() {
     // }
 
     return <>
-        <h4>YOUR ORDERS:</h4>
+        <h4 className="ordersPanel__titleOrders">YOUR ORDERS:</h4>
 
         {!orders &&
             <p>Add our <a href="/home">products</a> to your <a href="/cart">cart</a></p>}
@@ -43,7 +46,7 @@ function ShowAllOrders() {
                     return<>
                         <ul className='ordersPanel'>
                             {/* <div className='yourOrdersPanel__order'> */}
-                                <li className="ordersPanel__order--title">Order day:
+                                <li className="ordersPanel__order--title">Order {counter += 1}
                                 <li className="ordersPanel__order--delete" onClick={event => {
                                     event.preventDefault()
                                     
@@ -51,19 +54,23 @@ function ShowAllOrders() {
                                     // handleUpdateOrders(orderId)
                                 }}><a href="/"> X </a></li>
                                 </li>
-                                <li className="yourOrdersPanel__order--time">{ item.date.slice(0,10)+ ' / Hour ' + item.date.slice(11,20) }</li>
                                 {/* </li> */}
                             {/* </div> */}
                             <label className="orders-label">ITEMS:</label>
-                            <ul className='orders'>
+                            <li className="ordersPanel__order--time">{ item.date.slice(0,10)+ ' / Hour ' + item.date.slice(11,20) }</li>
+                            <ul className='ordersPanel'>
                                 { item.items.map(prod => {
                                     return<>
-                                    <li>{ "Product: " + prod.product.title }</li>
-                                    <li>{ "Quantity: " + prod.quantity }</li>
-                                    <li>{ "Price: " + prod.product.price }</li>
+                                    <li className="ordersPanel__order--product">{ "Product: " + prod.product.title }</li>
+                                    <div className="ordersPanel__order">
+                                        <li className="ordersPanel__order"><img src={ `${REACT_APP_API_PUBLIC}${prod.product.image }`} alt="product_image" width="70"/></li>
+                                        <div>
+                                            <li className="ordersPanel__order--img">{ "Quantity: " + prod.quantity + " u"}</li>
+                                            <li className="ordersPanel__order--img">{ "Price: " + prod.product.price + " €"}</li>
+                                        </div>
+                                    </div>
                                     <hr></hr>
-                                    <li className="">{ "Total Order: " + (prod.quantity * prod.product.price) + " €" }</li>
-                                    <hr></hr>
+                                    <li className="ordersPanel__order--ftotal">{ "First total: " + (prod.quantity * prod.product.price) + " €" }</li>
                                     <hr></hr>
                                     </>
                                 })}
@@ -72,8 +79,10 @@ function ShowAllOrders() {
                         </ul>
                         
                         <li className="userCart-hidden">{ item.items.map(prod => 'Total: ' + (total += (prod.product.price * prod.quantity)) + " €") }</li>  
-                            <p>{ "Total: " + total + " €" }</p>
+                        <p className="ordersPanel__order--total">{ "Total order: " + total + " €" }</p>
                         <p className="userCart-hidden">{ total = 0 }</p>
+                        <hr></hr>                       
+                        <hr></hr>                       
                     </>
                 })} 
 
