@@ -30,7 +30,6 @@ describe ('logic - search', () => {
     })
 
     it('should succeed on correct data', async () => {
-        debugger
         query = title
 
         const product = await searchProduct(query)

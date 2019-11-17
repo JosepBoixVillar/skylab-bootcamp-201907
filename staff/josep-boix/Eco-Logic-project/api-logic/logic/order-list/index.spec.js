@@ -7,7 +7,7 @@ const{ env: { DB_URL_TEST } } = process
 
 const listOrders = require('.')
 
-describe.only ('logic - list orders', () => {
+describe ('logic - list orders', () => {
     before(() => database.connect(DB_URL_TEST)) 
     
     let name, email, password, userId

@@ -6,7 +6,7 @@ const { database, models: { User, Product } } = require('datamodel')
 
 const{ env: { DB_URL_TEST } } = process
 
-describe ('logic - add to cart', () => {
+describe('logic - add to cart', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let name, email, password, userId

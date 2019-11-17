@@ -23,7 +23,7 @@ function searchProduct(query) {
         
         const products = await Product.find({ "title": { "$regex": `${query}`, "$options": "i" }, product: productId },{ __v: 0 }).sort({_id: 1}).lean()
         if (!products) throw Error(`there are not products with query ${query}`)   
-        
+
         return products
     })()
 }
