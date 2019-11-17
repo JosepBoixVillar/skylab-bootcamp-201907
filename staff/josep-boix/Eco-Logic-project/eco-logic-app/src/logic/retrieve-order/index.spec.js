@@ -6,11 +6,12 @@ const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
 
 describe ('logic - retrieve orders', () => {
+    
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
     let name, email, password, userId
     let title, categorie, image, price, description, productId
-    let _quantity, date
+    let _quantity, date, orderId
 
     beforeEach(async () => {
         name = `name-${Math.random()}`
@@ -41,7 +42,8 @@ describe ('logic - retrieve orders', () => {
         // itemId = item.id
         user.cart.push(item)
 
-        // let order = await Order.create({ date, customer: userId, items:item})
+        let order = await Order.create({ date, customer: userId, items:item})
+        order.id = orderId
 
         await user.save()   
 
@@ -50,22 +52,36 @@ describe ('logic - retrieve orders', () => {
 
     })
 
-    /* id */
+    //happy-path
     it ('should succeed on correct id', async () => { debugger
-        const cart = await logic.retrieveCart()
+        const cart = await logic.retrieveOrder()
         expect(cart).toBeDefined()
-        // expect(cart[0]._id).toBeDefined()
-        // expect(cart[0].product._id).toBe(productId)
-        // expect(cart[0].product.title).toBe(title)
-        // expect(cart[0].product.categorie).toBe(categorie)
-        // expect(cart[0].product.image).toBe(image)
-        // expect(cart[0].product.price).toBe(price)
-        // expect(cart[0].product.description).toBe(description)
-        // expect(cart[0].quantity).toBe(1)
+        expect(cart[0].id).toBeDefined()
+        expect(cart[0].date).toBeDefined()
+        expect(cart[0].customer).toBe(userId)
+        expect(cart[0].items[0].product.title).toBe(title)
+        expect(cart[0].items[0].product.categorie).toBe(categorie)
+        expect(cart[0].items[0].product.image).toBe(image)
+        expect(cart[0].items[0].product.price).toBe(price)
+        expect(cart[0].items[0].product.description).toBe(description)
+        expect(cart[0].items[0].quantity).toBe(_quantity)
     })
+
+    //error-path
+    it ('should fail if user already exists', async () => {
+        await Order.deleteMany()
+
+        try {
+            await logic.retrieveOrder()
+        } catch(error) {
+            expect(error).toBeDefined()
+            expect(error.message).toBe(`User with id ${userId} do not have any orders`)
+        }
+    })
+
     // it ('should fail on empty user id', () => { 
     //     userId = ''
-    //     expect(() => logic.retrieveCart(userId)
+    //     expect(() => logic.retrieveOrder()
     //     ).toThrow('User Id is empty or blank')
     // })
     // it ('should fail on not valid type id', () => { 

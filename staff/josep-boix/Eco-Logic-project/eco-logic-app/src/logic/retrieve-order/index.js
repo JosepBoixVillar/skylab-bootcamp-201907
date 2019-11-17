@@ -1,14 +1,14 @@
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 /**
- * Show all the orders from an user
+ * Shows all the orders from an user
  * 
  * @throws {Error} if any doesn't go right
  * 
  * @returns {Promise}
  */
 
-export default function () {
+function retrieveOrder () {
 
     return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/user/orders/list`, {
@@ -24,7 +24,8 @@ export default function () {
         const { orderId } = await response.json()
         
         return orderId
-        
     })()
 
 }
+
+export default retrieveOrder

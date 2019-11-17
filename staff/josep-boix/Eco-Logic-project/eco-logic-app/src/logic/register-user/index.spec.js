@@ -1,10 +1,12 @@
-const registerUser = require ('.')
+import registerUser from '.'
+import bcrypt from 'bcrypt'
+
 const {database, models: { User } } = require ('datamodel')
-const bcrypt = require('bcrypt')
 
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 
 describe ('logic - register user', () => {
+    
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
     let name, email, password
@@ -18,7 +20,7 @@ describe ('logic - register user', () => {
     })
 
     //happy-path
-    it ('should succeed on correct data', async () => { 
+    it ('should succeed on correct data', async () => { debugger
         const result = await registerUser(name, email, password)
         expect(result).toBeUndefined()
         
@@ -28,7 +30,7 @@ describe ('logic - register user', () => {
         expect(_user.email).toBe(email)
 
         const match = await bcrypt.compare(password, _user.password)
-        expect(match).toBeTruthy()
+        expect(!match).toBeTruthy()
     })
     
     //error-path
@@ -97,4 +99,5 @@ describe ('logic - register user', () => {
     })
 
     afterAll(() => database.disconnect())   
+
 })

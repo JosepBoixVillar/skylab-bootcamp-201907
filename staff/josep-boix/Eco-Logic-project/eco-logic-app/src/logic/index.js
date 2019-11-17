@@ -1,17 +1,17 @@
-import registerUser from './user-register'
-import authenticateUser from './user-authenticate'
-import retrieveUser from './user-retrieve'
+import registerUser from './register-user'
+import authenticateUser from './authenticate-user'
+import retrieveUser from './retrieve-user'
 import isUserLoggedIn from './user-logged_in'
 import logUserOut from './user-log_out'
 import searchProducts from './search'
+import retrieveProduct from './retrieve-product'
 import productDetail from './product-detail'
-import retrieveProduct from './product-retrieve'
 import addToCart from './cart-addToCart'
 import retrieveCart from './cart-retrieve'
 // import updateCart from './cart-update'
 import removeCart from './cart-update'
-import placeOrder from './order-register'
-import showAllOrders from './order-retrieve'
+import placeOrder from './place-order'
+import retrieveOrder from './retrieve-order'
 
 export default {
     set __token__(token) {
@@ -34,7 +34,7 @@ export default {
     retrieveCart,
     removeCart,
     placeOrder,
-    showAllOrders
+    retrieveOrder
 }
 
     // set __credentials__ ({ id, token }) {

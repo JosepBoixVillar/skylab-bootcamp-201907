@@ -3,7 +3,7 @@ import validate from "utils/validate"
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 /**
- * Retrieves data by user-id
+ * Retrieves data from user by user-id
  * 
  * @param {String} userId
  * 
@@ -33,4 +33,5 @@ function retrieveUser(userId) {
     })()
 
 }
+
 export default retrieveUser

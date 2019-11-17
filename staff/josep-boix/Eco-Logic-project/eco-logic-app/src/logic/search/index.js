@@ -11,11 +11,10 @@ const validate = require('utils/validate')
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 function searchProducts(query)  { 
+
     validate.string(query, 'query')
 
     return(async () => {
-        // const { token } = sessionStorage
-    
         const response = await fetch(`${REACT_APP_API_URL}/user/search/${query}`, {
             method: 'GET', 
             headers: { 'content-type': 'application/json' }
@@ -30,5 +29,7 @@ function searchProducts(query)  {
     
         return products
     })()
+
 }
+
 export default searchProducts

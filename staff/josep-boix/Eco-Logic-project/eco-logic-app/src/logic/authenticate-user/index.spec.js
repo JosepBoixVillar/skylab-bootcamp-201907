@@ -1,5 +1,4 @@
 // require('dotenv').config()
-
 import logic from '..'
 import authenticateUser from '.'
 import { database, models } from 'datamodel'
@@ -10,7 +9,7 @@ const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 
 describe ('logic - authenticate user', () => {
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
-    debugger
+    
     let name, email, password
         
     beforeEach(() => {

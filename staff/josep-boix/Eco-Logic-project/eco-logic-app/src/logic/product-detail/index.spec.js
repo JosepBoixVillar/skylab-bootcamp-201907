@@ -4,10 +4,10 @@ import { database, models } from 'datamodel'
 const { Product } = models
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST 
 
-describe ('logic - retrieve order', () => {
+describe ('logic - retrieve product detail', () => {
+
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST)) 
     
-    // let name, email, password, userId, user
     let title, categorie, image, price, description, productId
 
     beforeEach(async() => {
@@ -23,7 +23,8 @@ describe ('logic - retrieve order', () => {
         productId = product.id
     })
 
-    it('should succeed on correct data', async () =>{
+    //happy-path
+    it('should succeed on correct data', async () =>{ debugger
         const result = await logic.retrieveProduct(productId)
         expect(result).toBeDefined()
         expect(result.title).toBe(title)
@@ -33,7 +34,7 @@ describe ('logic - retrieve order', () => {
         expect(result.description).toBe(description)
     }) 
         
-    /* product ID */
+    //error-path
     it('should fail on empty productId', () => {
         productId = ""
         expect(() => logic.retrieveProduct(productId)
@@ -49,6 +50,17 @@ describe ('logic - retrieve order', () => {
         expect(() => logic.retrieveProduct(productId)
         ).toThrow(`productId with value false is not a string`)
     })
+    it ('should fail on wrong productId', async () => {
+        productId = '41224d776a326fb40f000001'
+        try {
+            await logic.retrieveProduct(productId)
+            // throw new Error('should not to throw, sth wrong in the logic')
+        } catch (error) {
+            expect(error).toBeDefined()
+            expect(error.message).toBe('product 41224d776a326fb40f000001 not found')
+        }                    
+    })
 
     afterAll(() => database.disconnect())
+
 })

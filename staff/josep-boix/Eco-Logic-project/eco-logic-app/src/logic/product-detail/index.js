@@ -3,7 +3,7 @@ import validate from "utils/validate"
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 /**
- * Retrieve the Product detail by ProductId
+ * Retrieves product detail by product Id
  * 
  * @param {String} productId 
  * 
@@ -13,10 +13,11 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  */
 
 function productDetail(productId) {
-    validate.string(productId, 'Product ID')
+
+    validate.string(productId, 'product Id')
 
     return(async () => {
-        const response = await fetch(`${REACT_APP_API_URL}/detail/${productId}`, {
+        const response = await fetch(`${REACT_APP_API_URL}user/detail/${productId}`, {
             method: 'GET',
             headers: { 'content-type':'application/json' }
         })
@@ -28,5 +29,7 @@ function productDetail(productId) {
         const { product } = await response.json
         return product
     })()
+
 }
+
 export default productDetail

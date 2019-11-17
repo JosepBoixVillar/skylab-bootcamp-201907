@@ -6,7 +6,8 @@ const { User } = models
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
 
-describe ('logic _ retrieve-user', () => {
+describe ('logic - retrieve user', () => {
+
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
     let name, email, password, userId
@@ -70,4 +71,5 @@ describe ('logic _ retrieve-user', () => {
     })
               
     afterAll(() => database.disconnect())
+
 })

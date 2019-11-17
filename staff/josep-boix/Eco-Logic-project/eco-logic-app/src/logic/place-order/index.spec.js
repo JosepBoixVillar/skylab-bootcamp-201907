@@ -6,7 +6,7 @@ const { User, Product, Item, Order } = models
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
 
-describe ('logic _ place-order', () => {
+describe ('logic - place order', () => {
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
     let name, email, password, userId
@@ -15,12 +15,15 @@ describe ('logic _ place-order', () => {
     let _orderId, date
     
     beforeEach(async() => {
-
+        
+        await User.deleteMany()
+        await Product.deleteMany()
+        await Item.deleteMany()
+        await Order.deleteMany()
+        
         name = `name-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
-        
-        await User.deleteMany()
 
         const user = await User.create({ name, email, password })
         userId = user.id
@@ -30,17 +33,12 @@ describe ('logic _ place-order', () => {
         image = `image-${Math.random()}`
         price = Math.random()
         description = `description-${Math.random()}`
-        
-        await Product.deleteMany()
 
         const product = await Product.create({ title, categorie, image, price, description })
         productId = product.id.toString()
 
         _quantity = Number((Math.random()*1000).toFixed())
         date = new Date()
-
-        await Item.deleteMany()
-        await Order.deleteMany()
 
         let item = new Item({ product: productId, quantity: _quantity })
         user.cart.push(item)
@@ -51,7 +49,8 @@ describe ('logic _ place-order', () => {
         // userId = id
     })
 
-     it('should succeed on correct data', async () => {
+    //happy-path
+    it('should succeed on correct data', async () => {
         const result = await logic.placeOrder(userId, productId, _quantity)
         _orderId = result.orderId._id
         expect(result).toBeDefined()
@@ -64,6 +63,8 @@ describe ('logic _ place-order', () => {
         expect(order.items).toBeDefined()
         expect(order.items[0].quantity).toBe(_quantity)
     })
+    
+    //error-path
     /* User ID */
     it ('should fail on empty user id', () => { 
         userId = ''
@@ -74,6 +75,11 @@ describe ('logic _ place-order', () => {
         userId = undefined
         expect(() => logic.placeOrder(userId, productId, _quantity)
         ).toThrow('user Id with value undefined is not a string')
+    })
+    it ('should fail on not valid type id', () => { 
+        userId = false
+        expect(() => logic.placeOrder(userId, productId, _quantity)
+        ).toThrow('user Id with value false is not a string')
     })
     it ('should fail on wrong id', async () => {
         userId = '41224d776a326fb40f000001'
@@ -116,6 +122,16 @@ describe ('logic _ place-order', () => {
         productId = false
         expect(() => logic.placeOrder(userId, productId, _quantity)
         ).toThrow(`product Id with value false is not a string`)
+    })
+    it ('should fail on wrong id', async () => {
+        productId = '41224d776a326fb40f000001'
+        try {
+            await logic.placeOrder(userId, productId, _quantity)
+            // throw new Error('should not to throw, sth wrong in the logic')
+        } catch (error) {
+            expect(error).toBeDefined()
+            // expect(error.message).toBe('User with id 41224d776a326fb40f000001 does not exist.')
+        }                    
     })
 
     afterAll(() => database.disconnect())

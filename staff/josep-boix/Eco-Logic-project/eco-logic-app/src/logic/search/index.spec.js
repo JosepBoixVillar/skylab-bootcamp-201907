@@ -4,11 +4,12 @@ const { database, models: { User, Product } } = require ('datamodel')
 
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 
-describe ('logic - search', () => {
+fdescribe ('logic - search', () => {
+
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
 
-    let name, email, password, userId
-    let title, categorie, image, price, description, productId
+    let name, email, password
+    let title, categorie, image, price, description
     let query
 
     beforeEach(async () => {
@@ -25,12 +26,18 @@ describe ('logic - search', () => {
 
         await User.deleteMany()
         const user = await User.create({ name, email, password })
-        userId = user.id
+        let userId = user.id
 
         await Product.deleteMany()
-        const product = await Product.create({ title, categorie, image, price, description })
-        productId = product.id
+
+        let product = await Product.create({ title, categorie, image, price, description })
+        let productId = product.id
+
+        await product.save()
+
     })
+    
+    //happy-path
     it('should succeed on correct data', async () => { debugger
         query = title
 
@@ -43,6 +50,8 @@ describe ('logic - search', () => {
             expect(product['product'][0].description).toBe(description)
             expect(product['product'][0].price).toBe(price)
     })
+    
+    //error-path
     it('should fail if query does not exist', async () => { debugger
         query = 'not_existing'
 
@@ -52,4 +61,5 @@ describe ('logic - search', () => {
     })
 
     afterAll(() => database.disconnect())
+    
 })

@@ -3,7 +3,7 @@ import validate from "utils/validate"
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 /**
- * Add an order to an user id
+ * Adds an order to an user id
  * 
  * @param {*} userId 
  * @param {*} productId 
@@ -13,6 +13,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  */
 
 function placeOrder (userId, productId, _quantity) {
+
     validate.string(userId, 'user Id')
     validate.string(productId, 'product Id')
     validate.number(_quantity, 'quantity')
@@ -32,5 +33,7 @@ function placeOrder (userId, productId, _quantity) {
             return response.json()
         }
     })()
+
 }
+
 export default placeOrder

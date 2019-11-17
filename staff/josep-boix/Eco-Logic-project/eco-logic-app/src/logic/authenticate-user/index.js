@@ -14,11 +14,12 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  */
 
 function authenticateUser(email, password) {
+
     validate.string(email, 'email')
     validate.email(email, 'email')
     validate.string(password, 'password')
 
-    return(async () => {
+    return (async () => {
         const response = await fetch(`${REACT_APP_API_URL}/users/auth`,{
             method: 'POST',
             headers: { 'content-type':'application/json'},
@@ -35,5 +36,7 @@ function authenticateUser(email, password) {
         const { error } = await response.json()
         throw Error(error)
     })()
+
 }
+
 export default authenticateUser
