@@ -13,7 +13,7 @@ const { models: { Product } } = require('datamodel')
 */
 
 function searchProduct(query) {
-    debugger
+    
     validate.string(query, 'query')
 
     return (async () => {
@@ -26,5 +26,7 @@ function searchProduct(query) {
 
         return products
     })()
+
 }
+
 module.exports = searchProduct

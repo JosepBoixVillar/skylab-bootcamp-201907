@@ -7,6 +7,7 @@ const { database, models: { User } } = require('datamodel')
 const { env: { DB_URL_TEST } } = process
 
 describe ('logic - authenticate user', () => {
+
     before(() => database.connect(DB_URL_TEST))
 
     let name, email, password, id
@@ -75,4 +76,7 @@ describe ('logic - authenticate user', () => {
         expect(() => authenticateUser(email, password)
         ).to.throw(Error, 'password with value false is not a string')
     })
+
+    after(() => database.disconnect())
+
 })

@@ -2,7 +2,7 @@ const validate = require('utils/validate')
 const { models: { Product } } = require('datamodel')
 
 /**
- * retrieve Products
+ * retrieves products
  * 
  * @param {string} id
  * 
@@ -10,6 +10,7 @@ const { models: { Product } } = require('datamodel')
  */
 
 function retrieveProduct(id) {
+
     validate.string(id, 'id')
 
     return (async () => {
@@ -21,5 +22,7 @@ function retrieveProduct(id) {
 
         return product
     })()
+    
 }
+
 module.exports = retrieveProduct

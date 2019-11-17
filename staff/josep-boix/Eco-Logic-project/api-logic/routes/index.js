@@ -6,11 +6,11 @@ const bodyParser = require('body-parser')
 const jsonBodyParser = bodyParser.json()
 const router = express.Router()
 
-const registerUser = require('./user-register')
-const authenticateUser = require('./user-authenticate')
-const unregisterUser = require('./user-unregister')
-const retrieveUser = require('./user-retireve')
-const updateUser = require('./user-update')
+const registerUser = require('./register-user')
+const authenticateUser = require('./authenticate-user')
+const unregisterUser = require('./unregister-user')
+const retrieveUser = require('./retireve-user')
+const updateUser = require('./update-user')
 
 const registerCard = require('./card-register')
 const unregisterCard = require('./card-unregister') 
@@ -18,12 +18,12 @@ const retrieveCard = require('./card-retrieve')
 const retrieveAllCards = require('./card-retrieve-all')
 
 const searchProduct = require('./search')
-const retrieveProducts = require('./product-retrieve')
+const retrieveProducts = require('./retrieve-product')
 
 // const unregisterProduct = require('./product-unregister')
 // const retrieveProduct = require('./product-retrieve')
 
-const registerOrder = require('./order-register')
+const placeOrder = require('./place-order')
 const listOrders = require('./order-list')
 
 // const retrieveAllOrders = require('./order-retrieveAll')
@@ -54,7 +54,7 @@ router.get('/user/detail/:productId', jsonBodyParser, retrieveProducts)
 // router.delete('/user/item/:productId', [tokenMiddleware, jsonBodyParser], unregisterItem)
 
 /* order */
-router.post('/user/orders', [tokenMiddleware, jsonBodyParser], registerOrder)
+router.post('/user/orders', [tokenMiddleware, jsonBodyParser], placeOrder)
 router.get('/user/orders/list', [tokenMiddleware, jsonBodyParser], listOrders)
 
 // router.get('/user/allorders/', [tokenMiddleware, jsonBodyParser], retrieveAllOrders)

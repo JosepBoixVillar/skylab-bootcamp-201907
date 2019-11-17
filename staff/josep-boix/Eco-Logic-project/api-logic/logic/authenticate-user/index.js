@@ -1,17 +1,17 @@
-// logic user-authenticate
-
 const validate = require ('utils/validate')
 const { models: { User } } = require ('datamodel')
 
 /**
- * 
+ * Authenticate an user by params
+ *  
  * @param {string} email
  * @param {string} password
  * 
  * @returns {Promise}
  */
 
- module.exports = function (email, password) { debugger
+function authenticateUser (email, password) { debugger
+
     validate.string(email, 'email')
     validate.email(email, 'email')
     validate.string(password, 'password')
@@ -21,4 +21,7 @@ const { models: { User } } = require ('datamodel')
         if (!user) throw new Error ('wrong credentials') 
         return user.id
     })()
- }
+
+}
+
+module.exports = authenticateUser

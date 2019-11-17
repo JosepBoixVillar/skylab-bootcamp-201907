@@ -1,20 +1,18 @@
 require('dotenv').config() 
 
+const listOrders = require('.')
 const { expect } = require('chai')
 const { database, models: { User, Product, Item, Order } } = require('datamodel')
 
 const{ env: { DB_URL_TEST } } = process 
 
-const listOrders = require('.')
+describe.only ('logic - list orders', () => {
 
-describe ('logic - list orders', () => {
     before(() => database.connect(DB_URL_TEST)) 
     
     let name, email, password, userId
     let title, categorie, image, price, description, productId
     let _quantity, date
-    let orderId, itemId
-    
 
     beforeEach(async() => {
         await User.deleteMany()
@@ -55,6 +53,7 @@ describe ('logic - list orders', () => {
         await order.save()
     })
 
+    //happy-path
     it('should succeed on correct data', async () =>{
         const orders = await listOrders(userId)
         expect(orders).to.exist
@@ -101,4 +100,5 @@ describe ('logic - list orders', () => {
     })
 
     after(() => database.disconnect())
+
 })

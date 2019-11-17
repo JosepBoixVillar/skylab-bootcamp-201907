@@ -6,7 +6,8 @@ const { database, models: { User } } = require('datamodel')
 
 const { env: { DB_URL_TEST } } = process
 
-describe ('logic _ retrieve-user', () => {
+describe ('logic retrieve user', () => {
+
     before(() => database.connect(DB_URL_TEST))
 
     let name, email, password, id
@@ -21,7 +22,7 @@ describe ('logic _ retrieve-user', () => {
         id = user.id
     })
 
-    /* id */
+    //happy-path
     it ('should succeed in correct data', async () => {
         const user = await retrieveUser(id)
             expect(user).to.exist
@@ -31,6 +32,8 @@ describe ('logic _ retrieve-user', () => {
             expect(user._id).not.to.exist
             expect(user.password).not.to.exist
     })
+
+    //error-path
     it ('should fail on empty id', () => { 
         id = ''
         expect(() => 
@@ -61,4 +64,5 @@ describe ('logic _ retrieve-user', () => {
     })
 
     after(() => database.disconnect())
+
 })
