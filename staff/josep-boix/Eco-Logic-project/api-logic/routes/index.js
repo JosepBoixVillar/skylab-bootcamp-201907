@@ -23,8 +23,13 @@ const retrieveProducts = require('./retrieve-product')
 // const unregisterProduct = require('./product-unregister')
 // const retrieveProduct = require('./product-retrieve')
 
+<<<<<<< HEAD
 const placeOrder = require('./place-order')
 const retrieveOrders = require('./retrieve-order')
+=======
+const registerOrder = require('./order-register')
+const listOrders = require('./order-list')
+>>>>>>> d4ebfe93fc5ea10758ac6afeb0a6497025b210e2
 
 // const retrieveAllOrders = require('./order-retrieveAll')
 
@@ -54,8 +59,13 @@ router.get('/user/detail/:productId', jsonBodyParser, retrieveProducts)
 // router.delete('/user/item/:productId', [tokenMiddleware, jsonBodyParser], unregisterItem)
 
 /* order */
+<<<<<<< HEAD
 router.post('/user/orders', [tokenMiddleware, jsonBodyParser], placeOrder)
 router.get('/user/orders/list', [tokenMiddleware, jsonBodyParser], retrieveOrders)
+=======
+router.post('/user/orders', [tokenMiddleware, jsonBodyParser], registerOrder)
+router.get('/user/orders/list', [tokenMiddleware, jsonBodyParser], listOrders)
+>>>>>>> d4ebfe93fc5ea10758ac6afeb0a6497025b210e2
 
 // router.get('/user/allorders/', [tokenMiddleware, jsonBodyParser], retrieveAllOrders)
 
