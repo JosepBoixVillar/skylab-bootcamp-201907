@@ -20,12 +20,12 @@ module.exports = {
     // registerItem: require('./item-register'),
     // unregisterItem: require('./item-unregister'),
     //ORDER
-    listOrder: require('./order-list'),
+    retrieveOrder: require('./retrieve-order'),
     registerOrder: require('./place-order'),
-    listOrders: require('./order-list'),
-    retrieveAllOrders: require('./order-retrieve-all'),
+    // retrieveOrders: require('./retrieve-order'),
+    // retrieveAllOrders: require('./order-retrieve-all'),
     // CART
     addToCart: require('./cart-addToCart'),
-    listToCart: require('./cart-list'),
+    listToCart: require('./retrieve-cart'),
     cartRemove: require('./cart-remove')
 }

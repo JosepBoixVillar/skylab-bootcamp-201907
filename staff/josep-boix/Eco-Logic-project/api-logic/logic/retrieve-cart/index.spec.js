@@ -6,7 +6,8 @@ const { database, models: { User, Product, Item } } = require('datamodel')
 
 const{ env: { DB_URL_TEST } } = process
 
-describe ('logic - list cart', () => {
+describe.only ('logic - retrieve cart', () => {
+
     before(() => database.connect(DB_URL_TEST))
     
     let name, email, password, userId
@@ -40,6 +41,7 @@ describe ('logic - list cart', () => {
         await user.save()              
     })
 
+    //happy-path
     it('should succeed on correct data',async () =>{
         await listToCart(userId)
         const user = await User.findById(userId)
@@ -47,7 +49,8 @@ describe ('logic - list cart', () => {
         expect(user.cart[0].quantity).to.equal(_quantity)
         expect(user.cart[0].product).to.exist
     })
-    /* User ID */
+
+    //error-path
     it('should fail on empty userId', () => {
         userId = ""
         expect(() => listToCart(userId)
@@ -65,4 +68,5 @@ describe ('logic - list cart', () => {
     })
 
     after(() => database.disconnect())
+
 })

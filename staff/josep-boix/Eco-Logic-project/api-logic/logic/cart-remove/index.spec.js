@@ -12,7 +12,7 @@ describe ('logic - remove from cart', () => {
     
     let name, email, password, userId
     let title, categorie, image, price, description, productId
-    let _quantity, itemId
+    let _quantity
     
     beforeEach(async() => {
         _quantity = Number((Math.random()*1000).toFixed())
@@ -37,18 +37,19 @@ describe ('logic - remove from cart', () => {
         productId = product.id 
 
         let item = new Item({ quantity:_quantity, product:productId })
-        itemId = item.id
         user.cart.push(item)
         await user.save()   
     })
 
+    //happy-path
     it('should succeed on correct data',async () =>{
         await removeProduct(userId, productId)
 
         const user = await User.findById(userId)
         expect(user.cart[0]).to.not.exist
     })
-    /* User ID */
+
+    //error-path
     it ('should fail on unexisting User ID', async () => {
         userId = '41224d776a326fb40f000001'
 
@@ -74,7 +75,16 @@ describe ('logic - remove from cart', () => {
         expect(() => removeProduct(userId, productId)
         ).to.throw(`User ID with value false is not a string`)
     })
-    /* Product ID */
+    it ('should fail on unexisting Product ID', async () => {
+        productId = '41224d776a326fb40f000001'
+
+        try {
+            await removeProduct(userId, productId)
+        } catch(error) {
+            expect(error).to.exist
+            expect(error.message).to.equal(`Item with product id ${productId} not found`)
+        }
+    })
     it('should fail on empty productId', () => {
         productId = ""
         expect(() => removeProduct(userId, productId)

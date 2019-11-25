@@ -11,6 +11,7 @@ const validate = require('utils/validate')
  */
 
 function cartRemove(userId, productId) {
+
     validate.string(userId, 'User ID')
     validate.string(productId, 'Product ID')
 
@@ -23,7 +24,7 @@ function cartRemove(userId, productId) {
         })
 
         if (item > -1) await user.cart.splice(item, 1)
-        if (item < 0) throw Error("Item not found")
+        if (item < 0) throw Error(`Item with product id ${productId} not found`)
         
         await user.save()
     })()

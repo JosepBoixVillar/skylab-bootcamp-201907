@@ -1,5 +1,5 @@
 const validate = require('utils/validate')
-const { models: { User, Item } } = require('datamodel')
+const { models: { User } } = require('datamodel')
 
 /**
  * Retrieve cart added products by an user

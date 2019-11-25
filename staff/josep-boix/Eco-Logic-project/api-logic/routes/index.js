@@ -9,7 +9,7 @@ const router = express.Router()
 const registerUser = require('./register-user')
 const authenticateUser = require('./authenticate-user')
 const unregisterUser = require('./unregister-user')
-const retrieveUser = require('./retireve-user')
+const retrieveUser = require('./retrieve-user')
 const updateUser = require('./update-user')
 
 const registerCard = require('./card-register')
@@ -24,7 +24,7 @@ const retrieveProducts = require('./retrieve-product')
 // const retrieveProduct = require('./product-retrieve')
 
 const placeOrder = require('./place-order')
-const listOrders = require('./order-list')
+const retrieveOrders = require('./retrieve-order')
 
 // const retrieveAllOrders = require('./order-retrieveAll')
 
@@ -55,7 +55,7 @@ router.get('/user/detail/:productId', jsonBodyParser, retrieveProducts)
 
 /* order */
 router.post('/user/orders', [tokenMiddleware, jsonBodyParser], placeOrder)
-router.get('/user/orders/list', [tokenMiddleware, jsonBodyParser], listOrders)
+router.get('/user/orders/list', [tokenMiddleware, jsonBodyParser], retrieveOrders)
 
 // router.get('/user/allorders/', [tokenMiddleware, jsonBodyParser], retrieveAllOrders)
 
