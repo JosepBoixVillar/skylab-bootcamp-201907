@@ -6,7 +6,7 @@ module.exports = async(req, res) => {
 
     try {
         const orderId = await logic.registerOrder(userId, productId, quantity)
-        res.status(201).json({ message: 'Order placed registered successfully', orderId})
+        res.status(201).json({ message: 'Order registered successfully', orderId})
     } catch({ message }) {
         res.status(400).json({ error: message })
     }

@@ -6,11 +6,14 @@ const { database, models: { User, Card } } = require('datamodel')
 
 const { env: { DB_URL_TEST } } = process
 
-describe ('logic - retrieve card', () => {
+describe.only ('logic - retrieve card', () => { debugger
+
     before(() => database.connect(DB_URL_TEST))
 
-    let userId
+    let userId, cardId
+
     beforeEach(() => {
+
         name = `name-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
@@ -18,9 +21,9 @@ describe ('logic - retrieve card', () => {
         identifier = Number((Math.random()*1000000000).toFixed())
         expiry = '09/24'
         ccv = (Math.random() *1000).toFixed() 
-        if (ccv < 10) ccv = '00' + ccv
-        else if(ccv < 100) ccv = '0' + ccv
-        else ccv 
+            if (ccv < 10) ccv = '00' + ccv
+            else if(ccv < 100) ccv = '0' + ccv
+            else ccv 
         currency = 'EUR'
 
         return( async () => {
@@ -28,17 +31,23 @@ describe ('logic - retrieve card', () => {
 
             const newUser = await User.create({ name, email, password})
             userId = newUser.id
+            
             const newCard = new Card({ identifier, expiry, ccv, currency })
             cardId = newCard.id
 
             newUser.cards.push(newCard)
+
             await newUser.save()
         })()
         
     })
+
+    //happy-path
     it('should succeed on correct data', async () => {
         const card = await retrieveCard(userId, cardId)
         expect(card).to.exist
+        expect(card._id).not.to.exist
+        expect(card.id).to.be.a('string')
         expect(card.identifier).to.equal(identifier)
         expect(card.expiry).to.equal(expiry)
         expect(card.ccv).to.equal(ccv)

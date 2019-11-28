@@ -6,7 +6,7 @@ const { database, models: { User, Product, Item } } = require('datamodel')
 
 const{ env: { DB_URL_TEST } } = process
 
-describe.only ('logic - retrieve cart', () => {
+describe ('logic - retrieve cart', () => {
 
     before(() => database.connect(DB_URL_TEST))
     

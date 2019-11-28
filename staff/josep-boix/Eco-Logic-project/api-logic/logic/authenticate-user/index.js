@@ -10,7 +10,7 @@ const { models: { User } } = require ('datamodel')
  * @returns {Promise}
  */
 
-function authenticateUser (email, password) { debugger
+function authenticateUser (email, password) {
 
     validate.string(email, 'email')
     validate.email(email, 'email')
@@ -19,6 +19,7 @@ function authenticateUser (email, password) { debugger
     return (async () => {
         const user = await User.findOne({ email, password })
         if (!user) throw new Error ('wrong credentials') 
+
         return user.id
     })()
 

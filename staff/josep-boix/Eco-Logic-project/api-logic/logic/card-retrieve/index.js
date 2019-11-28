@@ -21,6 +21,9 @@ module.exports = function(userId, cardId) {
         const card = user.cards.find(card => card.id === cardId)
         if(!card) throw Error(`Card with id ${cardId} does not exist.`)
 
+        card.id = card._id.toString()
+        delete card._id
+
         return card
     })()
 }

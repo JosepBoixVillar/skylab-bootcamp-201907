@@ -7,14 +7,12 @@ const{ env: { DB_URL_TEST } } = process
 
 const listOrders = require('.')
 
-describe.only ('logic - list orders', () => {
+describe ('logic - list orders', () => {
     before(() => database.connect(DB_URL_TEST)) 
     
     let name, email, password, userId
     let title, categorie, image, price, description, productId
     let _quantity, date
-    let orderId, itemId
-    
 
     beforeEach(async() => {
         await User.deleteMany()
