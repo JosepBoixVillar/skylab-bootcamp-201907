@@ -23,7 +23,7 @@ module.exports = function(userId, cardId) {
 
         card.id = card._id.toString()
         delete card._id
-
+        
         return card
     })()
 }

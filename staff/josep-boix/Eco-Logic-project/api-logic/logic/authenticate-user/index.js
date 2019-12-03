@@ -18,11 +18,13 @@ function authenticateUser (email, password) {
 
     return (async () => {
         const user = await User.findOne({ email, password })
-        if (!user) throw new Error ('wrong credentials') 
+        if (!user) throw new Error ('Wrong credentials') 
+
+        user.id = user._id.toString()
+        delete user._id
 
         return user.id
     })()
 
 }
-
 module.exports = authenticateUser

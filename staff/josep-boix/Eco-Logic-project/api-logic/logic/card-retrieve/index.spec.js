@@ -6,7 +6,7 @@ const { database, models: { User, Card } } = require('datamodel')
 
 const { env: { DB_URL_TEST } } = process
 
-describe.only ('logic - retrieve card', () => { debugger
+describe ('logic - retrieve card', () => { 
 
     before(() => database.connect(DB_URL_TEST))
 
@@ -46,8 +46,9 @@ describe.only ('logic - retrieve card', () => { debugger
     it('should succeed on correct data', async () => {
         const card = await retrieveCard(userId, cardId)
         expect(card).to.exist
-        expect(card._id).not.to.exist
         expect(card.id).to.be.a('string')
+        expect(card.id).to.equal(cardId)
+        // expect(card._id).to.not.exist
         expect(card.identifier).to.equal(identifier)
         expect(card.expiry).to.equal(expiry)
         expect(card.ccv).to.equal(ccv)

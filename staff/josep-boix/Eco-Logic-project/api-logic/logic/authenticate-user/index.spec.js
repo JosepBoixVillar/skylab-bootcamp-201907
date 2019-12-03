@@ -6,11 +6,11 @@ const { database, models: { User } } = require('datamodel')
 
 const { env: { DB_URL_TEST } } = process
 
-describe ('logic - authenticate user', () => {
+describe.only ('logic - authenticate user', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
-    let name, email, password, id
+    let name, email, password, userId
         
     beforeEach(() => {
         name = `name-${Math.random()}`
@@ -20,63 +20,80 @@ describe ('logic - authenticate user', () => {
         return (async () => {
             await User.deleteMany()
             const user = await User.create({ name, email, password })
-            id = user.id
+            userId = user.id
         })()
     })
 
-    it ('should succeed on correct data', async () => {
-        const retrieved_id = await authenticateUser(email, password) 
-
-        expect(retrieved_id).to.exist
-        expect(retrieved_id).to.be.a('string')
-        expect(retrieved_id).to.equal(id)
+    //happy-path
+    it ('should succeed on correct data', async () => { debugger
+        const response = await authenticateUser(email, password) 
+        expect(response).to.exist
+        expect(response).to.be.a('string')
+        expect(response).to.equal(userId)
+    })
+    it ('should succeed and feedback user', async () => {
+        try {
+            await authenticateUser(email, password)
+            expect(message).to.exist
+            expect(message).to.equal('Authentication had succeed')
+            expect(token).to.exist
+        } catch (error) {
+        }
     })
 
-    it ('should fail on not valid data', async () => {
-        let password = 'incorrect_pass'
+    //error-path
+    it ('should fail on not valid email', async () => {
+        email = 'incorrect_mail@mail.com'
 
         try {
             await authenticateUser(email, password)
         } catch (error) {
             expect(error).to.exist
-            expect(error.message).to.equal('wrong credentials')
+            expect(error.message).to.equal('Wrong credentials')
         }
     })
-
-    /* e-mail */
     it ('should fail on empty e-mail input', () => {
         email = ''
         expect(() => authenticateUser(email, password)
-        ).to.throw(Error, 'email is empty or blank')
+            ).to.throw(Error, 'email is empty or blank')
     })
     it ('should fail on undefined email', () => {
         email = undefined
         expect(() => authenticateUser(email, password)
-        ).to.throw(Error, 'email with value undefined is not a string')
+            ).to.throw(Error, 'email with value undefined is not a string')
     })
     it ('should fail on not valid e-mail', () => {
         email = 'false#mail.com'
         expect(() => authenticateUser(email, password)
-        ).to.throw(Error, 'email with value false#mail.com is not a valid e-mail')
+            ).to.throw(Error, 'email with value false#mail.com is not a valid e-mail')
     })
+    it ('should fail on not valid password', async () => {
+        password = 'incorrect_pass'
 
-    /* password */
+        try {
+            await authenticateUser(email, password)
+        } catch (error) {
+            expect(error).to.exist
+            expect(error.message).to.equal('Wrong credentials')
+        }
+    })
     it ('should fail on empty password', () => {
         password = ''
         expect(() => authenticateUser(email, password)
-        ).to.throw(Error, 'password is empty or blank')
+            ).to.throw(Error, 'password is empty or blank')
     })
     it ('should fail on undefined password', () => {
         password = undefined
         expect(() => authenticateUser(email, password)
-        ).to.throw(Error, 'password with value undefined is not a string')
+            ).to.throw(Error, 'password with value undefined is not a string')
     })
     it ('should fail on not valid data type for password', () => {
         password = false
         expect(() => authenticateUser(email, password)
-        ).to.throw(Error, 'password with value false is not a string')
+            ).to.throw(Error, 'password with value false is not a string')
     })
 
-    after(() => database.disconnect())
+    after(() => Promise.all([User.deleteMany()])
+        .then(() => database.disconnect()))
 
 })

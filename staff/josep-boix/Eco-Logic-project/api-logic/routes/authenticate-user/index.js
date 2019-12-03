@@ -3,15 +3,16 @@ const jwt = require('jsonwebtoken')
 
 const { env: { JWT_SECRET } } = process
 
-module.exports = async function(req, res) {
-    const { body: { email, password } } = req
+async function authenticateUser(request, response) {
+    const { body: { email, password } } = request
     
     try {
-        const id = await logic.authenticateUser(email, password)
-        const token = jwt.sign({ sub:id }, JWT_SECRET)
+        const userId = await logic.authenticateUser(email, password)
+        const token = jwt.sign({ sub:userId }, JWT_SECRET)
 
-        res.json({ message: 'Authentication success', token })
+        response.json({ message: 'Authentication had succeed', token })
     } catch ({ message }) {
-        res.status(401).json({ error: message })
+        response.status(401).json({ error: message })
     }
 }
+module.exports = authenticateUser

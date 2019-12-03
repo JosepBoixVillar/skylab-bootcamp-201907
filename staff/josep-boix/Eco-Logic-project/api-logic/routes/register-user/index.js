@@ -1,12 +1,13 @@
 const logic = require('../../logic')
 
-module.exports = async function(req, res) {
-    const { body: { name, email, password } } = req
+async function registerUser(request, response) {
+    const { body: { name, email, password } } = request
 
     try {
         await logic.registerUser(name, email, password)
-        res.status(201).json({ message: 'Register succees' })
+        response.status(201).json({ message: 'Register success' })
     } catch ({ message }) {
-        res.status(400).json({ error: message })
+        response.status(400).json({ error: message })
     }
 }
+module.exports = registerUser

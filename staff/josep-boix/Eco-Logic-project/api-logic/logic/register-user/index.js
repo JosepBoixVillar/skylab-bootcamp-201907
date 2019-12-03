@@ -1,5 +1,3 @@
-// logic register-user
-
 const validate = require ('utils/validate')
 // const bcrypt = require ('bcryptjs')
 const { models: { User } } = require ('datamodel')
@@ -14,7 +12,7 @@ const { models: { User } } = require ('datamodel')
  * @returns {Promise}
  */
 
-module.exports = function (name, email, password) {
+function registerUser (name, email, password) {
     
     validate.string(name, 'name')
     validate.email(email, 'email')
@@ -33,3 +31,4 @@ module.exports = function (name, email, password) {
     })()
     
 }
+module.exports = registerUser
