@@ -2,7 +2,7 @@ const validate = require('utils/validate')
 const { models: { User, Card } } = require('datamodel')
 
 /**
- * Registers a credit-card by an user id
+ * Register card by an user id
  * 
  * @param {string} id
  * @param {Number} identifier
@@ -14,6 +14,7 @@ const { models: { User, Card } } = require('datamodel')
  */
 
 module.exports = function(id, identifier, expiry, ccv, currency) {
+
     validate.string(id, 'id')
     validate.number(identifier, 'identifier')
     validate.string(expiry, 'expiry date')
@@ -32,4 +33,5 @@ module.exports = function(id, identifier, expiry, ccv, currency) {
     user.cards.push(newCard)
     await user.save()
     })()
+
 }

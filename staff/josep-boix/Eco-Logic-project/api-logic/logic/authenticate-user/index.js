@@ -17,7 +17,7 @@ function authenticateUser (email, password) {
     validate.string(password, 'password')
 
     return (async () => {
-        const user = await User.findOne({ email, password })
+        const user = await User.findOne({ email, password }) //, { _id: 0 }).lean()
         if (!user) throw new Error ('Wrong credentials') 
 
         user.id = user._id.toString()

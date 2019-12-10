@@ -1,27 +1,26 @@
-// logic user-retrieve
-
 const validate = require('utils/validate')
 const { models: { User } } = require('datamodel')
 
 /**
  * Retrieves data user by user ID
  * 
- * @param {string} id
+ * @param {string} userId
  * 
  * @returns {Promise}
  */
 
-module.exports = function (id) {
+function retrieveUser(userId) {
     
-    validate.string(id, 'id')
+    validate.string(userId, 'User Id')
 
     return (async () => {
-        const user = await User.findOne({ _id: id }, { _id: 0, password: 0}).lean()
+        const user = await User.findOne({ _id: userId }, { _id: 0, password: 0}).lean()
         if(!user) throw new Error(`User does not exist.`)
         
-        user.id = id
+        user.id = userId
         
         return user
     })()
     
 }
+module.exports = retrieveUser

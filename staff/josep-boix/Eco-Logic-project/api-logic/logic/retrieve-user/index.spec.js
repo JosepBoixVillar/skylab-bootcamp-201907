@@ -6,11 +6,11 @@ const { database, models: { User } } = require('datamodel')
 
 const { env: { DB_URL_TEST } } = process
 
-describe ('logic retrieve user', () => {
+describe ('logic - retrieve user', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
-    let name, email, password, id
+    let name, email, password, userId
 
     beforeEach(async () => {
         name = `name-${Math.random()}`
@@ -19,43 +19,44 @@ describe ('logic retrieve user', () => {
 
         await User.deleteMany()
         const user = await User.create({ name, email, password })
-        id = user.id
+        userId = user.id
     })
 
     //happy-path
     it ('should succeed in correct data', async () => {
-        const user = await retrieveUser(id)
-            expect(user).to.exist
-            expect(user.id).to.exist
-            expect(user.name).to.equal(name)
-            expect(user.email).to.equal(email)
-            expect(user._id).not.to.exist
-            expect(user.password).not.to.exist
+        const user = await retrieveUser(userId)
+        expect(user).to.exist
+        expect(user.id).to.exist
+        expect(user.id).to.equal(userId)
+        expect(user.name).to.equal(name)
+        expect(user.email).to.equal(email)
+        expect(user._id).not.to.exist
+        expect(user.password).not.to.exist
     })
-
+    
     //error-path
-    it ('should fail on empty id', () => { 
-        id = ''
+    it ('should fail on empty userId', () => { 
+        userId = ''
         expect(() => 
-            retrieveUser(id)
-        ).to.throw(Error, 'id is empty or blank')
+            retrieveUser(userId)
+        ).to.throw(Error, 'User Id is empty or blank')
     })
-    it ('should fail on not valid type id', () => { 
-        id = undefined
+    it ('should fail on not valid type userId', () => { 
+        userId = undefined
         expect(() => 
-            retrieveUser(id)
-        ).to.throw(Error, 'id with value undefined is not a string')
+            retrieveUser(userId)
+        ).to.throw(Error, 'User Id with value undefined is not a string')
     })
-    it ('should fail on not valid type id', () => { 
-        id = false
+    it ('should fail on not valid type userId', () => { 
+        userId = false
         expect(() => 
-            retrieveUser(id)
-        ).to.throw(Error, 'id with value false is not a string')
+            retrieveUser(userId)
+        ).to.throw(Error, 'User Id with value false is not a string')
     })
-    it ('should fail on uncorrect id', async () => {
-        id = '41224d776a326fb40f000001'
+    it ('should fail on uncorrect userId', async () => {
+        userId = '41224d776a326fb40f000001'
         try {
-            await retrieveUser(id)
+            await retrieveUser(userId)
             // throw new Error('should not to throw, sth wrong in the logic')
         } catch (error) {
             expect(error).to.exist
@@ -63,6 +64,7 @@ describe ('logic retrieve user', () => {
         }                    
     })
 
-    after(() => database.disconnect())
+    after(() => Promise.all([User.deleteMany()])
+        .then(() => database.disconnect()))
 
 })

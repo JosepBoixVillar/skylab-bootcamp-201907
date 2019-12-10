@@ -6,7 +6,7 @@ const { database, models: { User } } = require('datamodel')
 
 const { env: { DB_URL_TEST } } = process
 
-describe.only ('logic - authenticate user', () => {
+describe ('logic - authenticate user', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
@@ -30,17 +30,9 @@ describe.only ('logic - authenticate user', () => {
         expect(response).to.exist
         expect(response).to.be.a('string')
         expect(response).to.equal(userId)
-    })
-    it ('should succeed and feedback user', async () => {
-        try {
-            await authenticateUser(email, password)
-            expect(message).to.exist
-            expect(message).to.equal('Authentication had succeed')
-            expect(token).to.exist
-        } catch (error) {
-        }
-    })
 
+    })
+    
     //error-path
     it ('should fail on not valid email', async () => {
         email = 'incorrect_mail@mail.com'
@@ -62,7 +54,7 @@ describe.only ('logic - authenticate user', () => {
         expect(() => authenticateUser(email, password)
             ).to.throw(Error, 'email with value undefined is not a string')
     })
-    it ('should fail on not valid e-mail', () => {
+    it ('should fail on not valid email', () => {
         email = 'false#mail.com'
         expect(() => authenticateUser(email, password)
             ).to.throw(Error, 'email with value false#mail.com is not a valid e-mail')

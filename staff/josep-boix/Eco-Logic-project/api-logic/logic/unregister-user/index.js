@@ -1,26 +1,27 @@
-// logic user-unregister
-
 const validate = require('utils/validate')
 const { models: { User } } = require('datamodel')
 
 /**
  * Unregister an user by the user ID
  * 
- * @param {string} id
+ * @param {string} userId
  * @param {string} email
  * @param {string} password
  * 
  * @returns {Promise}
  */
 
-module.exports = function (id, email, password) {
-    validate.string(id, 'id')
-    validate.string(email, 'email')
-    validate.email(email, 'email')
-    validate.string(password, 'password')
+function unregisterUser(userId, email, password) {
+
+    validate.string(userId, 'User Id')
+    validate.string(email, 'Email')
+    validate.email(email, 'Email')
+    validate.string(password, 'Password')
 
     return (async () => {
-        const user = await User.deleteOne({ _id: id, email, password })
+        const user = await User.deleteOne({ _id: userId, email, password })
         if (!user.deletedCount) throw new Error ('There was an error unregistering the user')
     })()
+
 }
+module.exports = unregisterUser

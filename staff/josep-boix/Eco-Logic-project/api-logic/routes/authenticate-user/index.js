@@ -9,7 +9,6 @@ async function authenticateUser(request, response) {
     try {
         const userId = await logic.authenticateUser(email, password)
         const token = jwt.sign({ sub:userId }, JWT_SECRET)
-
         response.json({ message: 'Authentication had succeed', token })
     } catch ({ message }) {
         response.status(401).json({ error: message })
