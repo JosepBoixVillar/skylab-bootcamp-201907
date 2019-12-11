@@ -10,10 +10,11 @@ const { models: { User } } = require('datamodel')
  * @returns {Promise}
  */
 
-module.exports = function (userId, cardId) {
-    validate.string(userId, 'user ID')
-    validate.string(cardId, 'card ID')
-debugger
+function unregisterCard(userId, cardId) {
+
+    validate.string(userId, 'User ID')
+    validate.string(cardId, 'Card ID')
+
     return (async () => {
         const user = await User.findById(userId)
         if(!user) throw Error (`User with id ${userId} not found.`)
@@ -24,5 +25,7 @@ debugger
         user.cards.splice(user.cards.indexOf(findCard), 1)
 
         await user.save()
-     })()
- }
+    })()
+    
+}
+module.exports = unregisterCard

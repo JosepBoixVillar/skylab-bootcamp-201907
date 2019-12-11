@@ -6,7 +6,7 @@ const { database, models: { User, Card } } = require('datamodel')
 
 const { env: { DB_URL_TEST } } = process
 
-describe.only ('logic - register card', () => {
+describe ('logic - register card', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let name, email, password
@@ -43,10 +43,10 @@ describe.only ('logic - register card', () => {
         const { cards } = user
         expect(cards).to.exist
         expect(cards).to.have.lengthOf(1)
-        // expect(cards[cards.length -1].id).to.equal(cards.id)
 
         const [card] = cards
         expect(card).to.exist
+        expect(card.id).to.exist
         expect(card.identifier).to.equal(identifier)
         expect(card.expiry).to.deep.equal(expiry)
         expect(card.ccv).to.equal(ccv)
@@ -61,7 +61,7 @@ describe.only ('logic - register card', () => {
                 await registerCard(id, identifier, expiry, ccv, currency)
             } catch (error) {
                 expect(error).to.exist
-                expiry(error.message).to.equal('Card already exists')
+                expect(error.message).to.equal('Card already exists')
             }
         })()
     })
@@ -74,23 +74,23 @@ describe.only ('logic - register card', () => {
             expect(error.message).to.equal('User with id 41224d776a326fb40f000001 does not exist.')
         }
     })
-    it ('should fail on empty id', () => {
+    it ('should fail on empty User ID', () => {
         id = ''
         expect(() => 
         registerCard(id, identifier, expiry, ccv, currency)
-            ).to.throw('id is empty or blank')
+            ).to.throw('User ID is empty or blank')
     })
-    it ('should fail on undefined id string', () => {
+    it ('should fail on undefined User ID string', () => {
         id = undefined
         expect(() => 
         registerCard(id, identifier, expiry, ccv, currency)
-            ).to.throw('id with value undefined is not a string')
+            ).to.throw('User ID with value undefined is not a string')
     })
-    it ('should fail on wrong data type id', () => {
+    it ('should fail on wrong data type User ID', () => {
         id = false
         expect(() => 
         registerCard(id, identifier, expiry, ccv, currency)
-            ).to.throw('id with value false is not a string')
+            ).to.throw('User ID with value false is not a string')
     })
     it ('should fail on empty card number', () => {
         identifier = ''
@@ -165,6 +165,6 @@ describe.only ('logic - register card', () => {
             ).to.throw('currency with value false is not a string')
     })
 
-    after(() => Promise.all([User.deleteMany()]) 
+    after(() => Promise.all([User.deleteMany(), Card.deleteMany()]) 
         .then(() => database.disconnect()))
 })

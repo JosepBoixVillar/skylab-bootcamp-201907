@@ -43,6 +43,7 @@ describe ('logic - retrieveAll cards', () => {
             const newCard = new Card({ identifier, expiry, ccv, currency })
             cardId = newCard.id
             user.cards.push(newCard)
+            
             const newCard2 = new Card({ identifier:identifier2, expiry:expiry2, ccv:ccv2, currency:currency2 })
             cardId2 = newCard2.id
             user.cards.push(newCard2)
@@ -51,8 +52,8 @@ describe ('logic - retrieveAll cards', () => {
         })()
     })
 
-    it('should succeed on correct data', async () => {
-        debugger
+    //happy-path
+    it('should succeed on correct data', async () => { debugger
         const cards = await retrieveAll(userId)
         expect(cards).to.exist
 
@@ -72,7 +73,7 @@ describe ('logic - retrieveAll cards', () => {
         expect(card2.currency).to.equal(currency2)
     })
 
-    /* User ID */
+    //error-path
     it('should fail if user does not exist', async () => {
         await User.deleteMany()
 
@@ -96,18 +97,19 @@ describe ('logic - retrieveAll cards', () => {
     it('should fail on empty User ID', () => {
         userId = ''
         expect(() => retrieveAll(userId)
-        ).to.throw('User ID is empty or blank')
+            ).to.throw('User ID is empty or blank')
     })
     it('should fail on undefined User ID', () => {
         userId = undefined
         expect(() => retrieveAll(userId)
-        ).to.throw('User ID with value undefined is not a string')
+            ).to.throw('User ID with value undefined is not a string')
     })
     it('should fail on wrong data type for User ID', () => {
         userId = false
         expect(() => retrieveAll(userId)
-        ).to.throw('User ID with value false is not a string')
+            ).to.throw('User ID with value false is not a string')
     })
     
-    after(() => database.disconnect())
+    after(() => Promise.all([User.deleteMany(), Card.deleteMany()])
+        .then(() => database.disconnect()))
 })

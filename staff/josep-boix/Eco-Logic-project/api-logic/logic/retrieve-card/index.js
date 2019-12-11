@@ -11,6 +11,7 @@ const { models: { User } } = require('datamodel')
  */
 
 module.exports = function(userId, cardId) {
+
     validate.string(userId, 'User ID')
     validate.string(cardId, 'Card ID')
 
@@ -26,4 +27,5 @@ module.exports = function(userId, cardId) {
         
         return card
     })()
+    
 }

@@ -7,13 +7,11 @@ const { database, models: { User, Card } } = require('datamodel')
 const { env: { DB_URL_TEST } } = process
 
 describe ('logic - retrieve card', () => { 
-
     before(() => database.connect(DB_URL_TEST))
 
     let userId, cardId
 
     beforeEach(() => {
-
         name = `name-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
@@ -21,9 +19,9 @@ describe ('logic - retrieve card', () => {
         identifier = Number((Math.random()*1000000000).toFixed())
         expiry = '09/24'
         ccv = (Math.random() *1000).toFixed() 
-            if (ccv < 10) ccv = '00' + ccv
-            else if(ccv < 100) ccv = '0' + ccv
-            else ccv 
+        if (ccv < 10) ccv = '00' + ccv
+        else if(ccv < 100) ccv = '0' + ccv
+        else ccv 
         currency = 'EUR'
 
         return( async () => {
@@ -39,7 +37,6 @@ describe ('logic - retrieve card', () => {
 
             await newUser.save()
         })()
-        
     })
 
     //happy-path
@@ -55,7 +52,7 @@ describe ('logic - retrieve card', () => {
         expect(card.currency).to.equal(currency)
     })
 
-    /* user ID */
+    //error-path
     it('should fail if user does not exist', async () => {
         await User.deleteMany()
         try {
@@ -76,24 +73,19 @@ describe ('logic - retrieve card', () => {
     })
     it('should fail on empty User ID', () => {
         userId = ''
-        expect(() =>
-            retrieveCard(userId, cardId)
-        ).to.throw('User ID is empty or blank')
+        expect(() => retrieveCard(userId, cardId)
+            ).to.throw('User ID is empty or blank')
     }) 
     it('should fail on undefined User ID', () => {
         userId = undefined
-        expect(() =>
-            retrieveCard(userId, cardId)
-        ).to.throw(`User ID with value undefined is not a string`)
+        expect(() => retrieveCard(userId, cardId)
+            ).to.throw(`User ID with value undefined is not a string`)
     })
     it('should fail on wrong data type for User ID', () => {
         userId = false 
-        expect(() =>
-            retrieveCard(userId, cardId)
-        ).to.throw(`User ID with value false is not a string`)
+        expect(() => retrieveCard(userId, cardId)
+            ).to.throw(`User ID with value false is not a string`)
     })
-
-    /* card ID */
     it('should fail if card does not exist', async () => {
         const user = await User.findById(userId)
         expect(user).to.exist
@@ -124,22 +116,20 @@ describe ('logic - retrieve card', () => {
     })
     it('should fail on empty card ID', () => {
         cardId = ''
-        expect(() =>
-            retrieveCard(userId, cardId)
-        ).to.throw('Card ID is empty or blank')
+        expect(() => retrieveCard(userId, cardId)
+            ).to.throw('Card ID is empty or blank')
     })
     it('should fail on undefined Card ID', () => {
         cardId = undefined
-        expect(() =>
-            retrieveCard(userId, cardId)
-        ).to.throw(`Card ID with value undefined is not a string`)
+        expect(() => retrieveCard(userId, cardId)
+            ).to.throw(`Card ID with value undefined is not a string`)
     })
     it('should fail on wrong data type for Card ID', () => {
         cardId = false
-        expect(() =>
-            retrieveCard(userId, cardId)
-        ).to.throw(`Card ID with value false is not a string`)
+        expect(() => retrieveCard(userId, cardId)
+            ).to.throw(`Card ID with value false is not a string`)
     })
 
-    after(() => database.disconnect())
+    after(() => Promise.all([User.deleteMany(), Card.deleteMany()])
+        .then(() => database.disconnect()))
 })

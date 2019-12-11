@@ -11,9 +11,8 @@ const { models: { User } } = require('datamodel')
 
 module.exports = function(userId) {
     validate.string(userId, 'User ID')
-debugger
+
     return( async () => {
-        debugger
         const user = await User.findById(userId)
         if(!user) throw Error(`User with id ${userId} does not exist.`)
 
@@ -21,6 +20,7 @@ debugger
             card.id = card._id
             delete card._id
         })
+
         return user.cards
     })()
 }

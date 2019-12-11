@@ -38,6 +38,8 @@ describe ('logic - unregister card', () => {
         
         await newUser.save()
     })
+    
+    //happy-path
     it('should succeed on correct data', async () => {
         const card = await unregisterCard(userId, cardId)
         expect(card).not.to.exist
@@ -50,7 +52,7 @@ describe ('logic - unregister card', () => {
 
     })
 
-    /* user ID */
+    //error-path
     it('should fail on wrong user ID', async () => {
         userId = "41224d776a326fb40f000001"
         try {
@@ -63,20 +65,18 @@ describe ('logic - unregister card', () => {
     it('should fail on empty user ID', () => {
         userId = ''
         expect(() => unregisterCard(userId, cardId)
-        ).to.throw('user ID is empty or blank')
+            ).to.throw('User ID is empty or blank')
     })
     it('should fail on undefined user ID', () => {
         userId = undefined
         expect(() => unregisterCard(userId, cardId)
-        ).to.throw('user ID with value undefined is not a string')
+            ).to.throw('User ID with value undefined is not a string')
     })
     it('should fail on wrong type for user ID', () => {
         userId = false
         expect(() => unregisterCard(userId, cardId)
-        ).to.throw('user ID with value false is not a string')
+            ).to.throw('User ID with value false is not a string')
     })
-
-    /* card ID */
     it('should fail on wrong card ID', async () => {
         cardId = "123456789"
         try {
@@ -89,18 +89,19 @@ describe ('logic - unregister card', () => {
     it('should fail on empty card ID', () => {
         cardId = ''
         expect(() => unregisterCard(userId, cardId)
-        ).to.throw('card ID is empty or blank')
+            ).to.throw('Card ID is empty or blank')
     })
     it('should fail on undefined card ID', () => {
         cardId = undefined
         expect(() => unregisterCard(userId, cardId)
-        ).to.throw('card ID with value undefined is not a string')
+            ).to.throw('Card ID with value undefined is not a string')
     })
     it('should fail on wrong type for card ID', () => {
         cardId = false
         expect(() => unregisterCard(userId, cardId)
-        ).to.throw('card ID with value false is not a string')
+            ).to.throw('Card ID with value false is not a string')
     })
 
-    after(() => database.disconnect())
+    after(() => Promise.all([User.deleteMany(), Card.deleteMany()])
+        .then (() => database.disconnect()))
 })

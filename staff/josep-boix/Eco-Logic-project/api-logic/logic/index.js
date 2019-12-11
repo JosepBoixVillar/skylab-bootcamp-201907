@@ -9,9 +9,9 @@ module.exports = {
     updateUser: require ('./update-user'),
     //CARD
     registerCard: require('./register-card'),
-    unregisterCard: require('./card-unregister'),
-    retrieveCard: require('./card-retrieve'),
-    retrieveAllCards: require('./card-retrieve-all'),
+    unregisterCard: require('./unregister-card'),
+    retrieveCard: require('./retrieve-card'),
+    retrieveAllCards: require('./retrieve-all-cards'),
     // PRODUCT
     searchProduct: require('./search'),
     retrieveProduct: require('./retrieve-product'),
