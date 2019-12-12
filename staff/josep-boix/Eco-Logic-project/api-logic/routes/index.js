@@ -12,14 +12,13 @@ const unregisterUser = require('./unregister-user')
 const retrieveUser = require('./retrieve-user')
 const updateUser = require('./update-user')
 
-const registerCard = require('./card-register')
-const unregisterCard = require('./card-unregister') 
-const retrieveCard = require('./card-retrieve')
-const retrieveAllCards = require('./card-retrieve-all')
+const registerCard = require('./register-card')
+const unregisterCard = require('./unregister-card') 
+const retrieveCard = require('./retrieve-card')
+const retrieveAllCards = require('./retrieve-all-cards')
 
 const searchProduct = require('./search')
 const retrieveProducts = require('./retrieve-product')
-
 // const unregisterProduct = require('./product-unregister')
 // const retrieveProduct = require('./product-retrieve')
 

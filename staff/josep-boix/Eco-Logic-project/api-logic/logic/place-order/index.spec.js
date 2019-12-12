@@ -24,14 +24,16 @@ describe ('logic - place order', () => {
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
         
+        const user = await User.create({ name, email, password })
+        userId = user.id
+
+        await Product.deleteMany()
+
         title = `title-${Math.random()}`
         categorie = `categorie-${Math.random()}`
         image = `image-${Math.random()}`
         price = Math.random()
         description = `description-${Math.random()}`
-
-        const user = await User.create({ name, email, password })
-        userId = user.id
 
         const product = await Product.create({ title, categorie, image, price, description })
         productId = product.id.toString()
@@ -46,6 +48,7 @@ describe ('logic - place order', () => {
         const result = await placeOrder(userId)
         orderId = result.id
         expect(result).to.exist
+        // expect(result.id).to.exist
 
         const order = await Order.findById(orderId)
         expect(order).to.exist
@@ -92,5 +95,6 @@ describe ('logic - place order', () => {
         expect(() => placeOrder(123)).to.throw(`userId with value 123 is not a string`)
     })
 
-    after(() => database.disconnect())
+    after(() => Promise.all([User.deleteMany(), Product.deleteMany(), Item.deleteMany(), Order.deleteMany()])
+        .then (() => database.disconnect()))
 })

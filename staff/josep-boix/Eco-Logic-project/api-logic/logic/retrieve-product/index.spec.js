@@ -7,7 +7,6 @@ const { database, models: { Product } } = require('datamodel')
 const { env: { DB_URL_TEST } } = process 
 
 describe ('logic - retrieve product', () => {
-
     before(() => database.connect(DB_URL_TEST)) 
     
     let title, image, price, description, productId
@@ -27,6 +26,8 @@ describe ('logic - retrieve product', () => {
     it('should succeed on correct data', async () =>{ debugger
         const result = await retrieveProduct(productId)
         expect(result).to.exist
+        expect(result.id).to.exist
+        // expect(result._id).to.not.exist
         expect(result.title).to.deep.equal(title)
         expect(result.categorie).to.deep.equal(categorie)
         expect(result.image).to.deep.equal(image)
@@ -41,25 +42,26 @@ describe ('logic - retrieve product', () => {
             await retrieveProduct(productId)     
         }catch(error){
             expect(error).to.exist
-            expect(error.message).to.equal('product 41224d776a326fb40f000001 not found')
+            expect(error.message).to.equal('Product 41224d776a326fb40f000001 not found')
         }
     }) 
     it('should fail on empty productId', () => {
         productId = ""
         expect(() => retrieveProduct(productId)
-        ).to.throw('id is empty or blank')
+            ).to.throw('Product ID is empty or blank')
     })
     it('should fail on undefined productId', () => {
         productId = undefined
         expect(() => retrieveProduct(productId)
-        ).to.throw(`id with value undefined is not a string`)
+            ).to.throw(`Product ID with value undefined is not a string`)
     })
     it('should fail on wrong data type for productId', () => {
         productId = false
         expect(() => retrieveProduct(productId)
-        ).to.throw(`id with value false is not a string`)
+            ).to.throw(`Product ID with value false is not a string`)
     })
 
-    after(() => database.disconnect())
+    after(() => Promise.all([Product.deleteMany()])
+        .then (() => database.disconnect()))
 
 })

@@ -6,7 +6,7 @@ const { database, models: { Product } } = require('datamodel')
 
 const { env: { DB_URL_TEST }} = process
 
-describe ('logic - search', () => {
+describe ('logic - search product', () => {
 
     before(() => database.connect(DB_URL_TEST))
 
@@ -34,6 +34,8 @@ describe ('logic - search', () => {
 
         const product = await searchProduct(query)
         expect(product).to.exist
+        expect(product._id).to.not.exist
+        expect(productId).to.exist
         
         expect(product[0].title).to.deep.equal(title)
         expect(product[0].categorie).to.deep.equal(categorie)
@@ -65,6 +67,7 @@ describe ('logic - search', () => {
         }
     })
 
-    after(() => database.disconnect())
+    after(() => Promise.all([Product.deleteMany()])
+        .then (() => database.disconnect()))
     
 })

@@ -9,7 +9,7 @@ const { models: { User, Order } } = require('datamodel')
  * @returns {Promise}
  */
 
-function registerOrder(userId) {
+function placeOrder(userId) {
     validate.string(userId, 'userId')
 
     return(async () => {
@@ -22,6 +22,9 @@ function registerOrder(userId) {
         const date = new Date()
 
         const order = await Order.create({ date, customer: userId, items: user.cart })
+
+        order.id = order._id.toString()
+        delete order._id
         
         user.cart = []
 
@@ -30,4 +33,4 @@ function registerOrder(userId) {
         return order
     }) ()
 }
-module.exports = registerOrder
+module.exports = placeOrder

@@ -19,11 +19,11 @@ module.exports = {
     // registerItem: require('./item-register'),
     // unregisterItem: require('./item-unregister'),
     //ORDER
-    retrieveOrder: require('./retrieve-order'),
     registerOrder: require('./place-order'),
+    retrieveOrder: require('./retrieve-order'),
     // retrieveAllOrders: require('./order-retrieve-all'),
     // CART
-    addToCart: require('./cart-addToCart'),
+    addToCart: require('./add-to-cart'),
     listToCart: require('./retrieve-cart'),
-    cartRemove: require('./cart-remove')
+    cartRemove: require('./remove-from-cart')
 }

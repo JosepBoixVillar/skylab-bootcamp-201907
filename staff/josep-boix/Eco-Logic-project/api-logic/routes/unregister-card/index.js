@@ -1,8 +1,8 @@
 const logic = require('../../logic')
 
-module.exports = async function(req, res) {
+async function unregisterCard(req, res) {
     const { userId, params: { cardId } } = req
-debugger
+
     try {
         await logic.unregisterCard(userId, cardId)
         res.json({ message: 'Card deleted successfully.'})
@@ -10,5 +10,6 @@ debugger
         res.status(404).json({ error: message })
     }
 }
+module.exports = unregisterCard
 
 // , body: { password } = req

@@ -1,6 +1,6 @@
 const logic = require('../../logic')
 
-module.exports = async function(req, res) {
+async function registerCard(req, res) {
     const { userId, 
         body: { identifier, expiry, ccv, currency } } = req
 
@@ -11,3 +11,4 @@ module.exports = async function(req, res) {
         res.status(400).json({ error: message })
     }
 }
+module.exports = registerCard

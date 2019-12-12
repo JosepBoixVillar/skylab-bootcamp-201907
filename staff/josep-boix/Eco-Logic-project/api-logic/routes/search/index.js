@@ -1,8 +1,8 @@
 const logic = require('../../logic')
 
-module.exports = async (req, res) => {
+async function searchProduct(req, res) {
     const { params: { query } } = req
-    debugger
+
     try {
         
         const product = await logic.searchProduct(query)
@@ -11,3 +11,4 @@ module.exports = async (req, res) => {
         res.status(404).json({ error: message })
     }
 }
+module.exports = searchProduct

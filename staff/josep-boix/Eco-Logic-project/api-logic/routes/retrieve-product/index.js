@@ -1,6 +1,6 @@
 const logic = require('../../logic')
 
-async function retrieveProducts (req, res) {
+async function retrieveProducts(req, res) {
     const { productId } = req.params
 
     try {
