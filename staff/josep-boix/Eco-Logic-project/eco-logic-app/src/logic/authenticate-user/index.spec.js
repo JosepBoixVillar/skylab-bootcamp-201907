@@ -56,7 +56,7 @@ describe ('logic - authenticate user', () => {
             await authenticateUser(email, password)
         } catch (error) {
             expect(error).toBeDefined()
-            expect(error.message).toBe('wrong credentials')
+            expect(error.message).toBe('Wrong credentials')
         }
     })
     it ('should fail on empty password', () => {
@@ -75,5 +75,6 @@ describe ('logic - authenticate user', () => {
         ).toThrow('password with value false is not a string')
     })
 
-    afterAll(() => database.disconnect())
+    afterAll(() => Promise.all([User.deleteMany()])
+        .then(() => database.disconnect()))
 })

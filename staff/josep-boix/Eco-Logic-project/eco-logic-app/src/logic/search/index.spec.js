@@ -60,6 +60,7 @@ fdescribe ('logic - search', () => {
             expect(product['message']).toBe('Product found and available')
     })
 
-    afterAll(() => database.disconnect())
+    afterAll(() =>  Promise.all([User.deleteMany(), Product.deleteMany()])
+        .then (() => database.disconnect()))
     
 })

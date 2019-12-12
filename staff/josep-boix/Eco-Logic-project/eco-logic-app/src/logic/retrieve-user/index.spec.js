@@ -13,8 +13,8 @@ describe ('logic - retrieve user', () => {
     let name, email, password, userId
 
     beforeEach(async () => {
+        
         await User.deleteMany()
-
         name = `name-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
@@ -46,8 +46,8 @@ describe ('logic - retrieve user', () => {
         })
     })
     it ('should fail on empty user id', () => { 
-        userId = ''
-        logic.retrieveUser(userId)
+        // userId = ''
+        logic.retrieveUser('')
         .catch(error => {
             expect(error).toBeDefined()
             expect(error.message).toBe('User Id is empty or blank')
@@ -70,6 +70,7 @@ describe ('logic - retrieve user', () => {
         })
     })
               
-    afterAll(() => database.disconnect())
+    afterAll(() => Promise.all([User.deleteMany()])
+        .then (() => database.disconnect()))
 
 })

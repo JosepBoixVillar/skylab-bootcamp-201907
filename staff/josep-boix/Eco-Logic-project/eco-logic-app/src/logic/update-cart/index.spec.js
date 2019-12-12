@@ -8,45 +8,47 @@ const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
 
 
 describe ('logic - remove from cart', () => {
+
     beforeAll(() => database.connect(REACT_APP_DB_URL_TEST))
     
     let name, email, password, userId
     let title, categorie, image, price, description, productId
-    let _quantity, itemId
+    let _quantity
     
     beforeEach(async() => {
+        
         await User.deleteMany()
-        await Product.deleteMany()
         
         name = `name-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
         
-        _quantity = Number((Math.random()*1000).toFixed())
-        // date = new Date()
+        const user = await User.create({ name, email, password })
+        userId = user.id
 
+        // await Product.deleteMany()
         title = `title-${Math.random()}`
         categorie = `categorie-${Math.random()}`
         image = `image-${Math.random()}`
         price = Math.random()
         description = `description-${Math.random()}`
-
-        const user = await User.create({ name, email, password })
-        userId = user.id
-
+        
         const product = await Product.create({ title, categorie, image, price, description })
         productId = product.id 
+        
+        // await Item.deleteMany()
+        _quantity = Number((Math.random()*1000).toFixed())
 
         let item = new Item({ quantity:_quantity, product:productId })
-        itemId = item.id
         user.cart.push(item)
-
+        
         await user.save()   
 
         const token = jwt.sign({ sub: userId }, REACT_APP_JWT_SECRET_TEST)
         logic.__token__ = token
     })
 
+    //happy-path
     it('should succeed on correct data',async () =>{
         await logic.removeCart(productId)
 
@@ -54,7 +56,7 @@ describe ('logic - remove from cart', () => {
         expect(user.cart[0]).toBeUndefined()
     })
     
-    /* Product ID */
+    //error-path
     it('should fail on empty productId', () => {
         productId = ""
         expect(() => logic.removeCart(productId)
@@ -70,6 +72,18 @@ describe ('logic - remove from cart', () => {
         expect(() => logic.removeCart(productId)
         ).toThrow(`product id with value false is not a string`)
     })
+    it ('should fail if product not exists', async () => {
+        await Product.deleteMany()
 
-    afterAll(() => database.disconnect())
+        try {
+            await logic.retrieveOrder(productId)
+        } catch(error) {
+            expect(error).toBeDefined()
+            expect(error.message).toBe(`User with id ${userId} do not have any orders`)
+        }
+    })
+
+    afterAll(() => Promise.all([User.deleteMany(), Product.deleteMany(), Item.deleteMany()])
+        .then (() => database.disconnect()))
+
 })

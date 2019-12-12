@@ -53,7 +53,7 @@ describe ('logic - retrieve orders', () => {
     })
 
     //happy-path
-    it ('should succeed on correct id', async () => { debugger
+    it ('should succeed on correct id', async () => {
         const cart = await logic.retrieveOrder()
         expect(cart).toBeDefined()
         expect(cart[0].id).toBeDefined()
@@ -68,7 +68,7 @@ describe ('logic - retrieve orders', () => {
     })
 
     //error-path
-    it ('should fail if user already exists', async () => {
+    it ('should fail if user have no orders', async () => { debugger
         await Order.deleteMany()
 
         try {
@@ -79,25 +79,7 @@ describe ('logic - retrieve orders', () => {
         }
     })
 
-    // it ('should fail on empty user id', () => { 
-    //     userId = ''
-    //     expect(() => logic.retrieveOrder()
-    //     ).toThrow('User Id is empty or blank')
-    // })
-    // it ('should fail on not valid type id', () => { 
-    //     userId = undefined
-    //     expect(() => logic.retrieveCart(userId)).toThrow('User Id with value undefined is not a string')
-    // })
-    // it ('should fail on wrong id', async () => {
-    //     userId = '41224d776a326fb40f000001'
-    //     try {
-    //         await logic.retrieveCart(userId)
-    //         // throw new Error('should not to throw, sth wrong in the logic')
-    //     } catch (error) {
-    //         expect(error).toBeDefined()
-    //         // expect(error.message).toBe('User with id 41224d776a326fb40f000001 does not exist.')
-    //     }                    
-    // })
-
-    afterAll(() => database.disconnect())
+    afterAll(() => Promise.all([user.deleteMany(), Product.deleteMany(), Item.deleteMany(), Order.deleteMany()])
+        .then (() => database.disconnect()))
+    
 })

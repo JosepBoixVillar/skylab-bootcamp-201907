@@ -12,41 +12,41 @@ describe ('logic - place order', () => {
     let name, email, password, userId
     let title, categorie, image, price, description, productId
     let _quantity
-    let _orderId, date
+    let _orderId
     
     beforeEach(async() => {
         
         await User.deleteMany()
-        await Product.deleteMany()
-        await Item.deleteMany()
-        await Order.deleteMany()
-        
         name = `name-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
-
+        
         const user = await User.create({ name, email, password })
         userId = user.id
         
+        await Product.deleteMany()
         title = `title-${Math.random()}`
         categorie = `categorie-${Math.random()}`
         image = `image-${Math.random()}`
         price = Math.random()
         description = `description-${Math.random()}`
-
+        
         const product = await Product.create({ title, categorie, image, price, description })
         productId = product.id.toString()
-
+        
+        await Item.deleteMany()
         _quantity = Number((Math.random()*1000).toFixed())
-        date = new Date()
-
+        let date = new Date()
+        
         let item = new Item({ product: productId, quantity: _quantity })
         user.cart.push(item)
-        await user.save()
         
+        await Order.deleteMany()
+
         const token = jwt.sign({ sub: userId }, REACT_APP_JWT_SECRET_TEST)
         logic.__token__ = token
-        // userId = id
+        
+        await user.save()
     })
 
     //happy-path
@@ -54,6 +54,7 @@ describe ('logic - place order', () => {
         const result = await logic.placeOrder(userId, productId, _quantity)
         _orderId = result.orderId._id
         expect(result).toBeDefined()
+        expect(result.message).toBe('Order registered successfully')
 
         const order = await Order.findById(_orderId)
         expect(order).toBeDefined()
@@ -134,5 +135,6 @@ describe ('logic - place order', () => {
         }                    
     })
 
-    afterAll(() => database.disconnect())
+    afterAll(() => Promise.all([User.deleteMany(), Product.deleteMany(), Order.deleteMany()])
+        .then(() => database.disconnect()))
 })

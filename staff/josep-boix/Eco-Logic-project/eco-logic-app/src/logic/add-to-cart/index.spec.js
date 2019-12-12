@@ -17,27 +17,26 @@ describe('logic - add to cart', () => {
 
     beforeEach(async() => {
         
+        await User.deleteMany()
+
         name = `name-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
         
-        _quantity = Number((Math.random()*1000).toFixed()) //.toString()
-        // date = new Date()
-        
+        const user = await User.create({ name, email, password })
+        userId = user.id
+
         title = `title-${Math.random()}`
         categorie = `categorie-${Math.random()}`
         image = `image-${Math.random()}`
         price = Math.random()
         description = `description-${Math.random()}`
         
-        await User.deleteMany()
-        await Product.deleteMany()
-
-        const user = await User.create({ name, email, password })
-        userId = user.id
-
         const product = await Product.create({ title, categorie, image, price, description })
         productId = product.id
+        
+        _quantity = Number((Math.random()*1000).toFixed()) //.toString()
+        // date = new Date()
 
         const token = jwt.sign({ sub: userId }, REACT_APP_JWT_SECRET_TEST)
         logic.__token__ = token
@@ -112,6 +111,7 @@ describe('logic - add to cart', () => {
         ).toThrow(`productId with value false is not a string`)
     })
 
-    afterAll(() => database.disconnect())  
+    afterAll(() => Promise.all([User.deleteMany(), Product.deleteMany()])
+        .then(() => database.disconnect()))  
 
 })

@@ -57,10 +57,11 @@ describe ('logic - retrieve product detail', () => {
             // throw new Error('should not to throw, sth wrong in the logic')
         } catch (error) {
             expect(error).toBeDefined()
-            expect(error.message).toBe('product 41224d776a326fb40f000001 not found')
+            expect(error.message).toBe('Product 41224d776a326fb40f000001 not found')
         }                    
     })
 
-    afterAll(() => database.disconnect())
+    afterAll(() => Promise.all([Product.deleteMany()])
+        .then(() => database.disconnect()))
 
 })
