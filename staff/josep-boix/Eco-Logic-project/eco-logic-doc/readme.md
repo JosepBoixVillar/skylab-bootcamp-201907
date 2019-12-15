@@ -2,7 +2,7 @@
 
 ***Don't stop trying***
 
-![interesting img](images/readme-intro-gif.gif)
+![motivationImage](images/readme-intro-gif.gif)
 
 ## [Eco-Logic Trello](https://trello.com/b/bfwDrnGU/eco-logic)
 
@@ -15,7 +15,7 @@ You can access to the product listed by a click to see the detail of the product
 A registered user can access into their private and personalized area. As a registered user you can do the same operations cited above & can select products as favorites.
 
 ## Functional description
-![ToDo] wireframes
+![wireframes] wireframes
 
 Any user can:
 * Search products by categories or by search toolbar.
@@ -36,19 +36,19 @@ Registered user can:
 
 ## Technical description
 ### Block diagram
-![Blocks](images/technical-description/Block-diagram.png)
+![blocks](images/technical-description/Block-diagram.png)
 
 ### Components
-![Components](images/technical-description/Components-diagram.png)
+![components](images/technical-description/Components-diagram.png)
 
 ### Data model
-![ToDo](images/technical-description/Data-model-diagram.png)
+![dataModelDiagram](images/technical-description/Data-model-diagram.png)
 
 ### Code coverage
 #### API coverage
-![ToDo](images/API_coverag__TDD.jpg)
+![apiCoverage](images/API_coverage__TDD.jpg)
 #### APP coverage
-![ToDo](images/APP_coverag__TDD.jpg)
+![appCoverage](images/APP_coverage__TDD.jpg)
 
 ### Technologies
 JavaScript, ReactJS, Node.js, Express, MongoDB, Mongoose, SASS.
