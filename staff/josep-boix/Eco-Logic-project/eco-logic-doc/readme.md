@@ -51,7 +51,7 @@ Registered user can:
 ![appCoverage](images/APP_coverage__TDD.jpg)
 
 ### Technologies
-JavaScript, ReactJS, Node.js, Express, MongoDB, Mongoose, SASS.
+JavaScript, ReactJS, Node.js, Express, MongoDB, Mongoose, SASS. </n>
 Testing: Jest & Mocha-Chai.
 Others: draw.io
 
