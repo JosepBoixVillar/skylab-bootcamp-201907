@@ -51,7 +51,7 @@ Registered user can:
 ![ToDo]
 
 ### Technologies
-JavaScript, ReactJS, Node.js, Express, MongoDB, Mongoose, SASS.
+JavaScript, ReactJS, Node.js, Express, MongoDB, Mongoose, SASS. </n>
 Testing: Jest & Mocha-Chai.
 Others: draw.io
 
