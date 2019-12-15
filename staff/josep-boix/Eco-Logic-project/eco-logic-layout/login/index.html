@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Iniciar sessió</title>
+
+    <link rel="stylesheet" href="/style/index.css">
+</head>
+<body>
+    
+    <main class="main">
+
+        <form class="main__form" action="/client/register" method="POST">
+            <h2 class="main__form--title">Iniciar sessió</h2>
+
+            <label class="main__form--label" for="email">E-mail</label>
+            <input class="main__form--input" type="email" id="email" placeholder="e-mail@domain.com">
+            <label class="main__form--label" for="password">Contrasenya</label>
+            <input class="main__form--input" type="password" id="password" placeholder="introduir contrasenya">
+            
+            <button class="main__form--btn btn">Inicia sessió</button>
+        </form>
+
+        <a class="main__toAuth" href="/auth">No recordes la contrasenya?</a>
+        </span>
+
+        <div class="main__form--separate">ó</div>
+
+        <div class="main__social">
+            <a class="main__social--facebook" href="/social-login/login/facebook">Entrar amb Facebook</a>
+            <a class="main__social--google" href="/social-login/login/google">Entrar amb Google</a>
+        </div>
+
+        <div class="main__privacy">
+            <span class="main__privacy--policy" for="privacy">Accepta la politica de privacitat?
+                <a href="#">Política de privacitat</a>
+            </span>
+
+            <p class="main__privacy--publicity" for="publicity">Accepta l'enviament de publicitat?
+            <p class="main__privacy--publicity">Pot <a href="login/delete">donar-se de baixa</a> quan ho dessitgi.</p>  <!-- referenciar endpoint correctament -->
+            </span>
+        </div>
+
+        <a class="a__goHome" href="#">Tornar al inici</a>
+
+    </main>
+
+</body>
+</html>
