@@ -41,14 +41,14 @@ Registered user can:
 ### Components
 ![Components](images/technical-description/Components-diagram.png)
 
-### React components
-![ToDo]()
-
 ### Data model
 ![ToDo](images/technical-description/Data-model-diagram.png)
 
 ### Code coverage
-![ToDo]
+#### API coverage
+![ToDo](images/API_coverag__TDD.jpg)
+#### APP coverage
+![ToDo](images/APP_coverag__TDD.jpg)
 
 ### Technologies
 JavaScript, ReactJS, Node.js, Express, MongoDB, Mongoose, SASS.
