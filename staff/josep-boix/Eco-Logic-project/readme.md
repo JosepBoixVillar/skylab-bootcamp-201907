@@ -1,3 +1,0 @@
-# Eco-Logic-App
-
-[Documentation](#)
